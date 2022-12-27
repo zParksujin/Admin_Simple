@@ -12,6 +12,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 // routes
+import { RecoilRoot } from 'recoil';
 import Router from './routes';
 // theme
 import ThemeProvider from './theme';
@@ -27,30 +28,34 @@ import ScrollToTop from './components/scroll-to-top';
 // https://docs.minimals.cc/authentication/js-version
 
 import { AuthProvider } from './auth/JwtContext';
+import DebugObserver from './utils/debug/recoil';
 
 // ----------------------------------------------------------------------
 
 export default function App() {
   return (
-    <AuthProvider>
-      <HelmetProvider>
-        <SettingsProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <MotionLazyContainer>
-              <ThemeProvider>
-                <ThemeSettings>
-                  <ThemeLocalization>
-                    <SnackbarProvider>
-                      <Router />
-                    </SnackbarProvider>
-                  </ThemeLocalization>
-                </ThemeSettings>
-              </ThemeProvider>
-            </MotionLazyContainer>
-          </BrowserRouter>
-        </SettingsProvider>
-      </HelmetProvider>
-    </AuthProvider>
+    <RecoilRoot>
+      <AuthProvider>
+        <HelmetProvider>
+          <SettingsProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <MotionLazyContainer>
+                <ThemeProvider>
+                  <ThemeSettings>
+                    <ThemeLocalization>
+                      <SnackbarProvider>
+                        <Router />
+                        <DebugObserver />
+                      </SnackbarProvider>
+                    </ThemeLocalization>
+                  </ThemeSettings>
+                </ThemeProvider>
+              </MotionLazyContainer>
+            </BrowserRouter>
+          </SettingsProvider>
+        </HelmetProvider>
+      </AuthProvider>
+    </RecoilRoot>
   );
 }
