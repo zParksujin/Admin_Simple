@@ -2,8 +2,9 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2021": true
-  },
+    "es2021": true,
+    "node": true
+   },
   "plugins": [
     "prettier"
   ],
@@ -22,6 +23,14 @@
       "impliedStrict": true
     },
     "babelOptions": { "presets": [ ["@babel/preset-react"], ["babel-preset-react-app", false] ]}
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
   },
   "rules": {
     "no-alert": 0,
@@ -45,7 +54,13 @@
     "import/prefer-default-export": 0,
     "react/function-component-definition": 0,
     "jsx-a11y/control-has-associated-label": 0,
+
     "import/no-cycle" : 0,
+    // 확장자 명시
+    "import/extensions": 0,
+    // 파일의 경로가 완전히 정의되지 않았음을 의미
+    "import/no-unresolved": 0,
+
     "react/jsx-no-useless-fragment": [
       1,
       {

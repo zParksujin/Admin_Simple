@@ -1,5 +1,6 @@
-import atom from './atom';
-import selector from './selector';
+// import atom from './atom';
+import atom from '@/recoil/user/atom';
+import selector from '@/recoil/user/selector';
 
 export { selector };
 
