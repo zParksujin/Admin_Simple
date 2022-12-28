@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const baseURL =
   process.env.NODE_ENV === 'development'
-    ? 'https://dev-adminapi.fancoo.com'
+    ? // ? 'http://localhost:9200'
+      // : // ? 'http://local-adminapi.fancoo.com:9200'
+      'https://dev-adminapi.fancoo.com'
     : 'https://adminapi.fancoo.com';
 
 // eslint-disable-next-line no-unused-vars

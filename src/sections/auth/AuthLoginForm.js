@@ -1,108 +1,127 @@
-import { useState } from 'react';
-import * as Yup from 'yup';
-// form
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { memo, useCallback, useState } from 'react';
 // @mui
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
+import { Link, Stack, TextField, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // auth
-import { useAuthContext } from '../../auth/useAuthContext';
+import { useSetRecoilState } from 'recoil';
 // components
-import Iconify from '../../components/iconify';
-import FormProvider, { RHFTextField } from '../../components/hook-form';
+import { useLocales } from '@/locales';
+import userAtom from '@/recoil/user/atom';
 
 // ----------------------------------------------------------------------
 
-export default function AuthLoginForm() {
-  const { login } = useAuthContext();
+function AuthLoginForm() {
+  const { t } = useLocales();
+  const setUser = useSetRecoilState(userAtom);
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
 
-  const [showPassword, setShowPassword] = useState(false);
+  const onChangeEmail = useCallback(
+    (e) => {
+      setEmail(e.currentTarget.value);
+    },
+    [setEmail]
+  );
 
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    password: Yup.string().required('Password is required'),
-  });
+  const onChangePW = useCallback(
+    (e) => {
+      setPw(e.currentTarget.value);
+    },
+    [setPw]
+  );
 
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
-  };
+  const login = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (email.length === 0) {
+        alert('아이디를 입력해 주세요.'); // TODO 모달로 변경
+        return;
+      }
 
-  const methods = useForm({
-    resolver: yupResolver(LoginSchema),
-    defaultValues,
-  });
+      if (pw.length === 0) {
+        alert('비밀번호를 입력해 주세요.');
+        return;
+      }
 
-  const {
-    reset,
-    setError,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = methods;
+      const result = {};
+      //   const result = await adminLogin({
+      //     login_id: id.value,
+      //     password: pw.value
+      // });
 
-  const onSubmit = async (data) => {
-    try {
-      await login(data.email, data.password);
-    } catch (error) {
-      console.error(error);
+      if (!result?.status) {
+        alert(result.message);
+        return;
+      }
 
-      reset();
+      console.log(result);
 
-      setError('afterSubmit', {
-        ...error,
-        message: error.message,
-      });
-    }
-  };
+      // sessionStorage.setItem('admin-access-token', data?.token?.access_token);
+      // sessionStorage.setItem('admin-refresh-token', data?.token?.refresh_token);
+      setUser(result.data.userInfo);
+
+      // const myMenu = await getMyMenu();
+      // if (myMenu.status) {
+      //     $appStore.menu = myMenu.data;
+      // }
+
+      // $appStore.goMain(true);
+    },
+    [email.length, pw.length, setUser]
+  );
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3}>
-        {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
+    <Box>
+      <form onSubmit={login}>
+        <Stack spacing={3}>
+          <TextField
+            fullWidth
+            name="email"
+            value={email}
+            label="Email"
+            type="text"
+            onChange={onChangeEmail}
+          />
+          <TextField
+            fullWidth
+            name="password"
+            value={pw}
+            label="Password"
+            type="password"
+            onChange={onChangePW}
+            // error={!!error}
+            // helperText={error ? error?.message : helperText}
+          />
+        </Stack>
 
-        <RHFTextField name="email" label="Email address" />
+        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ my: 2 }}>
+          <Box>{t('login.connectIp')} : 15.15.52.24</Box>
+          <Link variant="body2" color="inherit" underline="always">
+            {t('login.findPw')}
+          </Link>
+        </Stack>
 
-        <RHFTextField
-          name="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Stack>
-
-      <Stack alignItems="flex-end" sx={{ my: 2 }}>
-        <Link variant="body2" color="inherit" underline="always">
-          Forgot password?
-        </Link>
-      </Stack>
-
-      <LoadingButton
-        fullWidth
-        color="inherit"
-        size="large"
-        type="submit"
-        variant="contained"
-        loading={isSubmitSuccessful || isSubmitting}
-        sx={{
-          bgcolor: 'text.primary',
-          color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
-          '&:hover': {
+        <LoadingButton
+          fullWidth
+          color="inherit"
+          size="large"
+          type="submit"
+          variant="contained"
+          // loading={isSubmitSuccessful || isSubmitting}
+          sx={{
             bgcolor: 'text.primary',
             color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
-          },
-        }}
-      >
-        Login
-      </LoadingButton>
-    </FormProvider>
+            '&:hover': {
+              bgcolor: 'text.primary',
+              color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
+            },
+          }}
+        >
+          {t('login.login')}
+        </LoadingButton>
+      </form>
+    </Box>
   );
 }
+
+export default memo(AuthLoginForm);

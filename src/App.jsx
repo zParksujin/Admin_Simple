@@ -29,6 +29,7 @@ import ScrollToTop from './components/scroll-to-top';
 
 import { AuthProvider } from './auth/JwtContext';
 import DebugObserver from './utils/debug/recoil';
+import CheckMyIpProvider from '@/auth/CheckMyIp';
 
 // ----------------------------------------------------------------------
 
@@ -45,8 +46,10 @@ export default function App() {
                   <ThemeSettings>
                     <ThemeLocalization>
                       <SnackbarProvider>
-                        <Router />
-                        <DebugObserver />
+                        <CheckMyIpProvider>
+                          <Router />
+                          <DebugObserver />
+                        </CheckMyIpProvider>
                       </SnackbarProvider>
                     </ThemeLocalization>
                   </ThemeSettings>

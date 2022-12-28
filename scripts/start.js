@@ -10,7 +10,7 @@ process.env.NODE_ENV = 'development';
 // 처리되지 않은 거부에 자동으로 스크립트가 충돌하는 대신 스크립트 충돌이 발생합니다.
 // 무시합니다. 처리되지 않은 Promise 거절은 앞으로
 // 0이 아닌 종료 코드로 Node.js 프로세스를 종료합니다.
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   throw err;
 });
 
@@ -48,7 +48,8 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = 3000;
+// const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {
@@ -59,12 +60,8 @@ if (process.env.HOST) {
       )}`
     )
   );
-  console.log(
-    `If this was unintentional, check that you haven't mistakenly set it in your shell.`
-  );
-  console.log(
-    `Learn more here: ${chalk.yellow('https://cra.link/advanced-config')}`
-  );
+  console.log(`If this was unintentional, check that you haven't mistakenly set it in your shell.`);
+  console.log(`Learn more here: ${chalk.yellow('https://cra.link/advanced-config')}`);
   console.log();
 }
 
@@ -74,12 +71,12 @@ if (process.env.HOST) {
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 
 checkBrowsers(paths.appPath, isInteractive)
-  .then(() => 
+  .then(() =>
     // 기본 포트를 사용하려고 시도하지만 사용 중인 경우 사용자에게 다음을 제공합니다.
     // 다른 포트에서 실행합니다. `choosePort()` Promise는 다음 사용 가능한 포트로 확인됩니다.
-     choosePort(HOST, DEFAULT_PORT)
+    choosePort(HOST, DEFAULT_PORT)
   )
-  .then(port => {
+  .then((port) => {
     if (port == null) {
       // 포트를 찾지 못했습니다.
       return;
@@ -91,12 +88,7 @@ checkBrowsers(paths.appPath, isInteractive)
     const appName = require(paths.appPackageJson).name;
 
     const useTypeScript = fs.existsSync(paths.appTsConfig);
-    const urls = prepareUrls(
-      protocol,
-      HOST,
-      port,
-      paths.publicUrlOrPath.slice(0, -1)
-    );
+    const urls = prepareUrls(protocol, HOST, port, paths.publicUrlOrPath.slice(0, -1));
     // 사용자 지정 메시지로 구성된 웹팩 컴파일러를 생성합니다.
     const compiler = createCompiler({
       appName,
@@ -109,11 +101,7 @@ checkBrowsers(paths.appPath, isInteractive)
     // Load proxy config
     // eslint-disable-next-line import/no-dynamic-require, global-require
     const proxySetting = require(paths.appPackageJson).proxy;
-    const proxyConfig = prepareProxy(
-      proxySetting,
-      paths.appPublic,
-      paths.publicUrlOrPath
-    );
+    const proxyConfig = prepareProxy(proxySetting, paths.appPublic, paths.publicUrlOrPath);
     // 웹 서버를 통해 컴파일러가 생성한 웹팩 자산을 제공합니다.
     const serverConfig = {
       ...createDevServerConfig(proxyConfig, urls.lanUrlForConfig),
@@ -154,7 +142,7 @@ checkBrowsers(paths.appPath, isInteractive)
       });
     }
   })
-  .catch(err => {
+  .catch((err) => {
     if (err && err.message) {
       console.log(err.message);
     }

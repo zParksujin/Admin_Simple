@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Tooltip, Link, ListItemText } from '@mui/material';
 // locales
-import { useLocales } from '../../../locales';
+import { useLocales } from '@/locales';
 // auth
 import RoleBasedGuard from '../../../auth/RoleBasedGuard';
 //
@@ -14,7 +14,7 @@ import { StyledItem, StyledIcon } from './styles';
 // ----------------------------------------------------------------------
 
 const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...other }, ref) => {
-  const { translate } = useLocales();
+  const { t } = useLocales();
 
   const { title, path, icon, children, disabled, caption, roles } = item;
 
@@ -25,7 +25,7 @@ const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...othe
       {icon && <StyledIcon>{icon}</StyledIcon>}
 
       <ListItemText
-        primary={`${translate(title)}`}
+        primary={`${t(title)}`}
         primaryTypographyProps={{
           noWrap: true,
           sx: {
@@ -46,7 +46,7 @@ const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...othe
       />
 
       {caption && (
-        <Tooltip title={`${translate(caption)}`} arrow placement="right">
+        <Tooltip title={`${t(caption)}`} arrow placement="right">
           <Iconify
             icon="eva:info-outline"
             width={16}

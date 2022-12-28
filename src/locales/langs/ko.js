@@ -1,20 +1,13 @@
-// ----------------------------------------------------------------------
-
-// IF THIS TRANSLATION IS INCORRECT PLEASE IGNORE THIS AS THIS TRANSLATION IS FOR DEMO PURPOSES ONLY
-// We are happy if you can help improve the translation by sending an email to support@minimals.cc.
-
-// ----------------------------------------------------------------------
-
-const en = {
+export default {
   login: {
-    main: 'Welcome! \n Fancoo Admin DashBoard.',
     // main: 'A few more clicks to sign in to your account.',
+    main: 'Welcome! \n Fancoo Admin DashBoard.',
     sub: 'Manage all your e-commerce accounts in one place',
     signIn: 'Sign In',
-    findPw: 'Find Password',
-    connectIp: 'connect IP',
-    login: 'Login',
-    workplaceLogin: 'WORKPLACE Login'
+    findPw: '비밀번호 찾기',
+    connectIp: '접속IP',
+    login: '로그인',
+    workplaceLogin: 'WORKPLACE 로그인'
   },
   demo: {
     title: `English`,
@@ -67,5 +60,3 @@ const en = {
   item_by_roles: `item by roles`,
   only_admin_can_see_this_item: `Only admin can see this item`,
 };
-
-export default en;

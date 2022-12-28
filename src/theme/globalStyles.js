@@ -26,6 +26,7 @@ export default function GlobalStyles() {
         '#root': {
           width: '100%',
           height: '100%',
+          whiteSpace: 'pre-line',
         },
         input: {
           '&[type=number]': {
