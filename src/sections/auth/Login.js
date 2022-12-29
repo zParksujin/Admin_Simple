@@ -1,22 +1,20 @@
 // @mui
-import { 
+import {
   // Alert,
-   Tooltip, Stack, Typography, 
+  // Tooltip,
+  Stack,
+  Typography,
+  // Box,
   //  Link,
-    Box } from '@mui/material';
+} from '@mui/material';
 import { useLocales } from '@/locales';
-// auth
-import { useAuthContext } from '../../auth/useAuthContext';
 // layouts
 import LoginLayout from '../../layouts/login';
 //
 import AuthLoginForm from './AuthLoginForm';
 import AuthWithSocial from './AuthWithSocial';
 
-// ----------------------------------------------------------------------
-
 export default function Login() {
-  const { method } = useAuthContext();
   const { t } = useLocales();
   return (
     <LoginLayout title={t('login.main')}>
@@ -29,14 +27,14 @@ export default function Login() {
           <Link variant="subtitle2">Create an account</Link>
         </Stack> */}
 
-        <Tooltip title={method} placement="left">
+        {/* <Tooltip placement="left">
           <Box
             component="img"
-            alt={method}
-            src={`/assets/icons/auth/ic_${method}.png`}
+            // alt={method}
+            // src={`/assets/icons/auth/ic_${method}.png`}
             sx={{ width: 32, height: 32, position: 'absolute', right: 0 }}
           />
-        </Tooltip>
+        </Tooltip> */}
       </Stack>
 
       {/* <Alert severity="info" sx={{ mb: 3 }}>

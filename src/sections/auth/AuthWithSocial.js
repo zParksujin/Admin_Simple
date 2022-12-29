@@ -1,19 +1,15 @@
-// @mui
+import { memo, useCallback, useEffect } from 'react';
 import { Divider, IconButton, Stack } from '@mui/material';
-import { useCallback, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-// eslint-disable-next-line import/no-unresolved
+import { useSetRecoilState } from 'recoil';
 import { baseURL } from 'src/api';
-// eslint-disable-next-line import/no-unresolved
 import { customWindowOpener } from 'src/utils/auth/customWindowOpener';
-// eslint-disable-next-line import/no-unresolved
 import userAtom from 'src/recoil/user/index';
+import { useNavigate } from 'react-router';
+import setToken from '@/utils/auth/setToken';
 
-// ----------------------------------------------------------------------
-
-export default function AuthWithSocial() {
-  const [user, setUser] = useRecoilState(userAtom);
-  console.log(user);
+function AuthWithSocial() {
+  const setUser = useSetRecoilState(userAtom);
+  const navigate = useNavigate();
 
   const workplaceLogin = () => {
     customWindowOpener(`${baseURL}/v1/admins/oauth/login`, 'WORKPLACE-LOGIN', {
@@ -26,26 +22,21 @@ export default function AuthWithSocial() {
     window.addEventListener('message', workplaceCallback, false);
     return () => {
       window.removeEventListener('message', workplaceCallback);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const workplaceCallback = useCallback(async (e) => {
-    if (e?.data && typeof e?.data === 'string' && e?.data?.includes('workplace-login:')) {
-        const data = JSON.parse(e.data.substring(16));
-        console.log(data);
-        sessionStorage.setItem('admin-access-token', data?.token?.access_token);
-        sessionStorage.setItem('admin-refresh-token', data?.token?.refresh_token);
+  const workplaceCallback = useCallback(
+    async (e) => {
+      if (e?.data && typeof e?.data === 'string' && e?.data?.includes('workplace-login:')) {
+        const data = setToken(e.data);
         setUser(data.userInfo);
-        
-        // const myMenu = await getMyMenu();
-        // if (myMenu.status) {
-        //     $appStore.menu = myMenu.data;
-        // }
-// 
-        // $appStore.goMain(true);
-    }
-  }, [setUser])
+
+        navigate('/dashboard');
+      }
+    },
+    [navigate, setUser]
+  );
 
   return (
     <div>
@@ -76,3 +67,4 @@ export default function AuthWithSocial() {
     </div>
   );
 }
+export default memo(AuthWithSocial);

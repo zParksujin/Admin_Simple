@@ -13,6 +13,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 // routes
 import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Router from './routes';
 // theme
 import ThemeProvider from './theme';
@@ -25,40 +26,49 @@ import { MotionLazyContainer } from './components/animate';
 import ScrollToTop from './components/scroll-to-top';
 
 // Check our docs
-// https://docs.minimals.cc/authentication/js-version
 
-import { AuthProvider } from './auth/JwtContext';
 import DebugObserver from './utils/debug/recoil';
-import CheckMyIpProvider from '@/auth/CheckMyIp';
-
 // ----------------------------------------------------------------------
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnmount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      staleTime: 1 * 60 * 1000,
+    },
+  },
+});
+
+const RootProvider = ({ children }) => (
+  <QueryClientProvider client={queryClient}>
+    <RecoilRoot>
+      <BrowserRouter>
+        <HelmetProvider>{children}</HelmetProvider>
+      </BrowserRouter>
+    </RecoilRoot>
+  </QueryClientProvider>
+);
 
 export default function App() {
   return (
-    <RecoilRoot>
-      <AuthProvider>
-        <HelmetProvider>
-          <SettingsProvider>
-            <BrowserRouter>
-              <ScrollToTop />
-              <MotionLazyContainer>
-                <ThemeProvider>
-                  <ThemeSettings>
-                    <ThemeLocalization>
-                      <SnackbarProvider>
-                        <CheckMyIpProvider>
-                          <Router />
-                          <DebugObserver />
-                        </CheckMyIpProvider>
-                      </SnackbarProvider>
-                    </ThemeLocalization>
-                  </ThemeSettings>
-                </ThemeProvider>
-              </MotionLazyContainer>
-            </BrowserRouter>
-          </SettingsProvider>
-        </HelmetProvider>
-      </AuthProvider>
-    </RecoilRoot>
+    <RootProvider>
+      <SettingsProvider>
+        <ScrollToTop />
+        <MotionLazyContainer>
+          <ThemeProvider>
+            <ThemeSettings>
+              <ThemeLocalization>
+                <SnackbarProvider>
+                  <Router /> 
+                  <DebugObserver />
+                </SnackbarProvider>
+              </ThemeLocalization>
+            </ThemeSettings>
+          </ThemeProvider>
+        </MotionLazyContainer>
+      </SettingsProvider>
+    </RootProvider>
   );
 }

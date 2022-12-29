@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 // components
-import LoadingScreen from '../components/loading-screen';
+// import LoadingScreen from '../components/loading-screen';
 //
-import { useAuthContext } from './useAuthContext';
+// import { useAuthContext } from './useAuthContext';
 
 // ----------------------------------------------------------------------
 
@@ -12,15 +12,15 @@ GuestGuard.propTypes = {
 };
 
 export default function GuestGuard({ children }) {
-  const { isAuthenticated, isInitialized } = useAuthContext();
+  // const { isAuthenticated, isInitialized } = useAuthContext();
 
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
-  }
+  // if (isAuthenticated) {
+  // return <Navigate to="/dashboard" />;
+  // }
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
-  }
+  // if (!isInitialized) {
+  // return <LoadingScreen />;
+  // }
 
   return <> {children} </>;
 }

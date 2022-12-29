@@ -27,6 +27,5 @@ export default function ThemeRtlLayout({ children }) {
     stylisPlugins: theme.direction === 'rtl' ? [prefixer, rtlPlugin] : [],
   });
 
-  console.log(cacheRtl);
   return <CacheProvider value={cacheRtl}>{children}</CacheProvider>;
 }

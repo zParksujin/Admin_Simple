@@ -8,7 +8,7 @@ import useResponsive from '../../hooks/useResponsive';
 // config
 import { NAV } from '../../config-global';
 // auth
-import { useAuthContext } from '../../auth/useAuthContext';
+// import { useAuthContext } from '../../auth/useAuthContext';
 //
 import Logo from '../logo';
 import ProgressBar from '../progress-bar';
@@ -36,11 +36,12 @@ export default function LoadingScreen() {
 
   const isDesktop = useResponsive('up', 'lg');
 
-  const { isInitialized } = useAuthContext();
+  // const { isInitialized } = useAuthContext();
 
   const { themeLayout } = useSettingsContext();
 
-  const isDashboard = isInitialized && pathname.includes('/dashboard') && isDesktop;
+  const isDashboard = pathname.includes('/dashboard') && isDesktop;
+  // const isDashboard = isInitialized && pathname.includes('/dashboard') && isDesktop;
 
   const size =
     (themeLayout === 'mini' && NAV.W_DASHBOARD_MINI) ||

@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // auth
 import AuthGuard from '../auth/AuthGuard';
-import GuestGuard from '../auth/GuestGuard';
+// import GuestGuard from '../auth/GuestGuard';
 // layouts
 import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
@@ -30,9 +30,9 @@ export default function Router() {
         {
           path: 'login',
           element: (
-            <GuestGuard>
+            <AuthGuard>
               <LoginPage />
-            </GuestGuard>
+            </AuthGuard>
           ),
         },
       ],

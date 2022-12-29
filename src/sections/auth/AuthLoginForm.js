@@ -3,18 +3,22 @@ import { memo, useCallback, useState } from 'react';
 import { Link, Stack, TextField, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // auth
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 // components
+import { useNavigate } from 'react-router';
 import { useLocales } from '@/locales';
 import userAtom from '@/recoil/user/atom';
-
-// ----------------------------------------------------------------------
+import { checkMyIpSelector } from '@/recoil/checkMyIp';
+import { adminLogin } from '@/api/auth';
+import setToken from '@/utils/auth/setToken';
 
 function AuthLoginForm() {
   const { t } = useLocales();
+  const navigate = useNavigate();
   const setUser = useSetRecoilState(userAtom);
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
+  const userIP = useRecoilValue(checkMyIpSelector);
 
   const onChangeEmail = useCallback(
     (e) => {
@@ -43,31 +47,22 @@ function AuthLoginForm() {
         return;
       }
 
-      const result = {};
-      //   const result = await adminLogin({
-      //     login_id: id.value,
-      //     password: pw.value
-      // });
+      const result = await adminLogin({
+        login_id: email,
+        password: pw,
+      });
 
       if (!result?.status) {
         alert(result.message);
         return;
       }
 
-      console.log(result);
-
-      // sessionStorage.setItem('admin-access-token', data?.token?.access_token);
-      // sessionStorage.setItem('admin-refresh-token', data?.token?.refresh_token);
+      setToken(result.data);
       setUser(result.data.userInfo);
 
-      // const myMenu = await getMyMenu();
-      // if (myMenu.status) {
-      //     $appStore.menu = myMenu.data;
-      // }
-
-      // $appStore.goMain(true);
+      navigate('/dashboard');
     },
-    [email.length, pw.length, setUser]
+    [email, navigate, pw, setUser]
   );
 
   return (
@@ -95,7 +90,9 @@ function AuthLoginForm() {
         </Stack>
 
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ my: 2 }}>
-          <Box>{t('login.connectIp')} : 15.15.52.24</Box>
+          <Box>
+            {t('login.connectIp')} : {userIP?.data?.ip || ''}
+          </Box>
           <Link variant="body2" color="inherit" underline="always">
             {t('login.findPw')}
           </Link>

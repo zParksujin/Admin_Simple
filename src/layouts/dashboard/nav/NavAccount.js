@@ -2,9 +2,9 @@
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
 // auth
-import { useAuthContext } from '../../../auth/useAuthContext';
+// import { useAuthContext } from '../../../auth/useAuthContext';
 // components
-import { CustomAvatar } from '../../../components/custom-avatar';
+// import { CustomAvatar } from '../../../components/custom-avatar';
 
 // ----------------------------------------------------------------------
 
@@ -19,19 +19,19 @@ const StyledRoot = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function NavAccount() {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
 
   return (
     <StyledRoot>
-      <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} />
+      {/* <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} /> */}
 
       <Box sx={{ ml: 2, minWidth: 0 }}>
         <Typography variant="subtitle2" noWrap>
-          {user?.displayName}
+          sujin
         </Typography>
 
         <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
-          {user?.role}
+          admin
         </Typography>
       </Box>
     </StyledRoot>
