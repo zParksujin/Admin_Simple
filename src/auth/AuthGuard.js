@@ -43,7 +43,7 @@ function AuthGuard({ children }) {
       typeof token === 'string' &&
       token?.length > 0
     ) {
-      refetch(); // TODO 적용 후 push
+      refetch(); // TODO 적용 후 push meQuery param 찾기
     } else if (
       location.pathname !== '/login' &&
       (!token || typeof token !== 'string' || token?.length === 0)
