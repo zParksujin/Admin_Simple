@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { Box, Stack, Drawer } from '@mui/material';
@@ -12,8 +12,7 @@ import Logo from '../../../components/logo';
 import Scrollbar from '../../../components/scrollbar';
 import { NavSectionVertical } from '../../../components/nav-section';
 //
-import navConfig from './config-navigation';
-import NavDocs from './NavDocs';
+// import NavDocs from './NavDocs';
 import NavAccount from './NavAccount';
 import NavToggleButton from './NavToggleButton';
 
@@ -24,7 +23,7 @@ NavVertical.propTypes = {
   onCloseNav: PropTypes.func,
 };
 
-export default function NavVertical({ openNav, onCloseNav }) {
+function NavVertical({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -60,12 +59,13 @@ export default function NavVertical({ openNav, onCloseNav }) {
 
         <NavAccount />
       </Stack>
-
-      <NavSectionVertical data={navConfig} />
+      <Suspense>
+        <NavSectionVertical />
+      </Suspense>
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <NavDocs />
+      {/* <NavDocs /> */}
     </Scrollbar>
   );
 
@@ -113,3 +113,5 @@ export default function NavVertical({ openNav, onCloseNav }) {
     </Box>
   );
 }
+
+export default NavVertical;

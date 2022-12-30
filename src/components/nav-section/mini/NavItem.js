@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
+import { forwardRef, memo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Tooltip, Link, ListItemText } from '@mui/material';
@@ -16,7 +16,7 @@ import { StyledItem, StyledIcon } from './styles';
 const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...other }, ref) => {
   const { t } = useLocales();
 
-  const { title, path, icon, children, disabled, caption, roles } = item;
+  const { title, sub_title, path, icon, menus, disabled, caption, roles } = item;
 
   const subItem = depth !== 1;
 
@@ -25,7 +25,7 @@ const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...othe
       {icon && <StyledIcon>{icon}</StyledIcon>}
 
       <ListItemText
-        primary={`${t(title)}`}
+        primary={`${t(sub_title || title)}`}
         primaryTypographyProps={{
           noWrap: true,
           sx: {
@@ -59,7 +59,7 @@ const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...othe
         </Tooltip>
       )}
 
-      {!!children && (
+      {!!menus && (
         <Iconify
           width={16}
           icon="eva:chevron-right-fill"
@@ -101,4 +101,4 @@ NavItem.propTypes = {
   isExternalLink: PropTypes.bool,
 };
 
-export default NavItem;
+export default memo(NavItem);

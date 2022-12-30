@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { checkRefreshToken } from '@/api/auth';
 import setToken from '@/utils/auth/setToken';
+import { PATH_AUTH } from '@/routes/paths';
 
 export const baseURL =
   process.env.NODE_ENV === 'development'
@@ -9,12 +10,12 @@ export const baseURL =
 
 // eslint-disable-next-line no-unused-vars
 export const clearSession = () => {
-  sessionStorage.removeItem('admin_access_token');
-  sessionStorage.removeItem('admin_refresh_token');
+  localStorage.removeItem('admin_access_token');
+  localStorage.removeItem('admin_refresh_token');
   window.sessionStorage.clear();
   window.localStorage.removeItem('recoil-persist');
 
-  window.location.href = '/login';
+  window.location.href = PATH_AUTH.login;
 };
 
 const instance = axios.create({
@@ -23,8 +24,9 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  // const token = Cookies.get(ACCESS_TOKEN);
-  const token = sessionStorage.getItem('admin_access_token');
+  const token = localStorage.getItem('admin_access_token');
+  // console.log('request', token, config);
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -34,10 +36,10 @@ instance.interceptors.request.use((config) => {
 
 instance.interceptors.response.use(
   (res) => {
-    console.log(res);
-    console.log('[fetch response]', res?.response?.status /* ,  res.response */);
-    // eslint-disable-next-line no-unsafe-optional-chaining
-    const duration = new Date() - res?.config?.metadata?.startTime;
+    // console.log('[fetch response]', res?.response?.status /* ,  res.response */);
+
+    const duration = new Date() - +(res?.config?.metadata?.startTime || 0);
+
     return {
       ...res,
       duration,
@@ -45,6 +47,9 @@ instance.interceptors.response.use(
   },
   async (err) => {
     console.log('err:', err);
+    if (err?.response === undefined) {
+      return Promise.reject(err);
+    }
     const accessToekn = localStorage.getItem('admin_access_token');
     const refreshToekn = localStorage.getItem('admin_refresh_token');
     const originalRequest = err?.config;
@@ -63,7 +68,12 @@ instance.interceptors.response.use(
         return axios.request(originalRequest);
       }
     }
-    // nuxtApp.$userStore.logout();
+    try {
+      await axios.post('/v1/admins/logout', { _checkToken: true });
+    } catch (error) {
+      console.log(error);
+    }
+
     clearSession();
 
     return Promise.reject(err);

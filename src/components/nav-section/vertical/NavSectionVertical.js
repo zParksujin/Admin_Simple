@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 // @mui
 import { List, Stack } from '@mui/material';
 // locales
-import { useLocales } from '@/locales';
-//
-import { StyledSubheader } from './styles';
+import { useRecoilValueLoadable } from 'recoil';
 import NavList from './NavList';
+import { menuSelector } from '@/recoil/menu';
 
 // ----------------------------------------------------------------------
 
@@ -14,31 +13,24 @@ NavSectionVertical.propTypes = {
   data: PropTypes.array,
 };
 
-export default function NavSectionVertical({ data, sx, ...other }) {
-  const { t } = useLocales();
+export default function NavSectionVertical({ sx, ...other }) {
+  const {
+    state,
+    contents: { data },
+  } = useRecoilValueLoadable(menuSelector);
+
+  if (state !== 'hasValue') {
+    return null;
+  }
 
   return (
     <Stack sx={sx} {...other}>
-      {data.map((group) => {
-        const key = group.subheader || group.items[0].title;
-
-        return (
-          <List key={key} disablePadding sx={{ px: 2 }}>
-            {group.subheader && (
-              <StyledSubheader disableSticky>{`${t(group.subheader)}`}</StyledSubheader>
-            )}
-
-            {group.items.map((list) => (
-              <NavList
-                key={list.title + list.path}
-                data={list}
-                depth={1}
-                hasChild={!!list.children}
-              />
-            ))}
-          </List>
-        );
-      })}
+      <List disablePadding sx={{ px: 2 }}>
+        {Object.keys(data).map((item) => {
+          const menu = data[item];
+          return <NavList key={menu?.menu_idx} data={menu} depth={1} hasChild={!!menu.menus} />;
+        })}
+      </List>
     </Stack>
   );
 }

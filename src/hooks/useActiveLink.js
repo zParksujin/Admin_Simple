@@ -11,6 +11,7 @@ export default function useActiveLink(path, deep = true) {
 
   return {
     active: deep ? deepActive : normalActive,
-    isExternalLink: path.includes('http'),
+    isExternalLink: false,
+    // isExternalLink: path.includes('http'),
   };
 }

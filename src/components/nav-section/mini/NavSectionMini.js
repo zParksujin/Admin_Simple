@@ -3,7 +3,9 @@ import { memo } from 'react';
 // @mui
 import { Box, Stack } from '@mui/material';
 //
+import { useRecoilValueLoadable } from 'recoil';
 import NavList from './NavList';
+import { menuSelector } from '@/recoil/menu';
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +14,16 @@ NavSectionMini.propTypes = {
   data: PropTypes.array,
 };
 
-function NavSectionMini({ data, sx, ...other }) {
+function NavSectionMini({ sx, ...other }) {
+  const {
+    state,
+    contents: { data },
+  } = useRecoilValueLoadable(menuSelector);
+
+  if (state !== 'hasValue') {
+    return null;
+  }
+
   return (
     <Stack
       spacing={0.5}
@@ -23,9 +34,7 @@ function NavSectionMini({ data, sx, ...other }) {
       }}
       {...other}
     >
-      {data.map((group, index) => (
-        <Items key={group.subheader} items={group.items} isLastGroup={index + 1 === data.length} />
-      ))}
+      <Items items={data} isLastGroup />
     </Stack>
   );
 }
@@ -42,20 +51,21 @@ Items.propTypes = {
 function Items({ items, isLastGroup }) {
   return (
     <>
-      {items.map((list) => (
-        <NavList key={list.title + list.path} data={list} depth={1} hasChild={!!list.children} />
-      ))}
+      {Object.keys(items).map((item) => {
+        const menu = items[item];
+        return (
+          <NavList key={menu.title + menu.path} data={menu} depth={1} hasChild={!!menu.menus} />
+        );
+      })}
 
-      {!isLastGroup && (
-        <Box
-          sx={{
-            width: 24,
-            height: '1px',
-            bgcolor: 'divider',
-            my: '8px !important',
-          }}
-        />
-      )}
+      <Box
+        sx={{
+          width: 24,
+          height: '1px',
+          bgcolor: 'divider',
+          my: '8px !important',
+        }}
+      />
     </>
   );
 }

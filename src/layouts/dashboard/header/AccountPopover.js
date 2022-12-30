@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
 // routes
-import { PATH_AUTH } from '../../../routes/paths';
 // components
-// import { CustomAvatar } from '../../../components/custom-avatar';
-import { useSnackbar } from '../../../components/snackbar';
-import MenuPopover from '../../../components/menu-popover';
-import { IconButtonAnimate } from '../../../components/animate';
+import { useRecoilValue } from 'recoil';
+import { useSnackbar } from '@/components/snackbar';
+import MenuPopover from '@/components/menu-popover';
+import { IconButtonAnimate } from '@/components/animate';
+import { CustomAvatar } from '@/components/custom-avatar';
+import useLogout from '@/queries/auth/logout';
+import userAtom from '@/recoil/user/atom';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +34,8 @@ const OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
+  const { mutate } = useLogout();
+  const user = useRecoilValue(userAtom);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -47,7 +51,7 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      navigate(PATH_AUTH.login, { replace: true });
+      mutate();
       handleClosePopover();
     } catch (error) {
       console.error(error);
@@ -79,17 +83,17 @@ export default function AccountPopover() {
           }),
         }}
       >
-        {/* <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} /> */}
+        <CustomAvatar src={user?.profileimg_url} alt={user?.name} name={user?.name} />
       </IconButtonAnimate>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {/* {user?.displayName} */}
+            {user?.name}
           </Typography>
 
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {/* {user?.email} */}
+            {user?.login_id}
           </Typography>
         </Box>
 

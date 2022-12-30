@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Box, Tooltip, Link, ListItemText } from '@mui/material';
 // locales
+import { memo, useMemo } from 'react';
 import { useLocales } from '@/locales';
 // auth
 import RoleBasedGuard from '../../../auth/RoleBasedGuard';
@@ -21,57 +22,60 @@ NavItem.propTypes = {
   isExternalLink: PropTypes.bool,
 };
 
-export default function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
+function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
   const { t } = useLocales();
 
-  const { title, path, icon, info, children, disabled, caption, roles } = item;
+  const { title, sub_title, path, icon, info, menus, disabled, caption, roles } = item;
 
   const subItem = depth !== 1;
 
-  const renderContent = (
-    <StyledItem depth={depth} active={active} disabled={disabled} caption={!!caption} {...other}>
-      {icon && <StyledIcon>{icon}</StyledIcon>}
+  const renderContent = useMemo(
+    () => (
+      <StyledItem depth={depth} active={active} disabled={disabled} caption={!!caption} {...other}>
+        {icon && <StyledIcon>{icon}</StyledIcon>}
 
-      {subItem && (
-        <StyledIcon>
-          <StyledDotIcon active={active && subItem} />
-        </StyledIcon>
-      )}
+        {subItem && (
+          <StyledIcon>
+            <StyledDotIcon active={active && subItem} />
+          </StyledIcon>
+        )}
 
-      <ListItemText
-        primary={`${t(title)}`}
-        secondary={
-          caption && (
-            <Tooltip title={`${t(caption)}`} placement="top-start">
-              <span>{`${t(caption)}`}</span>
-            </Tooltip>
-          )
-        }
-        primaryTypographyProps={{
-          noWrap: true,
-          component: 'span',
-          variant: active ? 'subtitle2' : 'body2',
-        }}
-        secondaryTypographyProps={{
-          noWrap: true,
-          variant: 'caption',
-        }}
-      />
-
-      {info && (
-        <Box component="span" sx={{ lineHeight: 0 }}>
-          {info}
-        </Box>
-      )}
-
-      {!!children && (
-        <Iconify
-          width={16}
-          icon={open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'}
-          sx={{ ml: 1, flexShrink: 0 }}
+        <ListItemText
+          primary={`${t(sub_title || title)}`}
+          secondary={
+            caption && (
+              <Tooltip title={`${t(caption)}`} placement="top-start">
+                <span>{`${t(caption)}`}</span>
+              </Tooltip>
+            )
+          }
+          primaryTypographyProps={{
+            noWrap: true,
+            component: 'span',
+            variant: active ? 'subtitle2' : 'body2',
+          }}
+          secondaryTypographyProps={{
+            noWrap: true,
+            variant: 'caption',
+          }}
         />
-      )}
-    </StyledItem>
+
+        {info && (
+          <Box component="span" sx={{ lineHeight: 0 }}>
+            {info}
+          </Box>
+        )}
+
+        {!!menus && (
+          <Iconify
+            width={16}
+            icon={open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'}
+            sx={{ ml: 1, flexShrink: 0 }}
+          />
+        )}
+      </StyledItem>
+    ),
+    [active, caption, depth, disabled, icon, info, menus, open, other, subItem, sub_title, t, title]
   );
 
   const renderItem = () => {
@@ -84,7 +88,7 @@ export default function NavItem({ item, depth, open, active, isExternalLink, ...
       );
 
     // Has child
-    if (children) {
+    if (menus) {
       return renderContent;
     }
 
@@ -98,3 +102,5 @@ export default function NavItem({ item, depth, open, active, isExternalLink, ...
 
   return <RoleBasedGuard roles={roles}> {renderItem()} </RoleBasedGuard>;
 }
+
+export default memo(NavItem);

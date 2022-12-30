@@ -1,11 +1,11 @@
 import { selector } from 'recoil';
-import { MyIpCheck } from '@/api/auth';
+import { myIpCheck } from '@/api/auth';
 // import atom from "."
 
 const checkMyIp = selector({
   key: 'checkMyIp',
   get: async ({ get }) => {
-    const res = await MyIpCheck();
+    const res = await myIpCheck();
     if (res?.status === 200) {
       return res.data;
     }

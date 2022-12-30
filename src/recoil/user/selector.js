@@ -1,11 +1,9 @@
-import { selector } from "recoil"
-// import atom from "."
+import { selector } from 'recoil';
 
 const userSelector = selector({
-    key: "userSelector",
-    get: ({get}) => ``,
-    set:({get, set}, value) => {
-    }
-})
+  key: 'userSelector',
+  get: async ({ get }) => {},
+  set: ({ get, set }, value) => {},
+});
 
 export default userSelector;

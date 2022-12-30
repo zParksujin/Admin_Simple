@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { Collapse } from '@mui/material';
@@ -16,7 +16,7 @@ NavList.propTypes = {
   hasChild: PropTypes.bool,
 };
 
-export default function NavList({ data, depth, hasChild }) {
+function NavList({ data, depth, hasChild }) {
   const { pathname } = useLocation();
 
   const { active, isExternalLink } = useActiveLink(data.path);
@@ -51,12 +51,14 @@ export default function NavList({ data, depth, hasChild }) {
 
       {hasChild && (
         <Collapse in={open} unmountOnExit>
-          <NavSubList data={data.children} depth={depth} />
+          <NavSubList data={data.menus} depth={depth} />
         </Collapse>
       )}
     </>
   );
 }
+
+export default memo(NavList);
 
 // ----------------------------------------------------------------------
 
@@ -68,14 +70,15 @@ NavSubList.propTypes = {
 function NavSubList({ data, depth }) {
   return (
     <>
-      {data.map((list) => (
-        <NavList
-          key={list.title + list.path}
-          data={list}
-          depth={depth + 1}
-          hasChild={!!list.children}
-        />
-      ))}
+      {data &&
+        data.map((list) => (
+          <NavList
+            key={list.menu_idx + list.sub_title}
+            data={list}
+            depth={depth + 1}
+            hasChild={!!list.menus}
+          />
+        ))}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, memo, useEffect } from 'react';
+import { useState, memo, useEffect, useMemo } from 'react';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -14,6 +14,7 @@ import {
   Autocomplete,
 } from '@mui/material';
 // utils
+import { useRecoilValue } from 'recoil';
 import { bgBlur } from '../../../utils/cssStyles';
 import flattenArray from '../../../utils/flattenArray';
 // components
@@ -21,7 +22,7 @@ import Iconify from '../../../components/iconify';
 import { IconButtonAnimate } from '../../../components/animate';
 import SearchNotFound from '../../../components/search-not-found';
 //
-import NavConfig from '../nav/config-navigation';
+import { menuSelector } from '@/recoil/menu';
 
 // ----------------------------------------------------------------------
 
@@ -95,19 +96,25 @@ function Searchbar() {
   const [open, setOpen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState('');
+  const { data } = useRecoilValue(menuSelector);
 
-  const reduceItems = NavConfig.map((list) => handleLoop(list.items, list.subheader)).flat();
+  const reduceItems = Object.keys(data).flatMap((item) => handleLoop(data[item]));
 
-  const allItems = flattenArray(reduceItems).map((option) => {
-    const group = splitPath(reduceItems, option.path);
+  const allItems = useMemo(
+    () =>
+      flattenArray(reduceItems).map((option) => {
+        const group = splitPath(reduceItems, option.path);
 
-    return {
-      group: group && group.length > 1 ? group[0] : option.subheader,
-      title: option.title,
-      path: option.path,
-      indexKey: 'minimal',
-    };
-  });
+        return {
+          group: group && group.length > 1 ? group[0] : option?.sub_title || option.title,
+          rootGroup: option?.title.trim(),
+          title: option?.sub_title || option.title,
+          path: option.path,
+          indexKey: 'minimal',
+        };
+      }),
+    [reduceItems]
+  );
 
   useEffect(() => {
     if (open) {
@@ -159,8 +166,8 @@ function Searchbar() {
               PopperComponent={StyledPopper}
               onInputChange={(event, value) => setSearchQuery(value)}
               noOptionsText={<SearchNotFound query={searchQuery} sx={{ py: 10 }} />}
-              options={allItems.sort((a, b) => -b.group.localeCompare(a.group))}
-              groupBy={(option) => option.group}
+              options={allItems.sort((a, b) => a.menu_idx - b.menu_idx)}
+              groupBy={(option) => option.rootGroup}
               getOptionLabel={(option) => `${option.title} ${option.path} ${option.indexKey}`}
               renderInput={(params) => (
                 <InputBase
@@ -245,9 +252,9 @@ function splitPath(array, key) {
       return path;
     }
 
-    if (currItem.children?.length) {
+    if (currItem.menus?.length) {
       stack = stack.concat(
-        currItem.children.map((item) => ({
+        currItem.menus.map((item) => ({
           path: path.concat(item.title),
           currItem: item,
         }))
@@ -259,12 +266,12 @@ function splitPath(array, key) {
 
 // ----------------------------------------------------------------------
 
-function handleLoop(array, subheader = '') {
-  return array?.map((list) => ({
-    subheader,
+function handleLoop(array, title = '') {
+  return array?.menus?.map((list) => ({
+    title,
     ...list,
-    ...(list.children && {
-      children: handleLoop(list.children, subheader),
+    ...(list.menus && {
+      menus: handleLoop(list.menus, title),
     }),
   }));
 }

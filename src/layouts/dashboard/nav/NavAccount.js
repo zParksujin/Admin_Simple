@@ -1,6 +1,9 @@
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
+import { useRecoilValue } from 'recoil';
+import userAtom from '@/recoil/user/atom';
+import { CustomAvatar } from '@/components/custom-avatar';
 // auth
 // import { useAuthContext } from '../../../auth/useAuthContext';
 // components
@@ -18,22 +21,24 @@ const StyledRoot = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function NavAccount() {
-  // const { user } = useAuthContext();
+function NavAccount() {
+  const user = useRecoilValue(userAtom);
 
   return (
     <StyledRoot>
-      {/* <CustomAvatar src={user?.photoURL} alt={user?.displayName} name={user?.displayName} /> */}
+      <CustomAvatar src={user?.profileimg_url} alt={user?.name} name={user?.name} />
 
       <Box sx={{ ml: 2, minWidth: 0 }}>
         <Typography variant="subtitle2" noWrap>
-          sujin
+          {user?.name}
         </Typography>
 
         <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
-          admin
+          {user?.permission_name}
         </Typography>
       </Box>
     </StyledRoot>
   );
 }
+
+export default NavAccount;

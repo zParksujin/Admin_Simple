@@ -1,5 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // auth
+import { Suspense } from 'react';
 import AuthGuard from '../auth/AuthGuard';
 // import GuestGuard from '../auth/GuestGuard';
 // layouts
@@ -18,8 +19,7 @@ import {
   LoginPage,
   PageThree,
 } from './elements';
-
-// ----------------------------------------------------------------------
+import LoadingScreen from '@/components/loading-screen';
 
 export default function Router() {
   return useRoutes([
@@ -41,7 +41,9 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <AuthGuard>
-          <DashboardLayout />
+          <Suspense fallback={<LoadingScreen />}>
+            <DashboardLayout />
+          </Suspense>
         </AuthGuard>
       ),
       children: [

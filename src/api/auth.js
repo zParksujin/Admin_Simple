@@ -22,7 +22,12 @@ export const getAdminMe = async (checkToken = true) => {
   return res;
 };
 
-export const MyIpCheck = async () => {
+export const myIpCheck = async () => {
   const res = await instance.get('/v1/admins/my-ip');
+  return res;
+};
+
+export const adminLogout = async () => {
+  const res = await instance.post('/v1/admins/logout', { _checkToken: true });
   return res;
 };

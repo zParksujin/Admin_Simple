@@ -3,9 +3,11 @@ import { memo } from 'react';
 // @mui
 import { Stack } from '@mui/material';
 // utils
+import { useRecoilValueLoadable } from 'recoil';
 import { hideScrollbarY } from '../../../utils/cssStyles';
 //
 import NavList from './NavList';
+import { menuSelector } from '@/recoil/menu';
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +16,16 @@ NavSectionHorizontal.propTypes = {
   data: PropTypes.array,
 };
 
-function NavSectionHorizontal({ data, sx, ...other }) {
+function NavSectionHorizontal({ sx, ...other }) {
+  const {
+    state,
+    contents: { data },
+  } = useRecoilValueLoadable(menuSelector);
+
+  if (state !== 'hasValue') {
+    return null;
+  }
+
   return (
     <Stack
       direction="row"
@@ -26,9 +37,7 @@ function NavSectionHorizontal({ data, sx, ...other }) {
       }}
       {...other}
     >
-      {data.map((group) => (
-        <Items key={group.subheader} items={group.items} />
-      ))}
+      <Items items={data} />
     </Stack>
   );
 }
@@ -44,8 +53,8 @@ Items.propTypes = {
 function Items({ items }) {
   return (
     <>
-      {items.map((list) => (
-        <NavList key={list.title + list.path} data={list} depth={1} hasChild={!!list.children} />
+      {items.map((menu) => (
+        <NavList key={menu.title + menu.path} data={menu} depth={1} hasChild={!!menu.menus} />
       ))}
     </>
   );

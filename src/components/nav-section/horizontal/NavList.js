@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 // hooks
 import useActiveLink from '../../../hooks/useActiveLink';
 //
 import { StyledPopover } from './styles';
 import NavItem from './NavItem';
-
-// ----------------------------------------------------------------------
 
 NavList.propTypes = {
   data: PropTypes.object,
@@ -15,7 +13,7 @@ NavList.propTypes = {
   hasChild: PropTypes.bool,
 };
 
-export default function NavList({ data, depth, hasChild }) {
+function NavList({ data, depth, hasChild }) {
   const navRef = useRef(null);
 
   const { pathname } = useLocation();
@@ -91,13 +89,14 @@ export default function NavList({ data, depth, hasChild }) {
             onMouseLeave: handleClose,
           }}
         >
-          <NavSubList data={data.children} depth={depth} />
+          <NavSubList data={data.menus} depth={depth} />
         </StyledPopover>
       )}
     </>
   );
 }
 
+export default memo(NavList);
 // ----------------------------------------------------------------------
 
 NavSubList.propTypes = {
@@ -113,7 +112,7 @@ function NavSubList({ data, depth }) {
           key={list.title + list.path}
           data={list}
           depth={depth + 1}
-          hasChild={!!list.children}
+          hasChild={!!list.menus}
         />
       ))}
     </>
