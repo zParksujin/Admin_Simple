@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { forwardRef, memo } from 'react';
+import { forwardRef, memo, useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Box, Tooltip, ListItemText, Link } from '@mui/material';
@@ -11,51 +11,72 @@ import RoleBasedGuard from '../../../auth/RoleBasedGuard';
 //
 import Iconify from '../../iconify';
 import { StyledItem, StyledIcon } from './styles';
+import { ICONS } from '@/layouts/dashboard/nav/config-navigation';
 
 // ----------------------------------------------------------------------
 
 const NavItem = forwardRef(({ item, depth, open, active, isExternalLink, ...other }, ref) => {
   const { t } = useLocales();
 
-  const { title, sub_title, path, icon, info, menus, disabled, caption, roles } = item;
+  const {
+    title,
+    sub_title,
+    path,
+    // icon,
+    info,
+    menus,
+    disabled,
+    caption,
+    roles,
+  } = item;
 
   const subItem = depth !== 1;
 
-  const renderContent = (
-    <StyledItem ref={ref} open={open} depth={depth} active={active} disabled={disabled} {...other}>
-      {icon && <StyledIcon>{icon}</StyledIcon>}
+  const renderContent = useMemo(
+    () => (
+      <StyledItem
+        ref={ref}
+        open={open}
+        depth={depth}
+        active={active}
+        disabled={disabled}
+        {...other}
+      >
+        <StyledIcon>{ICONS.user}</StyledIcon>
 
-      <ListItemText
-        primary={`${t(sub_title || title)}`}
-        primaryTypographyProps={{
-          noWrap: true,
-          component: 'span',
-          variant: active ? 'subtitle2' : 'body2',
-        }}
-      />
-
-      {info && (
-        <Box component="span" sx={{ ml: 1, lineHeight: 0 }}>
-          {info}
-        </Box>
-      )}
-
-      {caption && (
-        <Tooltip title={`${t(caption)}`} arrow>
-          <Box component="span" sx={{ ml: 0.5, lineHeight: 0 }}>
-            <Iconify icon="eva:info-outline" width={16} />
-          </Box>
-        </Tooltip>
-      )}
-
-      {!!menus && (
-        <Iconify
-          icon={subItem ? 'eva:chevron-right-fill' : 'eva:chevron-down-fill'}
-          width={16}
-          sx={{ ml: 0.5, flexShrink: 0 }}
+        <ListItemText
+          primary={`${t(sub_title || title)}`}
+          primaryTypographyProps={{
+            noWrap: true,
+            component: 'span',
+            variant: active ? 'subtitle2' : 'body2',
+          }}
         />
-      )}
-    </StyledItem>
+
+        {info && (
+          <Box component="span" sx={{ ml: 1, lineHeight: 0 }}>
+            {info}
+          </Box>
+        )}
+
+        {caption && (
+          <Tooltip title={`${t(caption)}`} arrow>
+            <Box component="span" sx={{ ml: 0.5, lineHeight: 0 }}>
+              <Iconify icon="eva:info-outline" width={16} />
+            </Box>
+          </Tooltip>
+        )}
+
+        {!!menus && (
+          <Iconify
+            icon={subItem ? 'eva:chevron-right-fill' : 'eva:chevron-down-fill'}
+            width={16}
+            sx={{ ml: 0.5, flexShrink: 0 }}
+          />
+        )}
+      </StyledItem>
+    ),
+    [active, caption, depth, disabled, info, menus, open, other, ref, subItem, sub_title, t, title]
   );
 
   const renderItem = () => {

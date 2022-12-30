@@ -3,18 +3,20 @@ import { forwardRef, memo, useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Box, Link, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useSettingsContext } from '../settings';
 
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const { themeLayout } = useSettingsContext();
   const isNavMini = useMemo(() => themeLayout === 'horizontal', [themeLayout]);
-  // const theme = useTheme();
+  const theme = useTheme();
 
-  // const PRIMARY_LIGHT = theme.palette.primary.light;
+  const PRIMARY_LIGHT = theme.palette.primary.light;
 
-  // const PRIMARY_MAIN = theme.palette.primary.main;
+  const PRIMARY_MAIN = theme.palette.primary.main;
 
-  // const PRIMARY_DARK = theme.palette.primary.dark;
+  const PRIMARY_DARK = theme.palette.primary.dark;
+  console.log(PRIMARY_LIGHT, PRIMARY_MAIN, PRIMARY_DARK);
 
   const logo = useMemo(
     () => (
@@ -35,7 +37,12 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
             <Typography
               variant="h5"
               gutterBottom
-              sx={{ color: 'white', alignItems: 'center', width: '100%', padding: '3px 0 0 16px' }}
+              sx={{
+                fontWeight: 'fontWeightMedium',
+                alignItems: 'center',
+                width: '100%',
+                padding: '3px 0 0 16px',
+              }}
             >
               Fancoo
             </Typography>

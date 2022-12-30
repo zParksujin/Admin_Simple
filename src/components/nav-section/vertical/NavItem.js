@@ -11,6 +11,7 @@ import RoleBasedGuard from '../../../auth/RoleBasedGuard';
 import Iconify from '../../iconify';
 //
 import { StyledItem, StyledIcon, StyledDotIcon } from './styles';
+import { ICONS } from '@/layouts/dashboard/nav/config-navigation';
 
 // ----------------------------------------------------------------------
 
@@ -25,14 +26,24 @@ NavItem.propTypes = {
 function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
   const { t } = useLocales();
 
-  const { title, sub_title, path, icon, info, menus, disabled, caption, roles } = item;
+  const {
+    title,
+    sub_title,
+    path,
+    // icon,
+    info,
+    menus,
+    disabled,
+    caption,
+    roles,
+  } = item;
 
   const subItem = depth !== 1;
 
   const renderContent = useMemo(
     () => (
       <StyledItem depth={depth} active={active} disabled={disabled} caption={!!caption} {...other}>
-        {icon && <StyledIcon>{icon}</StyledIcon>}
+        <StyledIcon>{ICONS.user}</StyledIcon>
 
         {subItem && (
           <StyledIcon>
@@ -75,7 +86,7 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
         )}
       </StyledItem>
     ),
-    [active, caption, depth, disabled, icon, info, menus, open, other, subItem, sub_title, t, title]
+    [active, caption, depth, disabled, info, menus, open, other, subItem, sub_title, t, title]
   );
 
   const renderItem = () => {
