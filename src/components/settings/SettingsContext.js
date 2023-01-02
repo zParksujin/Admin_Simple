@@ -6,9 +6,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import localStorageAvailable from '../../utils/localStorageAvailable';
 //
 import { defaultSettings } from './config-setting';
-import { defaultPreset, getPresets, presetsOption } from './presets';
-
-// ----------------------------------------------------------------------
+import { blackPreset, getPresets, presetsOption } from './presets';
 
 const initialState = {
   ...defaultSettings,
@@ -27,7 +25,7 @@ const initialState = {
   onChangeContrast: () => {},
   // Color
   onChangeColorPresets: () => {},
-  presetsColor: defaultPreset,
+  presetsColor: blackPreset,
   presetsOption: [],
   // Stretch
   onToggleStretch: () => {},
@@ -136,7 +134,9 @@ export function SettingsProvider({ children }) {
   // Color
   const onChangeColorPresets = useCallback(
     (event) => {
+      console.log(event.target.value);
       const themeColorPresets = event.target.value;
+      console.log(themeColorPresets);
       setSettings({ ...settings, themeColorPresets });
     },
     [setSettings, settings]

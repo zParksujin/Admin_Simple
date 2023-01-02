@@ -61,6 +61,26 @@ export const presets = [
     darker: '#7A0930',
     contrastText: '#FFFFFF',
   },
+  // BLACK
+  {
+    name: 'black',
+    lighter: '#000000',
+    light: '#000000',
+    main: '#000000',
+    dark: '#000000',
+    darker: '#000000',
+    contrastText: '#FFFFFF',
+  },
+  // WHITE
+  {
+    name: 'white',
+    lighter: '#FFFFFF',
+    light: '#FFFFFF',
+    main: '#FFFFFF',
+    dark: '#FFFFFF',
+    darker: '#FFFFFF',
+    contrastText: '#FFFFFF',
+  },
 ];
 
 export const defaultPreset = presets[0];
@@ -69,6 +89,8 @@ export const purplePreset = presets[2];
 export const bluePreset = presets[3];
 export const orangePreset = presets[4];
 export const redPreset = presets[5];
+export const blackPreset = presets[6];
+export const whitePreset = presets[7];
 
 export const presetsOption = presets.map((color) => ({
   name: color.name,
@@ -83,5 +105,7 @@ export function getPresets(key) {
     blue: bluePreset,
     orange: orangePreset,
     red: redPreset,
+    black: blackPreset,
+    white: whitePreset,
   }[key];
 }

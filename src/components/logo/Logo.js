@@ -3,20 +3,18 @@ import { forwardRef, memo, useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { Box, Link, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import { useSettingsContext } from '../settings';
 
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const { themeLayout } = useSettingsContext();
   const isNavMini = useMemo(() => themeLayout === 'horizontal', [themeLayout]);
-  const theme = useTheme();
+  // const theme = useTheme();
 
-  const PRIMARY_LIGHT = theme.palette.primary.light;
+  // const PRIMARY_LIGHT = theme.palette.primary.light;
 
-  const PRIMARY_MAIN = theme.palette.primary.main;
+  // const PRIMARY_MAIN = theme.palette.primary.main;
 
-  const PRIMARY_DARK = theme.palette.primary.dark;
-  console.log(PRIMARY_LIGHT, PRIMARY_MAIN, PRIMARY_DARK);
+  // const PRIMARY_DARK = theme.palette.primary.dark;
 
   const logo = useMemo(
     () => (

@@ -19,7 +19,7 @@ import ModeOptions from './ModeOptions';
 import LayoutOptions from './LayoutOptions';
 import StretchOptions from './StretchOptions';
 import FullScreenOptions from './FullScreenOptions';
-import ColorPresetsOptions from './ColorPresetsOptions';
+// import ColorPresetsOptions from './ColorPresetsOptions';
 
 // ----------------------------------------------------------------------
 
@@ -115,9 +115,9 @@ export default function SettingsDrawer() {
             <StretchOptions />
           </Block>
 
-          <Block title="Presets">
+          {/* <Block title="Presets">
             <ColorPresetsOptions />
-          </Block>
+          </Block> */}
         </Scrollbar>
 
         <Box sx={{ p: SPACING, pt: 0 }}>
