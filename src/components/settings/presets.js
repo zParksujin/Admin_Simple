@@ -79,7 +79,7 @@ export const presets = [
     main: '#FFFFFF',
     dark: '#FFFFFF',
     darker: '#FFFFFF',
-    contrastText: '#FFFFFF',
+    contrastText: '#637381',
   },
 ];
 

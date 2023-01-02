@@ -8,10 +8,10 @@ const { persistAtom } = recoilPersist({
   storage: localStorage,
 });
 
-const userAtom = atom({
-  key: 'userAtom',
+const authAtom = atom({
+  key: 'authAtom',
   default: {},
   effects_UNSTABLE: [persistAtom],
 });
 
-export default userAtom;
+export default authAtom;

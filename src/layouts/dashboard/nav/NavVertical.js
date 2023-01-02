@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { Box, Stack, Drawer } from '@mui/material';
@@ -59,10 +59,7 @@ function NavVertical({ openNav, onCloseNav }) {
 
         <NavAccount />
       </Stack>
-      <Suspense>
-        <NavSectionVertical />
-      </Suspense>
-
+      <NavSectionVertical />
       <Box sx={{ flexGrow: 1 }} />
 
       {/* <NavDocs /> */}

@@ -23,6 +23,7 @@ import { IconButtonAnimate } from '../../../components/animate';
 import SearchNotFound from '../../../components/search-not-found';
 //
 import { menuSelector } from '@/recoil/menu';
+import { ROOTS_DASHBOARD } from '@/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -105,11 +106,15 @@ function Searchbar() {
       flattenArray(reduceItems).map((option) => {
         const group = splitPath(reduceItems, option.path);
 
+        if (option.path?.includes('[0-9]+')) {
+          return null;
+        }
+
         return {
           group: group && group.length > 1 ? group[0] : option?.sub_title || option.title,
           rootGroup: option?.title.trim(),
           title: option?.sub_title || option.title,
-          path: option.path,
+          path: ROOTS_DASHBOARD + option.path,
           indexKey: 'minimal',
         };
       }),
@@ -166,7 +171,9 @@ function Searchbar() {
               PopperComponent={StyledPopper}
               onInputChange={(event, value) => setSearchQuery(value)}
               noOptionsText={<SearchNotFound query={searchQuery} sx={{ py: 10 }} />}
-              options={allItems.sort((a, b) => a.menu_idx - b.menu_idx)}
+              options={allItems
+                .filter((item) => item !== null)
+                .sort((a, b) => a.menu_idx - b.menu_idx)}
               groupBy={(option) => option.rootGroup}
               getOptionLabel={(option) => `${option.title} ${option.path} ${option.indexKey}`}
               renderInput={(params) => (

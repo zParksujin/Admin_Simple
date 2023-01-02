@@ -57,6 +57,10 @@ function NavList({ data, depth, hasChild }) {
     setOpen(false);
   };
 
+  if (data?.path && data?.path?.includes('[0-9]+')) {
+    return null;
+  }
+
   return (
     <>
       <NavItem

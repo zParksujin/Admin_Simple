@@ -6,7 +6,8 @@ import { PATH_AUTH } from '@/routes/paths';
 export const baseURL =
   process.env.NODE_ENV === 'development'
     ? 'https://dev-adminapi.fancoo.com'
-    : 'https://adminapi.fancoo.com';
+    : 'https://dev-adminapi.fancoo.com';
+// : 'https://adminapi.fancoo.com';
 
 // eslint-disable-next-line no-unused-vars
 export const clearSession = () => {
@@ -54,14 +55,9 @@ instance.interceptors.response.use(
     const refreshToekn = localStorage.getItem('admin_refresh_token');
     const originalRequest = err?.config;
     // 토큰 만료 시 갱신
-    if (
-      // !_checkToken &&
-      originalRequest &&
-      err?.response?.status === 401 &&
-      accessToekn &&
-      refreshToekn
-    ) {
+    if (originalRequest && err?.response?.status === 401 && accessToekn && refreshToekn) {
       const _token = await checkRefreshToken(refreshToekn);
+      alert(JSON.stringify(_token));
       if (_token.status === 200) {
         const data = setToken(_token.data);
         originalRequest.headers.Authorization = `Bearer ${data?.token?.access_token}`;

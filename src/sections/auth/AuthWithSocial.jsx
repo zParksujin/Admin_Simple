@@ -3,12 +3,12 @@ import { Divider, IconButton, Stack } from '@mui/material';
 import { useSetRecoilState } from 'recoil';
 import { baseURL } from 'src/api';
 import { customWindowOpener } from 'src/utils/auth/customWindowOpener';
-import userAtom from 'src/recoil/user/index';
+import authAtom from 'src/recoil/auth/index';
 import { useNavigate } from 'react-router';
 import setToken from '@/utils/auth/setToken';
 
 function AuthWithSocial() {
-  const setUser = useSetRecoilState(userAtom);
+  const setAuth = useSetRecoilState(authAtom);
   const navigate = useNavigate();
 
   const workplaceLogin = () => {
@@ -30,12 +30,12 @@ function AuthWithSocial() {
     async (e) => {
       if (e?.data && typeof e?.data === 'string' && e?.data?.includes('workplace-login:')) {
         const data = setToken(e.data);
-        setUser(data.userInfo);
+        setAuth(data.userInfo);
 
         navigate('/dashboard');
       }
     },
-    [navigate, setUser]
+    [navigate, setAuth]
   );
 
   return (

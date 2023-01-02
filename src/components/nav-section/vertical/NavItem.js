@@ -12,6 +12,7 @@ import Iconify from '../../iconify';
 //
 import { StyledItem, StyledIcon, StyledDotIcon } from './styles';
 import { ICONS } from '@/layouts/dashboard/nav/config-navigation';
+import { ROOTS_DASHBOARD } from '@/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -43,7 +44,7 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
   const renderContent = useMemo(
     () => (
       <StyledItem depth={depth} active={active} disabled={disabled} caption={!!caption} {...other}>
-        <StyledIcon>{ICONS.user}</StyledIcon>
+        {!path && <StyledIcon>{ICONS.user}</StyledIcon>}
 
         {subItem && (
           <StyledIcon>
@@ -86,14 +87,14 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
         )}
       </StyledItem>
     ),
-    [active, caption, depth, disabled, info, menus, open, other, subItem, sub_title, t, title]
+    [active, caption, depth, disabled, info, menus, open, other, path, subItem, sub_title, t, title]
   );
 
   const renderItem = () => {
     // ExternalLink
     if (isExternalLink)
       return (
-        <Link href={path} target="_blank" rel="noopener" underline="none">
+        <Link href={ROOTS_DASHBOARD + path} target="_blank" rel="noopener" underline="none">
           {renderContent}
         </Link>
       );
@@ -105,7 +106,7 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
 
     // Default
     return (
-      <Link component={RouterLink} to={path} underline="none">
+      <Link component={RouterLink} to={ROOTS_DASHBOARD + path} underline="none">
         {renderContent}
       </Link>
     );

@@ -1,6 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // auth
 import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import AuthGuard from '../auth/AuthGuard';
 // import GuestGuard from '../auth/GuestGuard';
 // layouts
@@ -9,17 +10,9 @@ import DashboardLayout from '../layouts/dashboard';
 // config
 import { PATH_AFTER_LOGIN } from '../config-global';
 //
-import {
-  Page404,
-  PageOne,
-  PageTwo,
-  PageSix,
-  PageFour,
-  PageFive,
-  LoginPage,
-  PageThree,
-} from './elements';
+import { Page404, LoginPage, UserListPage, SubListPage, MainPage } from './elements';
 import LoadingScreen from '@/components/loading-screen';
+import ErrorSection from '@/sections/error/Error';
 
 export default function Router() {
   return useRoutes([
@@ -41,25 +34,30 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <AuthGuard>
-          <Suspense fallback={<LoadingScreen />}>
-            <DashboardLayout />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={ErrorSection}>
+            <Suspense fallback={<LoadingScreen />}>
+              <DashboardLayout />
+            </Suspense>
+          </ErrorBoundary>
         </AuthGuard>
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        { path: 'one', element: <PageOne /> },
-        { path: 'two', element: <PageTwo /> },
-        { path: 'three', element: <PageThree /> },
-        {
-          path: 'user',
-          children: [
-            { element: <Navigate to="/dashboard/user/four" replace />, index: true },
-            { path: 'four', element: <PageFour /> },
-            { path: 'five', element: <PageFive /> },
-            { path: 'six', element: <PageSix /> },
-          ],
-        },
+        { path: 'main', element: <MainPage /> },
+        { path: 'user', element: <UserListPage /> },
+        { path: 'user/subscription', element: <SubListPage /> },
+        // { path: 'detail', element: <UserDetailPage /> },
+        // { path: 'one', element: <PageOne /> },
+        // { path: 'two', element: <PageTwo /> },
+        // { path: 'three', element: <PageThree /> },
+        // {
+        //   path: 'user',
+        //   children: [
+        //     { element: <Navigate to="/dashboard/user/list" replace />, index: true },
+        //     { path: 'list', element: <UserListPage /> },
+        //     { path: 'detail', element: <UserDetailPage /> },
+        //   ],
+        // },
       ],
     },
     {
