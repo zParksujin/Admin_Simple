@@ -1,15 +1,18 @@
 import { selector } from 'recoil';
 import { getUserList } from '@/api/user';
+
+import userListBodyAtom from './body/atom';
 // import atom from "."
 
 const userListSelector = selector({
   key: 'userListSelector',
   get: async ({ get }) => {
-    const res = await getUserList();
-    if (res.status === 200) {
-      return res.data;
+    const body = get(userListBodyAtom);
+    const res = await getUserList(body);
+    if (res.error) {
+      throw res.error;
     }
-    return res;
+    return res.data;
   },
 });
 

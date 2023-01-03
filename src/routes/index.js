@@ -12,7 +12,7 @@ import { PATH_AFTER_LOGIN } from '../config-global';
 //
 import { Page404, LoginPage, UserListPage, SubListPage, MainPage } from './elements';
 import LoadingScreen from '@/components/loading-screen';
-import ErrorSection from '@/sections/error/Error';
+// import ErrorSection from '@/sections/error/Error';
 
 export default function Router() {
   return useRoutes([
@@ -34,11 +34,11 @@ export default function Router() {
       path: '/dashboard',
       element: (
         <AuthGuard>
-          <ErrorBoundary FallbackComponent={ErrorSection}>
-            <Suspense fallback={<LoadingScreen />}>
-              <DashboardLayout />
-            </Suspense>
-          </ErrorBoundary>
+          {/* <ErrorBoundary FallbackComponent={ErrorSection}> */}
+          <Suspense fallback={<LoadingScreen />}>
+            <DashboardLayout />
+          </Suspense>
+          {/* </ErrorBoundary> */}
         </AuthGuard>
       ),
       children: [

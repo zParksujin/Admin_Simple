@@ -57,10 +57,12 @@ instance.interceptors.response.use(
     // 토큰 만료 시 갱신
     if (originalRequest && err?.response?.status === 401 && accessToekn && refreshToekn) {
       const _token = await checkRefreshToken(refreshToekn);
+      console.log(_token);
       alert(JSON.stringify(_token));
       if (_token.status === 200) {
-        const data = setToken(_token.data);
-        originalRequest.headers.Authorization = `Bearer ${data?.token?.access_token}`;
+        const { data } = setToken(_token.data);
+        console.log(data?.access_token);
+        originalRequest.headers.Authorization = `Bearer ${data?.access_token}`;
         return axios.request(originalRequest);
       }
     }
@@ -76,5 +78,11 @@ instance.interceptors.response.use(
   }
   // data._headers = ctx.response?.headers;
 );
+
+export const getSearchParam = (body) => {
+  const searchParams = new URLSearchParams(body);
+
+  return searchParams.toString();
+};
 
 export default instance;

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import TabSection from './Tab';
-import TopSection from './Top';
-import ContentsRender from './type';
+import TabSection from './tab';
+import ToolbarRender from './toolbarRender';
+import ContentsRender from './contentsRender';
 
 function UserListSection(params) {
   const [tab, setTab] = useState(0);
   return (
     <>
-      <TopSection />
       <TabSection tab={tab} setTab={setTab} />
+      <ToolbarRender tab={tab} />
       <ContentsRender tab={tab} />
     </>
   );

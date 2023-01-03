@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 // @mui
 import { TableRow, TableCell } from '@mui/material';
 //
-import EmptyContent from '../empty-content';
+import EmptyContent from '@/components/empty-content';
 
 // ----------------------------------------------------------------------
 

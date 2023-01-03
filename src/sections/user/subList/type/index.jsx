@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import ChartComponent from "./Chart";
-import TableComponent from "./Table";
+import ChartComponent from "./chart";
+import TableComponent from "./table";
 
 function ContentsRender({ tab }) {
     const render = useMemo(() => (

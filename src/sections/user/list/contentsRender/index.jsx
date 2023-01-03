@@ -1,14 +1,15 @@
 import React, { useMemo } from "react";
-import ChartComponent from "./Chart";
-import TableComponent from "./Table";
+import UserListChart from "./chart";
+import UserListTable from "./table";
 
-function ContentsRender({tab}) {
+function ContentsRender({ tab }) {
     const render = useMemo(() => (
         <>
-        {tab === 0 && (<TableComponent />)}
-        {tab === 1 && (<ChartComponent />)}
+        {tab === 0 && (<UserListTable />)}
+        {tab === 1 && (<UserListChart />)}
         </>
     ), [tab])
+    
     return (
         <>
             {render}
