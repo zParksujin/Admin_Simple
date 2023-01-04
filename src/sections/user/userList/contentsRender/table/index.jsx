@@ -1,8 +1,8 @@
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import TableComponent from "@/components/type/table";
-import { userListSelector } from "@/recoil/user/list";
-import { userListBodyParam } from "@/recoil/user/list/parmas";
+import { userListSelector } from "@/recoil/user/userList";
+import { userListParam } from "@/recoil/user/userList/parmas";
 
 const SUB_HEAD = [
     { id: '', label: '',colSpan: 3 },
@@ -35,7 +35,7 @@ const MAIN_HEAD = [
 
 function UserListTable({tab}) {
   const userList = useRecoilValue(userListSelector);
-  const setType = useSetRecoilState(userListBodyParam);
+  const setType = useSetRecoilState(userListParam);
   const { page, data } = userList;
 
     return (

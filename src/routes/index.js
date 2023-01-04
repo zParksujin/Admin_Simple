@@ -10,7 +10,14 @@ import DashboardLayout from '../layouts/dashboard';
 // config
 import { PATH_AFTER_LOGIN } from '../config-global';
 //
-import { Page404, LoginPage, UserListPage, SubListPage, MainPage } from './elements';
+import {
+  Page404,
+  LoginPage,
+  UserListPage,
+  SubListPage,
+  MainPage,
+  ContentListPage,
+} from './elements';
 import LoadingScreen from '@/components/loading-screen';
 import ErrorSection from '@/sections/error/Error';
 
@@ -44,8 +51,11 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'main', element: <MainPage /> },
+
         { path: 'user', element: <UserListPage /> },
         { path: 'user/subscription', element: <SubListPage /> },
+
+        { path: 'content', element: <ContentListPage /> },
         // { path: 'detail', element: <UserDetailPage /> },
         // { path: 'one', element: <PageOne /> },
         // { path: 'two', element: <PageTwo /> },

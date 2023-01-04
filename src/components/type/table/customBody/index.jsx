@@ -6,8 +6,8 @@ const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) =
   console.log(data);
   return (
     <>
-      {data.map((row) => (
-        <TableRow hover role="checkbox" tabIndex={-1} key={row.user_idx}>
+      {data.map((row, index) => (
+        <TableRow hover role="checkbox" tabIndex={-1} key={index}>
           {mainColumns.map((column) => {
             const value = row[column.id];
 

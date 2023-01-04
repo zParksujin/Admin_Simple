@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { useSettingsContext } from '@/components/settings';
-import UserListSection from '@/sections/user/list';
+import UserListSection from '@/sections/user/userList';
 
 function UserList() {
   const { themeStretch } = useSettingsContext();

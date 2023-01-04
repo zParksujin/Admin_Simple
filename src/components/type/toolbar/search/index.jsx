@@ -7,22 +7,21 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import Iconify from '@/components/iconify';
-import userListBodyAtom from '@/recoil/user/list/parmas/atom';
 
 const INPUT_WIDTH = 110;
 const SELECT_WIDTH = 100;
 
-const SearchType = ({ typeOptions, typeKey, setSearchType }) => {
-  const body = useRecoilValue(userListBodyAtom);
+const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
   const [searchText, setSearchText] = useState('');
+  console.log(typeOptions[typeKey]);
+  console.log(Object.keys(param));
 
   const returnValue = () => {
     let result = '';
     typeOptions[typeKey].forEach(v => {
       // eslint-disable-next-line consistent-return
-      Object.keys(body).forEach((item) => {
+      Object.keys(param).forEach((item) => {
         if (v === item){
           result = v;
       }
@@ -33,14 +32,15 @@ const SearchType = ({ typeOptions, typeKey, setSearchType }) => {
 
   const onChangeFilter = (e) => {
     e.preventDefault();
-    const copy = {...body, [e.target.value || 'profile_id']: searchText};
+    const copy = {...param, [e.target.value || 'profile_id']: searchText};
+    console.log(copy, e.target.value);
     delete copy[returnValue()]
     setSearchType({ ...copy });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const copy = {...body, [returnValue() || 'profile_id']: searchText};
+    const copy = {...param, [returnValue() || 'profile_id']: searchText};
     setSearchType({ ...copy });
   }
 

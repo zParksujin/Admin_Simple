@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-const userListBodyAtom = atom({
-  key: 'userListBodyAtom',
+const userListParamAtom = atom({
+  key: 'userListParamAtom',
   default: {
     profile_id: '',
     offset: 0,
@@ -13,4 +13,4 @@ const userListBodyAtom = atom({
   },
 });
 
-export default userListBodyAtom;
+export default userListParamAtom;

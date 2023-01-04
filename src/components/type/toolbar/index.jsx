@@ -5,7 +5,7 @@ import SearchType from './search';
 import OtherType from './other';
 import DateType from './date';
 
-const TableToolbar = ({ setType, setSearchType, typeKey, date, search, typeOptions }) => {
+const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions }) => {
 
   const renderTypes = useMemo(
     () =>
@@ -17,6 +17,7 @@ const TableToolbar = ({ setType, setSearchType, typeKey, date, search, typeOptio
                 key={i}
                 typeOptions={typeOptions}
                 setSearchType={setSearchType}
+                param={param}
                 typeKey={v}
               />
             );
@@ -24,6 +25,7 @@ const TableToolbar = ({ setType, setSearchType, typeKey, date, search, typeOptio
             return (
               <DateType
                 key={i}
+                param={param}
                 typeOptions={typeOptions}
                 setType={setType}
                 typeKey={v}
@@ -34,6 +36,7 @@ const TableToolbar = ({ setType, setSearchType, typeKey, date, search, typeOptio
             return (
               <OtherType
                 key={i}
+                param={param}
                 typeOptions={typeOptions}
                 setType={setType}
                 typeKey={v}
@@ -41,7 +44,7 @@ const TableToolbar = ({ setType, setSearchType, typeKey, date, search, typeOptio
             );
         }
       }),
-    [setSearchType, setType, typeKey, typeOptions]
+    [param, setSearchType, setType, typeKey, typeOptions]
   );
 
   return (

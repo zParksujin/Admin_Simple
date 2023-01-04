@@ -7,7 +7,7 @@ import CustomBodyRows from './customBody';
 import CustomBodyHeaders from './customHeader';
 import CustomPopover from './popover';
 
-function TableComponent({ page, setType, offset, total, limit, subColumns, mainColumns, data }) {
+function TableComponent({ page, setType, offset, total, limit, subColumns = [], mainColumns, data }) {
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const [openPopover, setOpenPopover] = useState(null);

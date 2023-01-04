@@ -23,10 +23,9 @@ export const typeOptions = {
 };
 
 export const paramType = {
+  profile_id: '',
   offset: 0,
   limit: 20,
-  searchType: 'profile_id',
-  searchVal: '',
   date_type: 'register',
   sort: 'register',
   adult_yn: '',

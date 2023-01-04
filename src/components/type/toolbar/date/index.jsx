@@ -2,18 +2,15 @@ import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Box, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useRecoilValue } from 'recoil';
 import dayjs from 'dayjs';
-import userListBodyAtom from '@/recoil/user/list/parmas/atom';
 
 const INPUT_WIDTH = 160;
 const SELECT_WIDTH = 100;
 
-const DateType = ({ typeOptions, typeKey, setType }) => {
-  const body = useRecoilValue(userListBodyAtom);
+const DateType = ({ typeOptions, typeKey, setType, param }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [dateType, setDateType] = useState(body.date_type);
+  const [dateType, setDateType] = useState(param.date_type);
 
   const onSearchDate = useCallback(() => {
     setType({ start_date: startDate, end_date: endDate });

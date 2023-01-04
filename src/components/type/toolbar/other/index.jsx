@@ -1,12 +1,9 @@
 import { Box, FormControl, InputLabel, NativeSelect } from '@mui/material';
 import React, { useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
-import userListBodyAtom from '@/recoil/user/list/parmas/atom';
 
 const SELECT_WIDTH = 100;
 
-const OtherType = ({ typeOptions, typeKey, setType }) => {
-  const body = useRecoilValue(userListBodyAtom);
+const OtherType = ({ typeOptions, typeKey, setType, param }) => {
 
   const onChangeFilter = useCallback((e) => {
     setType({ [typeKey]: e.target.value });
@@ -19,7 +16,7 @@ const OtherType = ({ typeOptions, typeKey, setType }) => {
         <NativeSelect
           id="demo-simple-select-label"
           onChange={onChangeFilter}
-          value={body[typeKey]}
+          value={param[typeKey]}
           label={typeKey}
           name={typeKey}
         >
