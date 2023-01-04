@@ -21,8 +21,8 @@ export default function CustomBodyHeaders({
   order,
   orderBy,
   rowCount = 0,
-  topColumns = [],
-  bottomColumns,
+  subColumns = [],
+  mainColumns,
   numSelected = 0,
   onSort,
   onSelectAllRows,
@@ -31,7 +31,7 @@ export default function CustomBodyHeaders({
   return (
     <TableHead sx={sx}>
       <TableRow>
-        {topColumns.map((v) => (
+        {subColumns.map((v) => (
           <TableCell
             key={v.label}
             align="center"
@@ -56,7 +56,7 @@ export default function CustomBodyHeaders({
           </TableCell>
         )}
 
-        {bottomColumns.map((headCell) => (
+        {mainColumns.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.align || 'left'}

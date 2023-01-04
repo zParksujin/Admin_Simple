@@ -1,97 +1,106 @@
-import { MenuItem, TextField } from '@mui/material';
+import React, { useState, useEffect, useCallback, memo } from 'react';
+import { Box, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import React from 'react';
+import { useRecoilValue } from 'recoil';
+import dayjs from 'dayjs';
+import userListBodyAtom from '@/recoil/user/list/parmas/atom';
 
 const INPUT_WIDTH = 160;
+const SELECT_WIDTH = 100;
 
-const DateType = ({
-  optionsService,
-  filterStartDate,
-  setFilterStartDate,
-  filterEndDate,
-  setFilterEndDate,
-  filterService,
-  setFilterService,
-  typeOptions,
-  typeKey,
-}) => {
-  const onFilterService = (event) => {
-    // setPage(0);
-    setFilterService(event.target.value);
+const DateType = ({ typeOptions, typeKey, setType }) => {
+  const body = useRecoilValue(userListBodyAtom);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [dateType, setDateType] = useState(body.date_type);
+
+  const onSearchDate = useCallback(() => {
+    setType({ start_date: startDate, end_date: endDate });
+  }, [endDate, setType, startDate]);
+
+  const onChangeFilter = (e) => {
+    setDateType(e.target.value);
   };
+
+  useEffect(() => {
+    if (startDate && endDate && dateType) {
+      onSearchDate();
+    }
+  }, [endDate, onSearchDate, startDate, dateType]);
+
   return (
     <>
-      <TextField
-        fullWidth
-        select
-        label="일자"
-        value={filterService}
-        onChange={onFilterService}
-        SelectProps={{
-          MenuProps: {
-            PaperProps: {
-              sx: { maxHeight: 220 },
-            },
-          },
-        }}
-        sx={{
-          maxWidth: { md: INPUT_WIDTH },
-          textTransform: 'capitalize',
-        }}
-      >
-        {typeOptions[typeKey].map((option) => (
-          <MenuItem
-            key={option}
-            value={option}
-            sx={{
-              mx: 1,
-              borderRadius: 0.75,
-              typography: 'body2',
-              textTransform: 'capitalize',
-            }}
+      <Box sx={{ minWidth: SELECT_WIDTH }}>
+        <FormControl fullWidth>
+          <InputLabel
+            variant="standard"
+            id="demo-simple-select-label"
+            htmlFor="uncontrolled-native"
           >
-            {option}
-          </MenuItem>
-        ))}
-      </TextField>
-
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label="Start date"
-          value={filterStartDate}
-          onChange={(newValue) => {
-            setFilterStartDate(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              fullWidth
-              sx={{
-                maxWidth: { md: INPUT_WIDTH },
-              }}
-            />
-          )}
-        />
-        <DatePicker
-          label="End date"
-          value={filterEndDate}
-          onChange={(newValue) => {
-            setFilterEndDate(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              fullWidth
-              sx={{
-                maxWidth: { md: INPUT_WIDTH },
-              }}
-            />
-          )}
-        />
-      </LocalizationProvider>
+            {typeKey}
+          </InputLabel>
+          <NativeSelect
+            id="uncontrolled-native"
+            onChange={onChangeFilter}
+            value={dateType}
+            name={typeKey}
+            label={typeKey}
+          >
+            {typeOptions[typeKey].map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </NativeSelect>
+        </FormControl>
+      </Box>
+      <Box sx={{ minWidth: INPUT_WIDTH }}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Start date"
+            value={startDate}
+            inputFormat="YYYY-MM-DD"
+            onChange={(newValue) => {
+              const startDay = dayjs(newValue, 'YYYY-MM-DD');
+              setStartDate(startDay.format('YYYY-MM-DD'));
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                fullWidth
+                sx={{
+                  maxWidth: { md: INPUT_WIDTH },
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider>
+      </Box>
+      <Box sx={{ minWidth: INPUT_WIDTH }}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="End date"
+            value={endDate}
+            inputFormat="YYYY-MM-DD"
+            onChange={(newValue) => {
+              const endDay = dayjs(newValue, 'YYYY-MM-DD');
+              setEndDate(endDay.format('YYYY-MM-DD'));
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                fullWidth
+                sx={{
+                  maxWidth: { md: INPUT_WIDTH },
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider>
+      </Box>
     </>
   );
 };
 
-export default DateType;
+export default memo(DateType);

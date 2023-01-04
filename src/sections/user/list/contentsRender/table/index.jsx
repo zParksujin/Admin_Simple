@@ -2,9 +2,9 @@ import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import TableComponent from "@/components/type/table";
 import { userListSelector } from "@/recoil/user/list";
-import { userListBodySelector } from "@/recoil/user/list/body";
+import { userListBodyParam } from "@/recoil/user/list/parmas";
 
-const TOP_TABLE_HEAD = [
+const SUB_HEAD = [
     { id: '', label: '',colSpan: 3 },
     { id: '1', label: '계정정보', colSpan: 3 },
     { id: '2', label: '인증정보', colSpan: 2 },
@@ -13,7 +13,7 @@ const TOP_TABLE_HEAD = [
     { id: '5', label: '활동정보', colSpan: 3 },
   ];
 
-const BOTTOM_TABLE_HEAD = [
+const MAIN_HEAD = [
     { id: 'user_idx', label: '번호', align: 'center', minWidth: 100},
     { id: 'status_name', label: '상태', align: 'center', minWidth: 100 },
     { id: 'login_social_code_name', label: '가입', align: 'center', minWidth: 140 },
@@ -35,7 +35,7 @@ const BOTTOM_TABLE_HEAD = [
 
 function UserListTable({tab}) {
   const userList = useRecoilValue(userListSelector);
-  const setType = useSetRecoilState(userListBodySelector);
+  const setType = useSetRecoilState(userListBodyParam);
   const { page, data } = userList;
 
     return (
@@ -44,8 +44,8 @@ function UserListTable({tab}) {
             total={page.total}
             limit={page.limit}
             offset={page.offset}
-            topColumns={TOP_TABLE_HEAD}
-            bottomColumns={BOTTOM_TABLE_HEAD}
+            subColumns={SUB_HEAD}
+            mainColumns={MAIN_HEAD}
             setType={setType}
             data={data}
         />

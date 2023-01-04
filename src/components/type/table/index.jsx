@@ -7,7 +7,7 @@ import CustomBodyRows from './customBody';
 import CustomBodyHeaders from './customHeader';
 import CustomPopover from './popover';
 
-function TableComponent({ page, setType, offset, total, limit, topColumns, bottomColumns, data }) {
+function TableComponent({ page, setType, offset, total, limit, subColumns, mainColumns, data }) {
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const [openPopover, setOpenPopover] = useState(null);
@@ -47,9 +47,9 @@ function TableComponent({ page, setType, offset, total, limit, topColumns, botto
   return (
     <Paper sx={{ width: '100%' }}>
       <TableContainer sx={{ overflow: 'unset' }}>
-        <Scrollbar sx={{ maxHeight: 400 }}>
+        <Scrollbar sx={{ maxHeight: 500 }}>
           <Table stickyHeader sx={{ minWidth: 800 }}>
-            <CustomBodyHeaders topColumns={topColumns} bottomColumns={bottomColumns} />
+            <CustomBodyHeaders subColumns={subColumns} mainColumns={mainColumns} />
             <TableBody>
               {data === null ? (
                 <TableNoData isNotFound={false} />
@@ -57,7 +57,7 @@ function TableComponent({ page, setType, offset, total, limit, topColumns, botto
                 <>
                   <CustomBodyRows
                     data={data}
-                    bottomColumns={bottomColumns}
+                    mainColumns={mainColumns}
                     openPopover={openPopover}
                     handleOpenPopover={handleOpenPopover}
                   />

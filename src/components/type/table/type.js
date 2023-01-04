@@ -1,5 +1,13 @@
-// const searchType = ['profile_id', 'nick', 'login_id', 'name', 'birthday', 'phone', 'ipin', 'ci'];
-const searchType = ['profile_id', 'nick', 'login_id', 'name', 'birthday', 'phone', 'ipin', 'ci'];
+export const searchType = [
+  'profile_id',
+  'nick',
+  'login_id',
+  'name',
+  'birthday',
+  'phone',
+  'ipin',
+  'ci',
+];
 const dateType = ['register', 'leave', 'cert'];
 const adultType = ['', 'Y', 'N'];
 const statusType = ['', 'cert', 'no-cert', 'leave', 'block'];

@@ -1,13 +1,21 @@
 import React from 'react';
-import {  useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import TableToolbar from '@/components/type/toolbar';
-import { userListBodySelector } from '@/recoil/user/list/body';
+import { userListBodyParam, userListBodySearch } from '@/recoil/user/list/parmas';
 import { typeOptions, typeKeyArray } from '@/components/type/table/type';
 
 function ToolbarRender({ tab }) {
-  const setType = useSetRecoilState(userListBodySelector);
+  const setType = useSetRecoilState(userListBodyParam);
+  const setSearchType = useSetRecoilState(userListBodySearch);
 
-  return (<TableToolbar setType={setType} typeKey={typeKeyArray} typeOptions={typeOptions} />);
+  return (
+    <TableToolbar
+      setType={setType}
+      setSearchType={setSearchType}
+      typeKey={typeKeyArray}
+      typeOptions={typeOptions}
+    />
+  );
 }
 
 export default ToolbarRender;

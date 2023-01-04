@@ -1,64 +1,86 @@
-import { InputAdornment, MenuItem, TextField } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  NativeSelect,
+  TextField,
+} from '@mui/material';
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import Iconify from '@/components/iconify';
+import userListBodyAtom from '@/recoil/user/list/parmas/atom';
 
-const INPUT_WIDTH = 160;
+const INPUT_WIDTH = 110;
+const SELECT_WIDTH = 100;
 
-const SearchType = ({ typeOptions, typeKey, setType }) => {
-  const [searchText, setSearchText] = useState();
+const SearchType = ({ typeOptions, typeKey, setSearchType }) => {
+  const body = useRecoilValue(userListBodyAtom);
+  const [searchText, setSearchText] = useState('');
+
+  const returnValue = () => {
+    let result = '';
+    typeOptions[typeKey].forEach(v => {
+      // eslint-disable-next-line consistent-return
+      Object.keys(body).forEach((item) => {
+        if (v === item){
+          result = v;
+      }
+      })
+    })
+    return result;
+}
 
   const onChangeFilter = (e) => {
-    setType({ [e.target.value]: searchText });
+    e.preventDefault();
+    const copy = {...body, [e.target.value || 'profile_id']: searchText};
+    delete copy[returnValue()]
+    setSearchType({ ...copy });
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const copy = {...body, [returnValue() || 'profile_id']: searchText};
+    setSearchType({ ...copy });
+  }
 
   return (
     <>
-      <TextField
-        fullWidth
-        select
-        label="검색어"
-        // value={filterService}
-        onChange={onChangeFilter}
-        SelectProps={{
-          MenuProps: {
-            PaperProps: {
-              sx: { maxHeight: 220 },
-            },
-          },
-        }}
-        sx={{
-          maxWidth: { md: INPUT_WIDTH },
-          textTransform: 'capitalize',
-        }}
-      >
-        {typeOptions[typeKey].map((option) => (
-          <MenuItem
-            key={option}
-            value={option}
-            sx={{
-              mx: 1,
-              borderRadius: 0.75,
-              typography: 'body2',
-              textTransform: 'capitalize',
-            }}
+      <Box sx={{ minWidth: SELECT_WIDTH }}>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" id="demo-simple-select-label" htmlFor="uncontrolled-native">{typeKey}</InputLabel>
+          <NativeSelect
+            id="uncontrolled-native"
+            onChange={onChangeFilter}
+            label={typeKey}
+            value={returnValue()}
           >
-            {option}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField
-        fullWidth
-        value={searchText}
-        onChange={(e) => setSearchText(e.currentTarget.value)}
-        placeholder="Search client or invoice number..."
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
-            </InputAdornment>
-          ),
-        }}
-      />
+            {typeOptions[typeKey].map((option) => (
+              <option
+                key={option}
+                value={option}
+              >
+                {option}
+              </option>
+            ))}
+          </NativeSelect>
+        </FormControl>
+      </Box>
+      <Box component="form" onSubmit={onSubmit} sx={{ minWidth: INPUT_WIDTH }}>
+        <TextField
+          fullWidth
+          value={searchText}
+          onChange={(e) => setSearchText(e.currentTarget.value)}
+          placeholder="Search..."
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
     </>
   );
 };

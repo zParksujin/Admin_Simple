@@ -1,14 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Stack } from '@mui/material';
 
 import SearchType from './search';
 import OtherType from './other';
 import DateType from './date';
 
-const TableToolbar = ({ setType, typeKey, date, search, typeOptions }) => {
-  const [filterService, setFilterService] = useState('all');
-  const [filterStartDate, setFilterStartDate] = useState(null);
-  const [filterEndDate, setFilterEndDate] = useState(null);
+const TableToolbar = ({ setType, setSearchType, typeKey, date, search, typeOptions }) => {
 
   const renderTypes = useMemo(
     () =>
@@ -19,7 +16,7 @@ const TableToolbar = ({ setType, typeKey, date, search, typeOptions }) => {
               <SearchType
                 key={i}
                 typeOptions={typeOptions}
-                setType={setType}
+                setSearchType={setSearchType}
                 typeKey={v}
               />
             );
@@ -27,12 +24,6 @@ const TableToolbar = ({ setType, typeKey, date, search, typeOptions }) => {
             return (
               <DateType
                 key={i}
-                filterStartDate={filterStartDate}
-                setFilterStartDate={setFilterStartDate}
-                filterEndDate={filterEndDate}
-                setFilterEndDate={setFilterEndDate}
-                filterService={filterService}
-                setFilterService={setFilterService}
                 typeOptions={typeOptions}
                 setType={setType}
                 typeKey={v}
@@ -50,7 +41,7 @@ const TableToolbar = ({ setType, typeKey, date, search, typeOptions }) => {
             );
         }
       }),
-    [filterEndDate, filterService, filterStartDate, setType, typeKey, typeOptions]
+    [setSearchType, setType, typeKey, typeOptions]
   );
 
   return (

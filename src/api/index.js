@@ -37,8 +37,6 @@ instance.interceptors.request.use((config) => {
 
 instance.interceptors.response.use(
   (res) => {
-    // console.log('[fetch response]', res?.response?.status /* ,  res.response */);
-
     const duration = new Date() - +(res?.config?.metadata?.startTime || 0);
 
     return {
@@ -57,12 +55,13 @@ instance.interceptors.response.use(
     // 토큰 만료 시 갱신
     if (originalRequest && err?.response?.status === 401 && accessToekn && refreshToekn) {
       const _token = await checkRefreshToken(refreshToekn);
-      console.log(_token);
-      alert(JSON.stringify(_token));
+      // console.log(_token);
+      // alert(JSON.stringify(_token));
       if (_token.status === 200) {
         const { data } = setToken(_token.data);
-        console.log(data?.access_token);
         originalRequest.headers.Authorization = `Bearer ${data?.access_token}`;
+        localStorage.setItem('admin_access_token', data?.access_token);
+        localStorage.setItem('admin_refresh_token', data?.refresh_token);
         return axios.request(originalRequest);
       }
     }
@@ -76,7 +75,6 @@ instance.interceptors.response.use(
 
     return Promise.reject(err);
   }
-  // data._headers = ctx.response?.headers;
 );
 
 export const getSearchParam = (body) => {
