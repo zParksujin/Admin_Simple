@@ -1,14 +1,14 @@
 import React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import TableToolbar from '@/components/type/toolbar';
-import { userListParam, userListSearch } from '@/recoil/user/userList/parmas';
+import userListParamAtom, { userListParam, userListSearch } from '@/recoil/user/userList/parmas';
 import { typeOptions, typeKeyArray } from '@/sections/user/userList/type';
-import userListParamAtom from '@/recoil/user/userList/parmas/atom';
 
 function ToolbarRender({ tab }) {
   const param = useRecoilValue(userListParamAtom);
   const setType = useSetRecoilState(userListParam);
   const setSearchType = useSetRecoilState(userListSearch);
+  const reset = useResetRecoilState(userListParamAtom)
 
   return (
     <TableToolbar
@@ -17,6 +17,7 @@ function ToolbarRender({ tab }) {
       param={param}
       typeKey={typeKeyArray}
       typeOptions={typeOptions}
+      onResetType={reset}
     />
   );
 }

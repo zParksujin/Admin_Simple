@@ -17,7 +17,6 @@ function AuthGuard({ children, history }) {
 
   useEffect(() => {
     const token = localStorage.getItem('admin_access_token');
-    // console.log('새로고침 ', pageAccessedByReload, location.pathname);
 
     if (
       // pageAccessedByReload &&

@@ -1,7 +1,7 @@
 import { selectorFamily } from 'recoil';
 import { getContentList } from '@/api/content';
 
-import contentListParamAtom from './parmas/atom';
+import contentListParamAtom from './parmas';
 
 const contentListSelector = selectorFamily({
   key: 'contentListSelector',
@@ -18,7 +18,7 @@ const contentListSelector = selectorFamily({
       }
       const param = get(contentListParamAtom);
 
-      const res = await getContentList({ ...param, list_type, limit: 50 });
+      const res = await getContentList({ ...param, list_type });
       if (res.error) {
         throw res.error;
       }

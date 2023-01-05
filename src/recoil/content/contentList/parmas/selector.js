@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import contentListParamAtom from './atom';
+import contentListParamAtom from '.';
 
 export const contentListParam = selector({
   key: 'contentListParam',

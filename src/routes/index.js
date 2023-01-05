@@ -1,10 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-// auth
-import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import AuthGuard from '../auth/AuthGuard';
-// import GuestGuard from '../auth/GuestGuard';
 // layouts
+import { ErrorBoundary } from 'react-error-boundary';
+import { Suspense } from 'react';
 import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
 // config
@@ -18,8 +15,10 @@ import {
   MainPage,
   ContentListPage,
 } from './elements';
-import LoadingScreen from '@/components/loading-screen';
 import ErrorSection from '@/sections/error/Error';
+import LoadingScreen from '@/components/loading-screen';
+import AuthGuard from '@/auth/AuthGuard';
+import GlobalModal from '@/components/modal';
 
 export default function Router() {
   return useRoutes([
@@ -29,24 +28,22 @@ export default function Router() {
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         {
           path: 'login',
-          element: (
-            <AuthGuard>
-              <LoginPage />
-            </AuthGuard>
-          ),
+          element: <LoginPage />,
         },
       ],
     },
     {
       path: '/dashboard',
       element: (
-        <AuthGuard>
-          <ErrorBoundary FallbackComponent={ErrorSection}>
-            <Suspense fallback={<LoadingScreen />}>
+        // react-router-dom으로 동작하기 때문에 Router 상위에 감싸질 경우 ErrorSection에서 home으로 보내는 page 이동이 spa 아닌 페이지 자체 이동으로 전환된다.
+        <ErrorBoundary FallbackComponent={ErrorSection}>
+          <Suspense fallback={<LoadingScreen />}>
+            <AuthGuard>
               <DashboardLayout />
-            </Suspense>
-          </ErrorBoundary>
-        </AuthGuard>
+              <GlobalModal />
+            </AuthGuard>
+          </Suspense>
+        </ErrorBoundary>
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
@@ -56,18 +53,6 @@ export default function Router() {
         { path: 'user/subscription', element: <SubListPage /> },
 
         { path: 'content', element: <ContentListPage /> },
-        // { path: 'detail', element: <UserDetailPage /> },
-        // { path: 'one', element: <PageOne /> },
-        // { path: 'two', element: <PageTwo /> },
-        // { path: 'three', element: <PageThree /> },
-        // {
-        //   path: 'user',
-        //   children: [
-        //     { element: <Navigate to="/dashboard/user/list" replace />, index: true },
-        //     { path: 'list', element: <UserListPage /> },
-        //     { path: 'detail', element: <UserDetailPage /> },
-        //   ],
-        // },
       ],
     },
     {

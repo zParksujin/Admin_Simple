@@ -14,8 +14,6 @@ const SELECT_WIDTH = 100;
 
 const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
   const [searchText, setSearchText] = useState('');
-  console.log(typeOptions[typeKey]);
-  console.log(Object.keys(param));
 
   const returnValue = () => {
     let result = '';

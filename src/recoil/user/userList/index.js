@@ -1,6 +1,6 @@
-import atom from '@/recoil/user/userList/atom';
-import userListSelector from '@/recoil/user/userList/selector';
+import userListAtom from '@/recoil/user/userList/atom';
+import userListSelector from '@/recoil/user/userList/fetchSelector';
 
 export { userListSelector };
 
-export default atom;
+export default userListAtom;

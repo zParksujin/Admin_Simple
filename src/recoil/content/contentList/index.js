@@ -1,5 +1,5 @@
 import atom from '@/recoil/content/contentList/atom';
-import contentListSelector from '@/recoil/content/contentList/selector';
+import contentListSelector from '@/recoil/content/contentList/fetchSelector';
 
 export { contentListSelector };
 

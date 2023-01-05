@@ -55,13 +55,20 @@ instance.interceptors.response.use(
     // 토큰 만료 시 갱신
     if (originalRequest && err?.response?.status === 401 && accessToekn && refreshToekn) {
       const _token = await checkRefreshToken(refreshToekn);
-      // console.log(_token);
-      // alert(JSON.stringify(_token));
+      console.log(_token);
+      alert('0');
       if (_token.status === 200) {
         const { data } = setToken(_token.data);
+        console.log(data);
+        console.log(data?.access_token);
+        console.log(data?.refresh_token);
+        alert('1');
         originalRequest.headers.Authorization = `Bearer ${data?.access_token}`;
         localStorage.setItem('admin_access_token', data?.access_token);
         localStorage.setItem('admin_refresh_token', data?.refresh_token);
+        console.log(localStorage.getItem('admin_access_token'));
+        console.log(localStorage.getItem('admin_refresh_token'));
+        alert('2');
         return axios.request(originalRequest);
       }
     }

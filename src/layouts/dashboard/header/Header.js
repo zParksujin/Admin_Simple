@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import { Stack, AppBar, Toolbar, IconButton, Button } from '@mui/material';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
@@ -19,6 +19,8 @@ import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import ContactsPopover from './ContactsPopover';
 import NotificationsPopover from './NotificationsPopover';
+import { MODAL_TYPE } from '@/components/modal';
+import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +30,7 @@ Header.propTypes = {
 
 export default function Header({ onOpenNav }) {
   const theme = useTheme();
+  const { setModal } = useGlobalModal();
 
   const { themeLayout } = useSettingsContext();
 
@@ -58,6 +61,18 @@ export default function Header({ onOpenNav }) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1.5 }}
       >
+        <Button
+          onClick={() =>
+            setModal({
+              type: MODAL_TYPE.DEPTH_TEST,
+              props: {
+                // cb: () => alert('modal test'),
+              },
+            })
+          }
+        >
+          Modal Depth Test
+        </Button>
         <LanguagePopover />
 
         <NotificationsPopover />

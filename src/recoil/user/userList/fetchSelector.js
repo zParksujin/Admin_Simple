@@ -1,8 +1,7 @@
 import { selector } from 'recoil';
 import { getUserList } from '@/api/user';
 
-import userListParamAtom from './parmas/atom';
-// import atom from "."
+import userListParamAtom from './parmas';
 
 const userListSelector = selector({
   key: 'userListSelector',

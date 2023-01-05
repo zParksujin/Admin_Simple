@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import userListParamAtom from './atom';
+import userListParamAtom from '.';
 // import atom from "."
 
 export const userListParam = selector({

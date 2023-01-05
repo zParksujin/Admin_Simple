@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
-import { Stack } from '@mui/material';
-
+import { IconButton, Stack } from '@mui/material';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SearchType from './search';
 import OtherType from './other';
 import DateType from './date';
 
-const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions }) => {
+const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions, onResetType }) => {
 
   const renderTypes = useMemo(
     () =>
@@ -58,6 +58,9 @@ const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions }) =
       sx={{ px: 2.5, py: 3 }}
     >
       {renderTypes}
+      <IconButton onClick={onResetType}>
+        <RestartAltIcon />
+      </IconButton>
     </Stack>
   );
 };

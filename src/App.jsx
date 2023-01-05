@@ -7,28 +7,26 @@ import 'simplebar/src/simplebar.css';
 // lazy image
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-// ----------------------------------------------------------------------
-
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 // routes
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Router from './routes';
+import Router from '@/routes';
 // theme
-import ThemeProvider from './theme';
+import ThemeProvider from '@/theme';
 // locales
-import ThemeLocalization from './locales';
+import ThemeLocalization from '@/locales';
 // components
-import SnackbarProvider from './components/snackbar';
-import { ThemeSettings, SettingsProvider } from './components/settings';
-import { MotionLazyContainer } from './components/animate';
-import ScrollToTop from './components/scroll-to-top';
+import SnackbarProvider from '@/components/snackbar';
+import { ThemeSettings, SettingsProvider } from '@/components/settings';
+import { MotionLazyContainer } from '@/components/animate';
+import ScrollToTop from '@/components/scroll-to-top';
 
 // Check our docs
 
-import DebugObserver from './utils/debug/recoil';
-// ----------------------------------------------------------------------
+import DebugObserver from '@/utils/debug/recoil';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -61,8 +59,9 @@ export default function App() {
             <ThemeSettings>
               <ThemeLocalization>
                 <SnackbarProvider>
-                  <Router /> 
-                  <DebugObserver />
+                  
+                        <Router />
+                      <DebugObserver />
                 </SnackbarProvider>
               </ThemeLocalization>
             </ThemeSettings>
