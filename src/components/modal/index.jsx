@@ -7,7 +7,6 @@ import DepthTestModal from './common/DepthTestModal';
 // import BanProccessLayerModal from './custom/BanProccessLayerModal';
 import BanLayerModal from './custom/BanLayerModal';
 
-
 const Loadable = (Component) => (props) =>
   (
     <Suspense 
@@ -16,7 +15,6 @@ const Loadable = (Component) => (props) =>
       <Component {...props} />
     </Suspense>
   );
-
 
 const BanProccessLayerModal = Loadable(lazy(() => import('@/components/modal/custom/BanProccessLayerModal')))
 
@@ -42,13 +40,15 @@ const GlobalModal = () => {
   const render = useMemo(
     () =>
       modalList.map(({ type, props }, index) => {
+        console.log('type', type);
         const ModalComponent = MODAL_COMPONENTS[type];
         return <ModalComponent key={index} {...props} />;
       }),
     [modalList]
   );
 
-  console.log(modalList);
+  console.log('modalList', modalList);
+  console.log(render);
   if (modalList.length === 0) {
     return null;
   }

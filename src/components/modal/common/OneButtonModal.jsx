@@ -2,12 +2,15 @@ import { Box, Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
 
-const OneButtonModal = ({ cb }) => {
-  const { setCloseModal } = useGlobalModal();
+const OneButtonModal = ({ cbFunc, des, clear = false }) => {
+  const { setCloseModal, setClearModal } = useGlobalModal();
 
   const onCloseModal = (e) => {
-    if (cb) {
-      cb();
+    if (cbFunc) {
+      cbFunc();
+    }
+    if (clear) {
+      setClearModal ();
     }
     setCloseModal();
   };
@@ -49,7 +52,7 @@ const OneButtonModal = ({ cb }) => {
         >
           {/* TODO add T */}
           <Box component="div" sx={{ height: '100%', padding: '70px 100px' }}>
-            <Typography>등록되었습니다.</Typography>
+            <Typography>{des}</Typography>
           </Box>
           <Box
             component="div"

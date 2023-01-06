@@ -2,9 +2,7 @@ import { IconButton, TableCell, TableRow } from '@mui/material';
 import React from 'react';
 import Iconify from '@/components/iconify';
 
-const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) => {
-  console.log(data);
-  return (
+const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) => (
     <>
       {data.map((row, index) => (
         <TableRow hover role="checkbox" tabIndex={-1} key={index}>
@@ -33,6 +31,5 @@ const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) =
       ))}
     </>
   );
-};
 
 export default CustomBodyRows;

@@ -13,13 +13,13 @@ import {
 import React, { useMemo } from 'react';
 import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
 
-const BanLayerModal = ({ cb }) => {
+const BanLayerModal = ({ cbFunc }) => {
   const { setCloseModal } = useGlobalModal();
   const blindList = useMemo(() => ['선택', '블라인드', '블라인드 해제'], [])
 
   const onCloseModal = (e) => {
-    if (cb) {
-      cb();
+    if (cbFunc) {
+      cbFunc();
     }
     setCloseModal();
   };

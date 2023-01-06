@@ -11,15 +11,17 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import dayjs from 'dayjs';
 import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
 import { blockCodeListSelector } from '@/recoil/global/block/blockCodeList';
 import { blockDetailCodeListSelector } from '@/recoil/global/block/blockDetailCodeList';
 import blockCodeIdxAtom from '@/recoil/global/block/blockCodeList/blockCodeIdx';
-import {pkg_type_name} from '@/components/modal/custom/type'
+import { expire_day, pkg_type_name, block_type } from '@/components/modal/custom/type';
+import { MODAL_TYPE } from '..';
 
 /**
  * 
@@ -28,24 +30,49 @@ import {pkg_type_name} from '@/components/modal/custom/type'
     expire_day: 0
     block_date: 2023-01-06 16:25:00
     message_idx: 3679
+    type: 'warning' | 'restriction' | 'ban';
+    expire_day: '0' | '3' | '7' | '30' | '36500';
  */
-const BanProccessLayerModal = ({ cb, data }) => {
+const BanProccessLayerModal = ({ cbFunc, data }) => {
   const { setCloseModal } = useGlobalModal();
+  const { setModal } = useGlobalModal();
   const blockCodeObj = useRecoilValue(blockCodeListSelector);
   const blockCodeDetailList = useRecoilValue(blockDetailCodeListSelector);
   const setBlockCodeIdx = useSetRecoilState(blockCodeIdxAtom);
-  const sanctionsList = useMemo(() => ['선택', '경고', '이용 제한', '이용 정지'], [])
+  const sanctionsList = useMemo(() => ['선택', '경고', '이용 제한', '이용 정지'], []);
   const termList = useMemo(() => ['선택', '-', '3일', '7일', '30일', '영구'], []);
+  const [categoryIdx, setCategoryIdx] = useState();
+  const [blockType, setBlockType] = useState();
+  const [expireDay, setExpireDay] = useState();
+  const [blockDate, setBlockDate] = useState(dayjs(new Date()).format('YYYY-MM-DD HH:mm'));
+  const [memo, setMemo] = useState('');
 
-  const onCloseModal = (e) => {
-    if (cb) {
-      cb();
+  // eslint-disable-next-line consistent-return
+  const handleBanContents = () => {
+    console.log(categoryIdx,
+      blockType,
+      expireDay);
+    if (!categoryIdx || !blockType || expireDay === undefined) {
+      setModal({ type: MODAL_TYPE.ONE_BUTTON, props: {
+        des: '항목을 선택해주세요.'
+      } })
+      return false;
     }
+    const defaultOption = {
+      category_idx: categoryIdx,
+      type: blockType,
+      expire_day: expireDay,
+      block_date: blockDate,
+      message_idx: data.message_idx,
+    };
 
-    setCloseModal();
+  
+    const subOption = { memo };
+
+    const obj = Object.assign(defaultOption, memo === '' ? {} : subOption);
+    cbFunc(obj);
   };
 
-  console.log(data);
   return (
     <Box
       sx={{
@@ -94,7 +121,7 @@ const BanProccessLayerModal = ({ cb, data }) => {
               label="종류"
               value={`${pkg_type_name[data?.pkg_type || data?.content?.pkg_type]}`}
             />
-           
+
             <TextField disabled name="처리자(관리자)" label="처리자(관리자)" value="자동입력" />
             <TextField disabled name="처리일" label="처리일" value="자동입력" />
             <TextField
@@ -122,8 +149,12 @@ const BanProccessLayerModal = ({ cb, data }) => {
               </NativeSelect>
             </FormControl>
             <FormControl sx={{ gridColumn: '1/3' }} fullWidth>
-              <InputLabel id="demo-simple-select-label">위반항목</InputLabel>
-              <NativeSelect id="block-detail-code">
+              <InputLabel htmlFor="block-detail-code">위반항목</InputLabel>
+              <NativeSelect
+                id="block-detail-code"
+                defaultValue="선택"
+                onChange={(e) => setCategoryIdx(e.currentTarget.value)}
+              >
                 <option value="선택">선택</option>
                 {blockCodeDetailList?.length > 0 &&
                   blockCodeDetailList.map((v) => (
@@ -134,8 +165,11 @@ const BanProccessLayerModal = ({ cb, data }) => {
               </NativeSelect>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">제재항목</InputLabel>
-              <NativeSelect id="uncontrolled-native">
+              <InputLabel htmlFor="block-list">제재항목</InputLabel>
+              <NativeSelect
+                id="block-list"
+                onChange={(e) => setBlockType(block_type[e.currentTarget.value])}
+              >
                 {sanctionsList.map((v) => (
                   <option key={v} value={v}>
                     {v}
@@ -144,8 +178,11 @@ const BanProccessLayerModal = ({ cb, data }) => {
               </NativeSelect>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">기간</InputLabel>
-              <NativeSelect id="uncontrolled-native">
+              <InputLabel htmlFor="expire-day">기간</InputLabel>
+              <NativeSelect
+                id="expire-day"
+                onChange={(e) => setExpireDay(expire_day[e.currentTarget.value])}
+              >
                 {termList.map((v) => (
                   <option key={v} value={v}>
                     {v}
@@ -155,12 +192,15 @@ const BanProccessLayerModal = ({ cb, data }) => {
             </FormControl>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
-                label="Responsive"
+                // label="Responsive"
+                label="적용일자"
                 inputFormat="YYYY-MM-DD HH:mm"
                 renderInput={(params) => <TextField {...params} />}
-                //   value={value}
+                value={blockDate}
                 onChange={(newValue) => {
-                  // setValue(newValue);
+                  const day = dayjs(newValue);
+                  console.log(day.format('YYYY-MM-DD HH:mm'));
+                  setBlockDate(day.format('YYYY-MM-DD HH:mm'));
                 }}
               />
             </LocalizationProvider>
@@ -175,10 +215,10 @@ const BanProccessLayerModal = ({ cb, data }) => {
               name="메모(관리자)"
               label="메모(관리자)"
               sx={{ gridColumn: '1/3' }}
+              value={memo}
+              onChange={(e) => setMemo(e.currentTarget.value)}
             />
-             <Typography>
-              컨텐츠 내용
-            </Typography>
+            <Typography>컨텐츠 내용</Typography>
             {data?.content && (
               <Box sx={{ gridColumn: '1/3' }}>
                 <CardMedia
@@ -190,20 +230,24 @@ const BanProccessLayerModal = ({ cb, data }) => {
               </Box>
             )}
             <Box sx={{ display: data?.contents?.length > 0 ? 'block' : 'none', gridColumn: '1/3' }}>
-            {data?.contents?.length > 0 &&  data?.contents.map((v) => (
-                <CardMedia
-                  sx={{ width: 151 }}
-                  component="img"
-                  image={data.content.poster_url}
-                  alt="Live from space album cover"
-                />
-            ))}
+              {data?.contents?.length > 0 &&
+                data?.contents.map((v) => (
+                  <CardMedia
+                    sx={{ width: 151 }}
+                    component="img"
+                    image={data.content.poster_url}
+                    alt="Live from space album cover"
+                  />
+                ))}
             </Box>
           </Box>
         </Paper>
         <Divider sx={{ margin: '20px 0' }} />
         <Box component="div" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
-          <Button sx={{ height: '45px', width: '100px' }} onClick={() => onCloseModal()}>
+          {/* <Button sx={{ height: '45px', width: '100px' }} onClick={() => onCloseModal()}> */}
+          <Button sx={{ height: '45px', width: '100px' }} onClick={() => {
+            handleBanContents();
+          } }>
             설정
           </Button>
           <Button sx={{ height: '45px', width: '100px' }} onClick={() => setCloseModal()}>
