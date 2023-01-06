@@ -123,7 +123,6 @@ export default function TablePaginationCustom({
   sx,
   ...other
 }) {
-  console.log(other);
   return (
     <Root sx={{ width: '100%', maxWidth: '100%' }}>
       <table aria-label="custom pagination table">

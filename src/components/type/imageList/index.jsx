@@ -2,10 +2,9 @@ import { Divider, IconButton, ImageList, ImageListItem, ImageListItemBar } from 
 import React, { useCallback } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import { TablePaginationCustom } from '@/components/table';
-import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
 
-const ImageListComponent = ({ setType, data, page, total, limit, modalType }) => {
-  const { setModal } = useGlobalModal();
+const ImageListComponent = ({ setType, data, page, total, limit, getBlockContentInfo }) => {
+
   const onChangeOffset = useCallback(
     (e, newPage) => {
       console.log(newPage, limit);
@@ -44,20 +43,13 @@ const ImageListComponent = ({ setType, data, page, total, limit, modalType }) =>
                 loading="lazy"
               />
               <ImageListItemBar
-                title={item.creator_profile_id || ''}
+                title={item.creator_nick || ''}
                 subtitle={item.creator_profile_id || ''}
                 actionIcon={
                   <IconButton
                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                     aria-label={`info about ${item.creator_nick}`}
-                    onClick={() =>
-                      setModal({
-                        type: modalType,
-                        props: {
-                          // cb: () => alert('modal test'),
-                        },
-                      })
-                    }
+                    onClick={() => getBlockContentInfo(item)}
                   >
                     <InfoIcon />
                   </IconButton>

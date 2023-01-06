@@ -1,5 +1,5 @@
 import blockCodeListAtom from './atom';
-import blockCodeeSelector from './fetchSelector';
+import blockCodeListSelector from './fetchSelector';
 
-export { blockCodeeSelector };
+export { blockCodeListSelector };
 export default blockCodeListAtom;

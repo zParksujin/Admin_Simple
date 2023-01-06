@@ -1,3 +1,6 @@
-import blockCodeAtom from './atom';
+import blockDetailCodeListAtom from './atom';
+import blockDetailCodeListSelector from './fetchSelector';
 
-export default blockCodeAtom;
+export { blockDetailCodeListSelector };
+
+export default blockDetailCodeListAtom;

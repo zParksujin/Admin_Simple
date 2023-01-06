@@ -59,9 +59,8 @@ export default function App() {
             <ThemeSettings>
               <ThemeLocalization>
                 <SnackbarProvider>
-                  
-                        <Router />
-                      <DebugObserver />
+                  <Router />
+                  <DebugObserver />
                 </SnackbarProvider>
               </ThemeLocalization>
             </ThemeSettings>

@@ -1,15 +1,30 @@
-import React, { useMemo } from 'react';
+import React, { lazy, Suspense, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createPortal } from 'react-dom';
 import globalModalAtom from '@/recoil/global/modal';
 import OneButtonModal from './common/OneButtonModal';
 import DepthTestModal from './common/DepthTestModal';
-import ContentListModal from './custom/ContentListModal';
+// import BanProccessLayerModal from './custom/BanProccessLayerModal';
+import BanLayerModal from './custom/BanLayerModal';
+
+
+const Loadable = (Component) => (props) =>
+  (
+    <Suspense 
+    // fallback={<LoadingScreen />}
+    >
+      <Component {...props} />
+    </Suspense>
+  );
+
+
+const BanProccessLayerModal = Loadable(lazy(() => import('@/components/modal/custom/BanProccessLayerModal')))
 
 export const MODAL_TYPE = {
     ONE_BUTTON: 'ONE_BUTTON',
     CUSTOM_COMOPNENT: {
-        CONTENT_LIST: 'CONTENT_LIST'
+        BAN_LAYER: 'BAN_LAYER',
+        BAN_PROCCESS_LAYER: 'BAN_PROCCESS_LAYER',
     },
     DEPTH_TEST: 'DEPTH_TEST'
 }
@@ -17,8 +32,8 @@ export const MODAL_TYPE = {
 const MODAL_COMPONENTS = {
   ONE_BUTTON: OneButtonModal,
   DEPTH_TEST: DepthTestModal,
-  CONTENT_LIST: ContentListModal,
-//   second: SecondModal,
+  BAN_LAYER: BanLayerModal,
+  BAN_PROCCESS_LAYER: BanProccessLayerModal,
 };
 
 const GlobalModal = () => {

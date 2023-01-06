@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 const blockCodeListAtom = atom({
   key: 'blockCodeListAtom',
-  default: [],
+  default: {},
 });
 
 export default blockCodeListAtom;
