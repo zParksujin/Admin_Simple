@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
 import { TablePaginationCustom } from '@/components/table';
 
-const ImageListComponent = ({ setType, data, page, total, limit, getBlockContentInfo }) => {
+const ImageListComponent = ({ setType, data, page, total, limit, getInfoData }) => {
 
   const onChangeOffset = useCallback(
     (e, newPage) => {
@@ -49,7 +49,7 @@ const ImageListComponent = ({ setType, data, page, total, limit, getBlockContent
                   <IconButton
                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                     aria-label={`info about ${item.creator_nick}`}
-                    onClick={() => getBlockContentInfo(item)}
+                    onClick={() => getInfoData(item)}
                   >
                     <InfoIcon />
                   </IconButton>
