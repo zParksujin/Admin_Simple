@@ -5,11 +5,18 @@ import dayjs from 'dayjs';
 const INPUT_WIDTH = 160;
 const SELECT_WIDTH = 100;
 
-const DateType = ({ typeOptions, typeKey, setType, param }) => {
-  const [startDate, setStartDate] = useState(param?.start_date || null);
-  const [endDate, setEndDate] = useState(param?.end_date || null);
-  const [dateType, setDateType] = useState(param?.date_type || null);
-
+const DateType = ({
+  typeOptions,
+  typeKey,
+  setType,
+  param,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  dateType,
+  setDateType,
+}) => {
   const onSearchDate = useCallback(() => {
     setType({ start_date: startDate, end_date: endDate });
   }, [endDate, setType, startDate]);
@@ -73,39 +80,38 @@ const DateType = ({ typeOptions, typeKey, setType, param }) => {
             )}
           />
         </LocalizationProvider> */}
-           <TextField
-        id="date"
-        label="Start date"
-        type="date"
-        // defaultValue="2017-05-24"
-        sx={{ width: INPUT_WIDTH }}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={startDate}
-        onChange={(e) => {
-          const startDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
-          setStartDate(startDay.format('YYYY-MM-DD'));
-        }}
-        inputFormat="YYYY-MM-DD"
+        <TextField
+          id="date"
+          label="Start date"
+          type="date"
+          // defaultValue="2017-05-24"
+          sx={{ width: INPUT_WIDTH }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={param?.start_date || startDate}
+          onChange={(e) => {
+            const startDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
+            setStartDate(startDay.format('YYYY-MM-DD'));
+          }}
+          // inputFormat="YYYY-MM-DD"
         />
-       
       </Box>
       <Box sx={{ minWidth: INPUT_WIDTH }}>
-      <TextField
-        id="date"
-        label="End date"
-        type="date"
-        sx={{ width: INPUT_WIDTH }}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={endDate}
-        onChange={(e) => {
-          const endDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
-          setEndDate(endDay.format('YYYY-MM-DD'));
-        }}
-        inputFormat="YYYY-MM-DD"
+        <TextField
+          id="date"
+          label="End date"
+          type="date"
+          sx={{ width: INPUT_WIDTH }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={param?.end_date || endDate}
+          onChange={(e) => {
+            const endDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
+            setEndDate(endDay.format('YYYY-MM-DD'));
+          }}
+          // inputFormat="YYYY-MM-DD"
         />
         {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -132,4 +138,4 @@ const DateType = ({ typeOptions, typeKey, setType, param }) => {
   );
 };
 
-export default memo(DateType);
+export default DateType;

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { IconButton, Stack } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import SearchType from './search';
@@ -6,6 +6,16 @@ import OtherType from './other';
 import DateType from './date';
 
 const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions, onResetType }) => {
+  const [startDate, setStartDate] = useState(param?.start_date || '');
+  const [endDate, setEndDate] = useState(param?.end_date || '');
+  const [dateType, setDateType] = useState(param?.date_type || null);
+
+  const onResetParams = () => {
+    onResetType();
+    setDateType(param?.date_type || null);
+    setStartDate('');
+    setEndDate('');
+  };
 
   const renderTypes = useMemo(
     () =>
@@ -29,6 +39,12 @@ const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions, onR
                 typeOptions={typeOptions}
                 setType={setType}
                 typeKey={v}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                dateType={dateType}
+                setDateType={setDateType}
               />
             );
 
@@ -44,7 +60,7 @@ const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions, onR
             );
         }
       }),
-    [param, setSearchType, setType, typeKey, typeOptions]
+    [dateType, endDate, param, setSearchType, setType, startDate, typeKey, typeOptions]
   );
 
   return (
@@ -58,7 +74,7 @@ const TableToolbar = ({ setType, setSearchType, typeKey, param, typeOptions, onR
       sx={{ px: 2.5, py: 3 }}
     >
       {renderTypes}
-      <IconButton onClick={onResetType}>
+      <IconButton onClick={onResetParams}>
         <RestartAltIcon />
       </IconButton>
     </Stack>
