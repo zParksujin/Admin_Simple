@@ -9,8 +9,9 @@ import { useRecoilValue } from 'recoil';
 import { useSnackbar } from '@/components/snackbar';
 import MenuPopover from '@/components/menu-popover';
 import { CustomAvatar } from '@/components/custom-avatar';
-import useLogout from '@/queries/auth/logout';
-import authAtom from '@/recoil/auth/atom';
+import adminMeAtom from '@/recoil/me/atom';
+import { adminLogout } from '@/api/auth';
+import { clearSession } from '@/api';
 
 // ----------------------------------------------------------------------
 
@@ -33,8 +34,7 @@ const OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
-  const { mutate } = useLogout();
-  const auth = useRecoilValue(authAtom);
+  const me = useRecoilValue(adminMeAtom);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -50,7 +50,9 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      mutate();
+      await adminLogout().finally(() => {
+        clearSession();
+      });
       handleClosePopover();
     } catch (error) {
       console.error(error);
@@ -82,17 +84,17 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <CustomAvatar src={auth?.profileimg_url} alt={auth?.name} name={auth?.name} />
+        <CustomAvatar src={me?.profileimg_url} alt={me?.name} name={me?.name} />
       </IconButton>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {auth?.name}
+            {me?.name}
           </Typography>
 
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {auth?.login_id}
+            {me?.login_id}
           </Typography>
         </Box>
 

@@ -7,7 +7,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 // components
 import { useNavigate } from 'react-router';
 import { useLocales } from '@/locales';
-import authAtom from '@/recoil/auth/atom';
+import adminMeAtom from '@/recoil/me/atom';
 import { checkMyIpSelector } from '@/recoil/check-my-ip';
 import { adminLogin } from '@/api/auth';
 import setToken from '@/utils/auth/setToken';
@@ -15,7 +15,7 @@ import setToken from '@/utils/auth/setToken';
 function AuthLoginForm() {
   const { t } = useLocales();
   const navigate = useNavigate();
-  const setAuth = useSetRecoilState(authAtom);
+  const setAuth = useSetRecoilState(adminMeAtom);
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const userIP = useRecoilValue(checkMyIpSelector);
@@ -60,7 +60,7 @@ function AuthLoginForm() {
       setToken(result.data);
       setAuth(result.data.userInfo);
 
-      navigate('/dashboard');
+      navigate('/dashboard/main');
     },
     [email, navigate, pw, setAuth]
   );

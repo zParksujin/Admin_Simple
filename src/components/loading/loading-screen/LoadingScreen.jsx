@@ -40,7 +40,7 @@ export default function LoadingScreen() {
 
   const { themeLayout } = useSettingsContext();
 
-  const isDashboard = pathname.includes('/dashboard') && isDesktop;
+  const isDashboard = pathname.includes('/dashboard/main') && isDesktop;
   // const isDashboard = isInitialized && pathname.includes('/dashboard') && isDesktop;
 
   const size =

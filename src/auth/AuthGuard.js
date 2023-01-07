@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { clearSession } from '@/api';
-import useMeQuery from '@/queries/auth/me';
+import useMe from '@/recoil/me/hook/useMe';
 
 function AuthGuard({ children, history }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { refetch } = useMeQuery(location.pathname, navigate);
+  const { setMe } = useMe(location.pathname, navigate);
   // const pageAccessedByReload =
   //   (window.performance.navigation && window.performance.navigation.type === 1) ||
   //   window.performance
@@ -25,7 +25,7 @@ function AuthGuard({ children, history }) {
       typeof token === 'string' &&
       token?.length > 0
     ) {
-      refetch();
+      setMe();
     } else if (
       location.pathname !== '/login' &&
       (!token || typeof token !== 'string' || token?.length === 0)

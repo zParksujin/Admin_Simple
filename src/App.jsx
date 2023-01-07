@@ -11,7 +11,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 // routes
 import { RecoilRoot } from 'recoil';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import Router from '@/routes';
 // theme
 import ThemeProvider from '@/theme';
@@ -26,25 +25,11 @@ import ScrollToTop from '@/components/scroll-to-top';
 
 import DebugObserver from '@/utils/debug/recoil';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchOnmount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      staleTime: 1 * 60 * 1000,
-    },
-  },
-});
-
 const RootProvider = ({ children }) => (
   <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <HelmetProvider>{children}</HelmetProvider>
       </BrowserRouter>
-    </QueryClientProvider>
   </RecoilRoot>
 );
 

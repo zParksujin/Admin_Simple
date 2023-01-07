@@ -1,6 +1,3 @@
-import atom from '@/recoil/me/atom';
-import meSelector from '@/recoil/me/selector';
+import adminMeAtom from '@/recoil/me/atom';
 
-export { meSelector };
-
-export default atom;
+export default adminMeAtom;
