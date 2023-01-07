@@ -21,6 +21,8 @@ import ContactsPopover from './ContactsPopover';
 import NotificationsPopover from './NotificationsPopover';
 import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 import { MODAL_TYPE } from '@/components/modal';
+import { LOADING_TYPE } from '@/components/loading/global-progress';
+import useGlobalLoading from '@/utils/hooks/global/loading/useGlobalLoading';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +33,7 @@ Header.propTypes = {
 export default function Header({ onOpenNav }) {
   const theme = useTheme();
   const { setModal } = useGlobalModal();
+  const { setLoading } = useGlobalLoading();
 
   const { themeLayout } = useSettingsContext();
 
@@ -72,6 +75,18 @@ export default function Header({ onOpenNav }) {
           }
         >
           Modal Depth Test
+        </Button>
+        <Button
+          onClick={() =>
+            setLoading({
+              type: LOADING_TYPE.TEST,
+              props: {
+                // cb: () => alert('modal test'),
+              },
+            })
+          }
+        >
+          Global Loading Test
         </Button>
         <LanguagePopover />
 

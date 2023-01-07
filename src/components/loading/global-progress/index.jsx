@@ -1,16 +1,20 @@
-import React, { lazy, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createPortal } from 'react-dom';
 import globalLoadingAtom from '@/recoil/global/loading/atom';
 
-const BasicLoading = lazy(() => import('@/components/loading/global-progress/basic'))
+import BasicProgress from '@/components/loading/global-progress/basic';
+import TestProgress from '@/components/loading/global-progress/test';
+
 
 export const LOADING_TYPE = {
     BASIC: 'BASIC',
+    TEST: 'TEST',
 }
 
 const LOADING_COMPONENTS = {
-    BASIC: BasicLoading,
+    BASIC: BasicProgress,
+    TEST: TestProgress,
 };
 
 const GlobalProgress = () => {

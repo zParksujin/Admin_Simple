@@ -28,9 +28,7 @@ const OneButtonModal = ({ cbFunc, des, clear = false }) => {
         zIndex: 1200,
         outline: '0px',
         display: 'flex',
-        '-webkit-box-pack': 'center',
         justifyContent: 'center',
-        '-webkit-box-align': 'center',
         alignItems: 'center',
       }}
       component="div"

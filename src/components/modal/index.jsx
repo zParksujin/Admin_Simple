@@ -6,16 +6,6 @@ import OneButtonModal from './common/OneButtonModal';
 import DepthTestModal from './common/DepthTestModal';
 import BanLayerModal from './custom/BanLayerModal';
 
-// const Lazy = () => {
-//   const { setLoading, closeLoading } = useGlobalLoading();
-//   console.log(LOADING_TYPE.BASIC);
-//   useEffect(() => {
-//     setLoading({ type: LOADING_TYPE.BASIC });
-//     return () => closeLoading();
-//   }, [closeLoading, setLoading]);
-//   return '';
-// };
-
 const Loadable = (Component) => (props) =>
   (
     <Suspense
@@ -27,7 +17,6 @@ const Loadable = (Component) => (props) =>
   );
 
 const BanProccessLayerModal = Loadable(lazy(() => import('@/components/modal/custom/block-process-layer')));
-// const BanProccessLayerModal = lazy(() => import('@/components/modal/custom/BanProccessLayerModal'));
 
 export const MODAL_TYPE = {
   ONE_BUTTON: 'ONE_BUTTON',
