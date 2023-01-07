@@ -40,15 +40,13 @@ const MAIN_HEAD = [
 function StatisticsBuyTable({tab}) {
   const statisticsBuyList = useRecoilValue(statisticsBuySelector);
   const setType = useSetRecoilState(statisticsBuyParam);
-  console.log(statisticsBuyList);
-  const { data } = statisticsBuyList;
 
     return (
         <TableComponent
             subColumns={SUB_HEAD}
             mainColumns={MAIN_HEAD}
             setType={setType}
-            data={data}
+            data={statisticsBuyList}
         />
     )
 }

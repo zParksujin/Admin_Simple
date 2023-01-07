@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Box, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 
@@ -25,11 +25,12 @@ const DateType = ({
     setDateType(e.target.value);
   };
 
+  console.log('startDate, endDate', startDate, endDate, param?.start_date, param?.end_date);
   useEffect(() => {
     if (startDate && endDate && ((typeOptions && dateType) || !typeOptions)) {
       onSearchDate();
     }
-  }, [endDate, onSearchDate, startDate, dateType, typeOptions]);
+  }, [endDate, onSearchDate, startDate, dateType, typeOptions, param?.start_date, param?.end_date]);
 
   return (
     <>
@@ -93,6 +94,9 @@ const DateType = ({
           onChange={(e) => {
             const startDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
             setStartDate(startDay.format('YYYY-MM-DD'));
+            if (param?.end_date) {
+              setEndDate(param?.end_date)
+            }
           }}
           // inputFormat="YYYY-MM-DD"
         />
@@ -110,6 +114,9 @@ const DateType = ({
           onChange={(e) => {
             const endDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
             setEndDate(endDay.format('YYYY-MM-DD'));
+            if (param?.start_date) {
+              setStartDate(param?.start_date)
+            }
           }}
           // inputFormat="YYYY-MM-DD"
         />
