@@ -1,17 +1,13 @@
 import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
-import { Typography, ListItemText, ListItemAvatar, MenuItem, IconButton } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
 // utils
-import { fToNow } from '../../../utils/formatTime';
 // _mock_
-import { _contacts } from '../../../_mock/arrays';
 // components
-import { CustomAvatar } from '../../../components/custom-avatar';
 import Iconify from '../../../components/iconify';
 import Scrollbar from '../../../components/scrollbar';
 import MenuPopover from '../../../components/menu-popover';
-import BadgeStatus from '../../../components/badge-status';
 
 // ----------------------------------------------------------------------
 
@@ -47,11 +43,11 @@ export default function ContactsPopover() {
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 320 }}>
         <Typography variant="h6" sx={{ p: 1.5 }}>
-          Contacts <Typography component="span">({_contacts.length})</Typography>
+          {/* Contacts <Typography component="span">({_contacts.length})</Typography> */}
         </Typography>
 
         <Scrollbar sx={{ height: ITEM_HEIGHT * 6 }}>
-          {_contacts.map((contact) => (
+          {/* {_contacts.map((contact) => (
             <MenuItem key={contact.id} sx={{ height: ITEM_HEIGHT }}>
               <ListItemAvatar>
                 <CustomAvatar
@@ -69,7 +65,7 @@ export default function ContactsPopover() {
                 secondaryTypographyProps={{ typography: 'caption' }}
               />
             </MenuItem>
-          ))}
+          ))} */}
         </Scrollbar>
       </MenuPopover>
     </>

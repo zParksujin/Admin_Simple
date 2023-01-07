@@ -21,7 +21,6 @@ import {
 // utils
 import { fToNow } from '../../../utils/formatTime';
 // _mock_
-import { _notifications } from '../../../_mock/arrays';
 // components
 import Iconify from '../../../components/iconify';
 import Scrollbar from '../../../components/scrollbar';
@@ -32,7 +31,7 @@ import MenuPopover from '../../../components/menu-popover';
 export default function NotificationsPopover() {
   const [openPopover, setOpenPopover] = useState(null);
 
-  const [notifications, setNotifications] = useState(_notifications);
+  const [notifications, setNotifications] = useState([]);
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
 
