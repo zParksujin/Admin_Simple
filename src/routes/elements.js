@@ -16,9 +16,9 @@ const Loadable = (Component) => (props) =>
 export const MainPage = Loadable(lazy(() => import('@/pages/main')));
 export const LoginPage = Loadable(lazy(() => import('@/pages/auth/LoginPage')));
 
-export const UserListPage = Loadable(lazy(() => import('@/pages/user/userList')));
-export const SubListPage = Loadable(lazy(() => import('@/pages/user/subList')));
+export const UserListPage = Loadable(lazy(() => import('@/pages/user/user-list')));
+export const SubListPage = Loadable(lazy(() => import('@/pages/user/sub-list')));
 
-export const ContentListPage = Loadable(lazy(() => import('@/pages/content/contentList')));
+export const ContentListPage = Loadable(lazy(() => import('@/pages/content/content-list')));
 
 export const Page404 = Loadable(lazy(() => import('@/pages/error/Page404')));

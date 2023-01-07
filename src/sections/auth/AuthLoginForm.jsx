@@ -8,7 +8,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router';
 import { useLocales } from '@/locales';
 import authAtom from '@/recoil/auth/atom';
-import { checkMyIpSelector } from '@/recoil/checkMyIp';
+import { checkMyIpSelector } from '@/recoil/check-my-ip';
 import { adminLogin } from '@/api/auth';
 import setToken from '@/utils/auth/setToken';
 

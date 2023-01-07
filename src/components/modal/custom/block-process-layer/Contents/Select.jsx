@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { blockCodeListSelector } from '@/recoil/global/modal/block/blockCodeList';
-import { blockDetailCodeListSelector } from '@/recoil/global/modal/block/blockDetailCodeList';
-import blockCodeIdxAtom from '@/recoil/global/modal/block/blockCodeList/blockCodeIdx';
+import { blockCodeListSelector } from '@/recoil/global/modal/block/block-code-list';
+import { blockDetailCodeListSelector } from '@/recoil/global/modal/block/block-detail-code-list';
+import blockCodeIdxAtom from '@/recoil/global/modal/block/block-code-list/block-code-idx';
 import { block_type, expire_day } from '../../type';
 
 const BlockProcessSelect = ({ setCategoryIdx, setBlockType, setExpireDay }) => {

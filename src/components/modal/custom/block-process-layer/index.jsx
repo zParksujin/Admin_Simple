@@ -3,12 +3,9 @@ import React, { Suspense, useState } from 'react';
 import dayjs from 'dayjs';
 import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 import { MODAL_TYPE } from '../..';
-import BlockProcessContents from './Contents';
-
-// const BlockProcessContents = lazy(() => import('@/components/modal/custom/block-process-layer/Contents'));
+import BlockProcessContents from './contents';
 
 /**
- * 
  * category_idx: 1
     type: warning
     expire_day: 0
