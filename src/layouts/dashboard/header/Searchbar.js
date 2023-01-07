@@ -12,6 +12,7 @@ import {
   InputAdornment,
   ClickAwayListener,
   Autocomplete,
+  IconButton,
 } from '@mui/material';
 // utils
 import { useRecoilValue } from 'recoil';
@@ -19,7 +20,6 @@ import { bgBlur } from '../../../utils/cssStyles';
 import flattenArray from '../../../utils/flattenArray';
 // components
 import Iconify from '../../../components/iconify';
-import { IconButtonAnimate } from '../../../components/animate';
 import SearchNotFound from '../../../components/search-not-found';
 //
 import { menuSelector } from '@/recoil/menu';
@@ -155,9 +155,9 @@ function Searchbar() {
     <ClickAwayListener onClickAway={handleClose}>
       <div>
         {!open && (
-          <IconButtonAnimate onClick={handleOpen}>
+          <IconButton onClick={handleOpen}>
             <Iconify icon="eva:search-fill" />
-          </IconButtonAnimate>
+          </IconButton>
         )}
 
         <Slide direction="down" in={open} mountOnEnter unmountOnExit>

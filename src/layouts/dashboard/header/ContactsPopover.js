@@ -1,7 +1,7 @@
 import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
-import { Typography, ListItemText, ListItemAvatar, MenuItem } from '@mui/material';
+import { Typography, ListItemText, ListItemAvatar, MenuItem, IconButton } from '@mui/material';
 // utils
 import { fToNow } from '../../../utils/formatTime';
 // _mock_
@@ -12,7 +12,6 @@ import Iconify from '../../../components/iconify';
 import Scrollbar from '../../../components/scrollbar';
 import MenuPopover from '../../../components/menu-popover';
 import BadgeStatus from '../../../components/badge-status';
-import { IconButtonAnimate } from '../../../components/animate';
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +30,7 @@ export default function ContactsPopover() {
 
   return (
     <>
-      <IconButtonAnimate
+      <IconButton
         color={openPopover ? 'primary' : 'default'}
         onClick={handleOpenPopover}
         sx={{
@@ -44,7 +43,7 @@ export default function ContactsPopover() {
         }}
       >
         <Iconify icon="eva:people-fill" />
-      </IconButtonAnimate>
+      </IconButton>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 320 }}>
         <Typography variant="h6" sx={{ p: 1.5 }}>

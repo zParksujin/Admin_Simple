@@ -26,7 +26,6 @@ import { _notifications } from '../../../_mock/arrays';
 import Iconify from '../../../components/iconify';
 import Scrollbar from '../../../components/scrollbar';
 import MenuPopover from '../../../components/menu-popover';
-import { IconButtonAnimate } from '../../../components/animate';
 
 // ----------------------------------------------------------------------
 
@@ -56,7 +55,7 @@ export default function NotificationsPopover() {
 
   return (
     <>
-      <IconButtonAnimate
+      <IconButton
         color={openPopover ? 'primary' : 'default'}
         onClick={handleOpenPopover}
         sx={{ width: 40, height: 40 }}
@@ -64,7 +63,7 @@ export default function NotificationsPopover() {
         <Badge badgeContent={totalUnRead} color="error">
           <Iconify icon="eva:bell-fill" />
         </Badge>
-      </IconButtonAnimate>
+      </IconButton>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 360, p: 0 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>

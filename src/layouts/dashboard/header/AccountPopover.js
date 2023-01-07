@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
-import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
+import { Box, Divider, Typography, Stack, MenuItem, IconButton } from '@mui/material';
 // routes
 // components
 import { useRecoilValue } from 'recoil';
 import { useSnackbar } from '@/components/snackbar';
 import MenuPopover from '@/components/menu-popover';
-import { IconButtonAnimate } from '@/components/animate';
 import { CustomAvatar } from '@/components/custom-avatar';
 import useLogout from '@/queries/auth/logout';
 import authAtom from '@/recoil/auth/atom';
@@ -66,7 +65,7 @@ export default function AccountPopover() {
 
   return (
     <>
-      <IconButtonAnimate
+      <IconButton
         onClick={handleOpenPopover}
         sx={{
           p: 0,
@@ -84,7 +83,7 @@ export default function AccountPopover() {
         }}
       >
         <CustomAvatar src={auth?.profileimg_url} alt={auth?.name} name={auth?.name} />
-      </IconButtonAnimate>
+      </IconButton>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>

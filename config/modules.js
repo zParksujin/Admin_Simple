@@ -10,7 +10,7 @@ const paths = require('./paths');
  * @param {Object} options
  */
 function getAdditionalModulePaths(options = {}) {
-  const {baseUrl} = options;
+  const { baseUrl } = options;
 
   if (!baseUrl) {
     return '';
@@ -54,7 +54,7 @@ function getAdditionalModulePaths(options = {}) {
  */
 // eslint-disable-next-line consistent-return
 function getWebpackAliases(options = {}) {
-  const {baseUrl} = options;
+  const { baseUrl } = options;
 
   if (!baseUrl) {
     return {};
@@ -76,7 +76,7 @@ function getWebpackAliases(options = {}) {
  */
 // eslint-disable-next-line consistent-return
 function getJestAliases(options = {}) {
-  const {baseUrl} = options;
+  const { baseUrl } = options;
 
   if (!baseUrl) {
     return {};

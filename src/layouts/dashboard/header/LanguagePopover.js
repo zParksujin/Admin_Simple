@@ -1,12 +1,11 @@
 import { useState } from 'react';
 // @mui
-import { MenuItem, Stack } from '@mui/material';
+import { IconButton, MenuItem, Stack } from '@mui/material';
 // locales
 import { useLocales } from '@/locales';
 // components
 import Image from '../../../components/image';
 import MenuPopover from '../../../components/menu-popover';
-import { IconButtonAnimate } from '../../../components/animate';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +29,7 @@ export default function LanguagePopover() {
 
   return (
     <>
-      <IconButtonAnimate
+      <IconButton
         onClick={handleOpenPopover}
         sx={{
           width: 40,
@@ -41,7 +40,7 @@ export default function LanguagePopover() {
         }}
       >
         <Image disabledEffect src={currentLang.icon} alt={currentLang.label} />
-      </IconButtonAnimate>
+      </IconButton>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 180 }}>
         <Stack spacing={0.75}>

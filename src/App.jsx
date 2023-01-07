@@ -20,7 +20,6 @@ import ThemeLocalization from '@/locales';
 // components
 import SnackbarProvider from '@/components/snackbar';
 import { ThemeSettings, SettingsProvider } from '@/components/settings';
-import { MotionLazyContainer } from '@/components/animate';
 import ScrollToTop from '@/components/scroll-to-top';
 
 // Check our docs
@@ -54,7 +53,6 @@ export default function App() {
     <RootProvider>
       <SettingsProvider>
         <ScrollToTop />
-        <MotionLazyContainer>
           <ThemeProvider>
             <ThemeSettings>
               <ThemeLocalization>
@@ -65,7 +63,6 @@ export default function App() {
               </ThemeLocalization>
             </ThemeSettings>
           </ThemeProvider>
-        </MotionLazyContainer>
       </SettingsProvider>
     </RootProvider>
   );
