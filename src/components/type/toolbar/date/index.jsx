@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Box, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 
 const INPUT_WIDTH = 160;
@@ -55,7 +53,7 @@ const DateType = ({ typeOptions, typeKey, setType, param }) => {
         </Box>
       )}
       <Box sx={{ minWidth: INPUT_WIDTH }}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Start date"
             value={startDate}
@@ -74,10 +72,42 @@ const DateType = ({ typeOptions, typeKey, setType, param }) => {
               />
             )}
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
+           <TextField
+        id="date"
+        label="Start date"
+        type="date"
+        // defaultValue="2017-05-24"
+        sx={{ width: INPUT_WIDTH }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        value={startDate}
+        onChange={(e) => {
+          const startDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
+          setStartDate(startDay.format('YYYY-MM-DD'));
+        }}
+        inputFormat="YYYY-MM-DD"
+        />
+       
       </Box>
       <Box sx={{ minWidth: INPUT_WIDTH }}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <TextField
+        id="date"
+        label="End date"
+        type="date"
+        sx={{ width: INPUT_WIDTH }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        value={endDate}
+        onChange={(e) => {
+          const endDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
+          setEndDate(endDay.format('YYYY-MM-DD'));
+        }}
+        inputFormat="YYYY-MM-DD"
+        />
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="End date"
             value={endDate}
@@ -96,7 +126,7 @@ const DateType = ({ typeOptions, typeKey, setType, param }) => {
               />
             )}
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
       </Box>
     </>
   );
