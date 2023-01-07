@@ -3,7 +3,7 @@ import { useRecoilCallback } from "recoil";
 
 import { setBlockContent, getBlockContentInfo } from "@/api/content"
 import { MODAL_TYPE } from "@/components/modal"
-import useGlobalModal from "@/utils/hooks/modal/useGlobalModal"
+import useGlobalModal from "@/utils/hooks/global/modal/useGlobalModal"
 
 const useContentListImage = () => {
     const { setModal } = useGlobalModal();

@@ -40,13 +40,13 @@ const queryClient = new QueryClient({
 });
 
 const RootProvider = ({ children }) => (
-  <QueryClientProvider client={queryClient}>
-    <RecoilRoot>
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <HelmetProvider>{children}</HelmetProvider>
       </BrowserRouter>
-    </RecoilRoot>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </RecoilRoot>
 );
 
 export default function App() {

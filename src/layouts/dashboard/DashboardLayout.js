@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 // @mui
 import { Box } from '@mui/material';
@@ -12,6 +12,7 @@ import Header from './header';
 import NavMini from './nav/NavMini';
 import NavVertical from './nav/NavVertical';
 import NavHorizontal from './nav/NavHorizontal';
+import LoadingScreen from '@/components/loading/loading-screen';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +40,9 @@ export default function DashboardLayout() {
   if (isNavHorizontal) {
     return (
       <>
-        <Header onOpenNav={handleOpen} />
+        <Suspense fallback={<LoadingScreen />}>
+          <Header onOpenNav={handleOpen} />
+        </Suspense>
         {isDesktop ? <NavHorizontal /> : renderNavVertical}
         <Main>
           <Outlet />
@@ -51,8 +54,9 @@ export default function DashboardLayout() {
   if (isNavMini) {
     return (
       <>
-        <Header onOpenNav={handleOpen} />
-
+        <Suspense fallback={<LoadingScreen />}>
+          <Header onOpenNav={handleOpen} />
+        </Suspense>
         <Box
           sx={{
             display: { lg: 'flex' },
@@ -70,8 +74,9 @@ export default function DashboardLayout() {
 
   return (
     <>
-      <Header onOpenNav={handleOpen} />
-
+      <Suspense fallback={<LoadingScreen />}>
+        <Header onOpenNav={handleOpen} />
+      </Suspense>
       <Box
         sx={{
           display: { lg: 'flex' },

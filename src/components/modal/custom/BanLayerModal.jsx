@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useMemo } from 'react';
-import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
+import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 
 const BanLayerModal = ({ cbFunc }) => {
   const { setCloseModal } = useGlobalModal();

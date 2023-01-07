@@ -1,6 +1,6 @@
 import { Box, Button, Card, Typography } from '@mui/material';
 import React from 'react';
-import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
+import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 
 const OneButtonModal = ({ cbFunc, des, clear = false }) => {
   const { setCloseModal, setClearModal } = useGlobalModal();

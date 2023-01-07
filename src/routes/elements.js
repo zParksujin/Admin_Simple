@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 // components
-import LoadingScreen from '../components/loading-screen';
+import LoadingScreen from '../components/loading/loading-screen';
 
 // ----------------------------------------------------------------------
 

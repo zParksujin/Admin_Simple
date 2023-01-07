@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import ImageListComponent from '@/components/type/imageList';
 import { contentListSelector } from '@/recoil/content/contentList';
 import { contentListParam } from '@/recoil/content/contentList/parmas';
-import useContentListImage from '@/recoil/global/block/hooks/useContentList';
+import useContentListImage from '@/recoil/global/modal/block/hooks/useContentList';
 
 const ContentListImage = () => {
   const contentList = useRecoilValue(contentListSelector('content'));

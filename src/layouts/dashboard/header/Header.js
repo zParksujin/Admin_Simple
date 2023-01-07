@@ -19,8 +19,8 @@ import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import ContactsPopover from './ContactsPopover';
 import NotificationsPopover from './NotificationsPopover';
+import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 import { MODAL_TYPE } from '@/components/modal';
-import useGlobalModal from '@/utils/hooks/modal/useGlobalModal';
 
 // ----------------------------------------------------------------------
 

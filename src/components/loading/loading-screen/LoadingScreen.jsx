@@ -4,15 +4,15 @@ import { useLocation } from 'react-router-dom';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, LinearProgress } from '@mui/material';
 // hooks
-import useResponsive from '../../hooks/useResponsive';
+import useResponsive from '../../../hooks/useResponsive';
 // config
-import { NAV } from '../../config-global';
+import { NAV } from '../../../config-global';
 // auth
 // import { useAuthContext } from '../../auth/useAuthContext';
 //
-import Logo from '../logo';
-import ProgressBar from '../progress-bar';
-import { useSettingsContext } from '../settings';
+import Logo from '../../logo';
+import ProgressBar from '../../progress-bar';
+import { useSettingsContext } from '../../settings';
 
 // ----------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import blockCodeIdxAtom from '@/recoil/global/block/blockCodeList/blockCodeIdx';
+import blockCodeIdxAtom from '@/recoil/global/modal/block/blockCodeList/blockCodeIdx';
 import { getBlockCategoryDetailCode } from '@/api/content';
 
 const blockDetailCodeListSelector = selector({

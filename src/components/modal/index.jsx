@@ -4,28 +4,39 @@ import { createPortal } from 'react-dom';
 import globalModalAtom from '@/recoil/global/modal';
 import OneButtonModal from './common/OneButtonModal';
 import DepthTestModal from './common/DepthTestModal';
-// import BanProccessLayerModal from './custom/BanProccessLayerModal';
 import BanLayerModal from './custom/BanLayerModal';
+
+// const Lazy = () => {
+//   const { setLoading, closeLoading } = useGlobalLoading();
+//   console.log(LOADING_TYPE.BASIC);
+//   useEffect(() => {
+//     setLoading({ type: LOADING_TYPE.BASIC });
+//     return () => closeLoading();
+//   }, [closeLoading, setLoading]);
+//   return '';
+// };
 
 const Loadable = (Component) => (props) =>
   (
-    <Suspense 
-    // fallback={<LoadingScreen />}
+    <Suspense
+      // fallback={<LoadingScreen />}
+      // fallback={<Lazy />}
     >
       <Component {...props} />
     </Suspense>
   );
 
-const BanProccessLayerModal = Loadable(lazy(() => import('@/components/modal/custom/BanProccessLayerModal')))
+const BanProccessLayerModal = Loadable(lazy(() => import('@/components/modal/custom/block-process-layer')));
+// const BanProccessLayerModal = lazy(() => import('@/components/modal/custom/BanProccessLayerModal'));
 
 export const MODAL_TYPE = {
-    ONE_BUTTON: 'ONE_BUTTON',
-    CUSTOM_COMOPNENT: {
-        BAN_LAYER: 'BAN_LAYER',
-        BAN_PROCCESS_LAYER: 'BAN_PROCCESS_LAYER',
-    },
-    DEPTH_TEST: 'DEPTH_TEST'
-}
+  ONE_BUTTON: 'ONE_BUTTON',
+  CUSTOM_COMOPNENT: {
+    BAN_LAYER: 'BAN_LAYER',
+    BAN_PROCCESS_LAYER: 'BAN_PROCCESS_LAYER',
+  },
+  DEPTH_TEST: 'DEPTH_TEST',
+};
 
 const MODAL_COMPONENTS = {
   ONE_BUTTON: OneButtonModal,
@@ -40,19 +51,16 @@ const GlobalModal = () => {
   const render = useMemo(
     () =>
       modalList.map(({ type, props }, index) => {
-        console.log('type', type);
         const ModalComponent = MODAL_COMPONENTS[type];
         return <ModalComponent key={index} {...props} />;
       }),
     [modalList]
   );
 
-  console.log('modalList', modalList);
-  console.log(render);
   if (modalList.length === 0) {
     return null;
   }
-  return createPortal(<>{render}</>, document.getElementById('modal-root'))
+  return createPortal(<>{render}</>, document.getElementById('modal-root'));
 };
 
 export default GlobalModal;

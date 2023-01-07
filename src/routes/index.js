@@ -1,7 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import { ErrorBoundary } from 'react-error-boundary';
-import { Suspense } from 'react';
 import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
 // config
@@ -16,9 +15,9 @@ import {
   ContentListPage,
 } from './elements';
 import ErrorSection from '@/sections/error/Error';
-import LoadingScreen from '@/components/loading-screen';
 import AuthGuard from '@/auth/AuthGuard';
 import GlobalModal from '@/components/modal';
+import GlobalProgress from '@/components/loading/global-progress';
 
 export default function Router() {
   return useRoutes([
@@ -37,12 +36,13 @@ export default function Router() {
       element: (
         // react-router-dom으로 동작하기 때문에 Router 상위에 감싸질 경우 ErrorSection에서 home으로 보내는 page 이동이 spa 아닌 페이지 자체 이동으로 전환된다.
         <ErrorBoundary FallbackComponent={ErrorSection}>
-          <Suspense fallback={<LoadingScreen />}>
-            <AuthGuard>
-              <DashboardLayout />
-              <GlobalModal />
-            </AuthGuard>
-          </Suspense>
+          {/* <Suspense fallback={<LoadingScreen />}> */}
+          <AuthGuard>
+            <DashboardLayout />
+            <GlobalModal />
+            <GlobalProgress />
+          </AuthGuard>
+          {/* </Suspense> */}
         </ErrorBoundary>
       ),
       children: [
