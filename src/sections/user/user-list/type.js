@@ -31,20 +31,3 @@ export const paramType = {
   adult_yn: '',
   status: '',
 };
-
-// export interface IGetUserListParam extends IApiListParam {
-//     sort?: 'register' | 'leave' | 'buy' | 'buy-count' | 'refund' | '';
-//     profile_id_nick?: string;
-//     profile_id?: string;
-//     login_id?: string;
-//     nick?: string;
-//     name?: string;
-//     birthday?: string;
-//     phone?: string;
-//     ipin?: string;
-//     ci?: string;
-//     adult_yn?: 'Y' | 'N' | '';
-//     ip?: string;
-//     status?: 'cert' | 'not-cert' | 'leave' | 'block' | '';
-//     date_type?: 'register' | 'leave' | 'cert' | '';
-// }

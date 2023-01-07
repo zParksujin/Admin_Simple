@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 const userListAtom = atom({
   key: 'userListAtom',
-  default: {},
+  default: [],
 });
 
 export default userListAtom;

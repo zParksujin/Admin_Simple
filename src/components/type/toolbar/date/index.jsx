@@ -8,9 +8,9 @@ const INPUT_WIDTH = 160;
 const SELECT_WIDTH = 100;
 
 const DateType = ({ typeOptions, typeKey, setType, param }) => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [dateType, setDateType] = useState(param.date_type);
+  const [startDate, setStartDate] = useState(param?.start_date || null);
+  const [endDate, setEndDate] = useState(param?.end_date || null);
+  const [dateType, setDateType] = useState(param?.date_type || null);
 
   const onSearchDate = useCallback(() => {
     setType({ start_date: startDate, end_date: endDate });
@@ -21,37 +21,39 @@ const DateType = ({ typeOptions, typeKey, setType, param }) => {
   };
 
   useEffect(() => {
-    if (startDate && endDate && dateType) {
+    if (startDate && endDate && ((typeOptions && dateType) || !typeOptions)) {
       onSearchDate();
     }
-  }, [endDate, onSearchDate, startDate, dateType]);
+  }, [endDate, onSearchDate, startDate, dateType, typeOptions]);
 
   return (
     <>
-      <Box sx={{ minWidth: SELECT_WIDTH }}>
-        <FormControl fullWidth>
-          <InputLabel
-            variant="standard"
-            id="demo-simple-select-label"
-            htmlFor="uncontrolled-native"
-          >
-            {typeKey}
-          </InputLabel>
-          <NativeSelect
-            id="uncontrolled-native"
-            onChange={onChangeFilter}
-            value={dateType}
-            name={typeKey}
-            label={typeKey}
-          >
-            {typeOptions[typeKey].map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </NativeSelect>
-        </FormControl>
-      </Box>
+      {typeOptions && (
+        <Box sx={{ minWidth: SELECT_WIDTH }}>
+          <FormControl fullWidth>
+            <InputLabel
+              variant="standard"
+              id="demo-simple-select-label"
+              htmlFor="uncontrolled-native"
+            >
+              {typeKey}
+            </InputLabel>
+            <NativeSelect
+              id="uncontrolled-native"
+              onChange={onChangeFilter}
+              value={dateType}
+              name={typeKey}
+              label={typeKey}
+            >
+              {typeOptions[typeKey].map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </NativeSelect>
+          </FormControl>
+        </Box>
+      )}
       <Box sx={{ minWidth: INPUT_WIDTH }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker

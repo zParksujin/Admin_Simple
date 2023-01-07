@@ -13,6 +13,7 @@ import {
   SubListPage,
   MainPage,
   ContentListPage,
+  StatisticsBuyPage,
 } from './elements';
 import ErrorSection from '@/sections/error/Error';
 import AuthGuard from '@/auth/AuthGuard';
@@ -36,13 +37,11 @@ export default function Router() {
       element: (
         // react-router-dom으로 동작하기 때문에 Router 상위에 감싸질 경우 ErrorSection에서 home으로 보내는 page 이동이 spa 아닌 페이지 자체 이동으로 전환된다.
         <ErrorBoundary FallbackComponent={ErrorSection}>
-          {/* <Suspense fallback={<LoadingScreen />}> */}
           <AuthGuard>
             <DashboardLayout />
             <GlobalModal />
             <GlobalProgress />
           </AuthGuard>
-          {/* </Suspense> */}
         </ErrorBoundary>
       ),
       children: [
@@ -53,6 +52,8 @@ export default function Router() {
         { path: 'user/subscription', element: <SubListPage /> },
 
         { path: 'content', element: <ContentListPage /> },
+
+        { path: 'statistics/buy', element: <StatisticsBuyPage /> },
       ],
     },
     {

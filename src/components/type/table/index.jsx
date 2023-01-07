@@ -75,13 +75,13 @@ function TableComponent({ page, setType, offset, total, limit, subColumns = [], 
         </Scrollbar>
       </TableContainer>
 
-      <TablePaginationCustom
+      {page !== undefined && <TablePaginationCustom
         count={total}
         page={page}
         rowsPerPage={limit}
         onPageChange={onChangeOffset}
         onRowsPerPageChange={onChangeLimit}
-      />
+      />}
     </Paper>
   );
 }

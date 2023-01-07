@@ -21,4 +21,6 @@ export const SubListPage = Loadable(lazy(() => import('@/pages/user/sub-list')))
 
 export const ContentListPage = Loadable(lazy(() => import('@/pages/content/content-list')));
 
+export const StatisticsBuyPage = Loadable(lazy(() => import('@/pages/statistics/statistics-buy')));
+
 export const Page404 = Loadable(lazy(() => import('@/pages/error/Page404')));
