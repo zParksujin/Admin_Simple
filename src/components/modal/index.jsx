@@ -9,8 +9,6 @@ import BanLayerModal from './custom/BanLayerModal';
 const Loadable = (Component) => (props) =>
   (
     <Suspense
-      // fallback={<LoadingScreen />}
-      // fallback={<Lazy />}
     >
       <Component {...props} />
     </Suspense>

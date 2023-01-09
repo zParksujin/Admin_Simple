@@ -1,6 +1,7 @@
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import React from 'react';
 import Iconify from '@/components/iconify';
+import { Comma } from '@/utils/Comma';
 
 const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) => (
     <>
@@ -23,7 +24,7 @@ const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) =
             }
             return (
               <TableCell key={column.id} align={column.align}>
-                {column.format && typeof value === 'number' ? column.format(value) : value}
+                {column.comma && typeof value === 'number' ? Comma(value) : value}
               </TableCell>
             );
           })}

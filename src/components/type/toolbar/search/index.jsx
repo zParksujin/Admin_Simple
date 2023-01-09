@@ -8,12 +8,14 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import Iconify from '@/components/iconify';
+import { useLocales } from '@/locales';
 
 const INPUT_WIDTH = 110;
 const SELECT_WIDTH = 100;
 
 const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
   const [searchText, setSearchText] = useState('');
+  const { t } = useLocales();
 
   const returnValue = () => {
     let result = '';
@@ -46,11 +48,11 @@ const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
     <>
       <Box sx={{ minWidth: SELECT_WIDTH }}>
         <FormControl fullWidth>
-          <InputLabel variant="standard" id="demo-simple-select-label" htmlFor="uncontrolled-native">{typeKey}</InputLabel>
+          <InputLabel variant="standard" id="demo-simple-select-label" htmlFor="uncontrolled-native">{t(`common.${typeKey}.tag`)}</InputLabel>
           <NativeSelect
             id="uncontrolled-native"
             onChange={onChangeFilter}
-            label={typeKey}
+            label={t(`common.${typeKey}.tag`)}
             value={returnValue()}
           >
             {typeOptions[typeKey].map((option) => (
@@ -58,7 +60,7 @@ const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
                 key={option}
                 value={option}
               >
-                {option}
+                {t(`common.search_type.${option}`)}
               </option>
             ))}
           </NativeSelect>

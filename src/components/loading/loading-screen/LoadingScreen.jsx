@@ -11,7 +11,6 @@ import { NAV } from '../../../config-global';
 // import { useAuthContext } from '../../auth/useAuthContext';
 //
 import Logo from '../../logo';
-import ProgressBar from '../../progress-bar';
 import { useSettingsContext } from '../../settings';
 
 // ----------------------------------------------------------------------
@@ -40,7 +39,7 @@ export default function LoadingScreen() {
 
   const { themeLayout } = useSettingsContext();
 
-  const isDashboard = pathname.includes('/dashboard/main') && isDesktop;
+  const isDashboard = pathname.includes('/dashboard') && isDesktop;
   // const isDashboard = isInitialized && pathname.includes('/dashboard') && isDesktop;
 
   const size =
@@ -50,7 +49,7 @@ export default function LoadingScreen() {
 
   return (
     <>
-      <ProgressBar />
+      {/* <ProgressBar /> */}
 
       <StyledRoot
         sx={{

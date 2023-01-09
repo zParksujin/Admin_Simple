@@ -1,6 +1,5 @@
-import { Button, Divider, MenuItem } from '@mui/material';
+import { Divider, MenuItem } from '@mui/material';
 import React from 'react';
-import ConfirmDialog from '@/components/confirm-dialog';
 import Iconify from '@/components/iconify';
 import MenuPopover from '@/components/menu-popover';
 
@@ -11,8 +10,7 @@ const CustomPopover = ({
   openConfirm,
   handleCloseConfirm,
 }) => (
-  <>
-    <MenuPopover
+  <MenuPopover
       open={openPopover}
       onClose={handleClosePopover}
       arrow="right-top"
@@ -51,22 +49,6 @@ const CustomPopover = ({
         Delete
       </MenuItem>
     </MenuPopover>
-    <ConfirmDialog
-      open={openConfirm}
-      onClose={handleCloseConfirm}
-      title="Delete"
-      content="Are you sure want to delete?"
-      action={
-        <Button
-          variant="contained"
-          color="error"
-          //    onClick={onDeleteRow}
-        >
-          Delete
-        </Button>
-      }
-    />
-  </>
 );
 
 export default CustomPopover;

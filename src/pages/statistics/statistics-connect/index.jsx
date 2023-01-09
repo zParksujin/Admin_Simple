@@ -3,6 +3,7 @@ import { Container } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { useSettingsContext } from '@/components/settings';
 import UserListSection from '@/sections/user/user-list';
+// const UserListSection = Loadable(lazy(() => import('@/sections/user/user-list')));
 
 function UserList() {
   const { themeStretch } = useSettingsContext();

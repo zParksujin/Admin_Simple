@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { Box, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
 import dayjs from 'dayjs';
+import { useLocales } from '@/locales';
 
 const INPUT_WIDTH = 160;
 const SELECT_WIDTH = 100;
@@ -17,6 +18,7 @@ const DateType = ({
   dateType,
   setDateType,
 }) => {
+  const { t } = useLocales();
   const onSearchDate = useCallback(() => {
     setType({ start_date: startDate, end_date: endDate });
   }, [endDate, setType, startDate]);
@@ -25,7 +27,6 @@ const DateType = ({
     setDateType(e.target.value);
   };
 
-  console.log('startDate, endDate', startDate, endDate, param?.start_date, param?.end_date);
   useEffect(() => {
     if (startDate && endDate && ((typeOptions && dateType) || !typeOptions)) {
       onSearchDate();
@@ -42,18 +43,18 @@ const DateType = ({
               id="demo-simple-select-label"
               htmlFor="uncontrolled-native"
             >
-              {typeKey}
+              {t(`common.${typeKey}.tag`)}
             </InputLabel>
             <NativeSelect
               id="uncontrolled-native"
               onChange={onChangeFilter}
               value={dateType}
               name={typeKey}
-              label={typeKey}
+              label={t(`common.${typeKey}.tag`)}
             >
               {typeOptions[typeKey].map((option) => (
                 <option key={option} value={option}>
-                  {option}
+                  {t(`common.${typeKey}.${option}`)}
                 </option>
               ))}
             </NativeSelect>
@@ -83,7 +84,7 @@ const DateType = ({
         </LocalizationProvider> */}
         <TextField
           id="date"
-          label="Start date"
+          label={t('common.start_date')}
           type="date"
           // defaultValue="2017-05-24"
           sx={{ width: INPUT_WIDTH }}
@@ -104,7 +105,7 @@ const DateType = ({
       <Box sx={{ minWidth: INPUT_WIDTH }}>
         <TextField
           id="date"
-          label="End date"
+          label={t('common.end_date')}
           type="date"
           sx={{ width: INPUT_WIDTH }}
           InputLabelProps={{

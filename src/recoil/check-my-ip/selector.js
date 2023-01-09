@@ -11,7 +11,6 @@ const checkMyIp = selector({
     }
     return res;
   },
-  set: ({ get, set }, value) => {},
 });
 
 export default checkMyIp;

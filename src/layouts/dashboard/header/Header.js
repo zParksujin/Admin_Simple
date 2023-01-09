@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Stack, AppBar, Toolbar, IconButton, Button } from '@mui/material';
 // utils
+import { useRecoilRefresher_UNSTABLE } from 'recoil';
 import { bgBlur } from '../../../utils/cssStyles';
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
@@ -23,6 +24,7 @@ import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 import { MODAL_TYPE } from '@/components/modal';
 import { LOADING_TYPE } from '@/components/loading/global-progress';
 import useGlobalLoading from '@/utils/hooks/global/loading/useGlobalLoading';
+import { menuSelector } from '@/recoil/menu';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +36,7 @@ export default function Header({ onOpenNav }) {
   const theme = useTheme();
   const { setModal } = useGlobalModal();
   const { setLoading } = useGlobalLoading();
+  const refresh = useRecoilRefresher_UNSTABLE(menuSelector);
 
   const { themeLayout } = useSettingsContext();
 
@@ -64,6 +67,7 @@ export default function Header({ onOpenNav }) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1.5 }}
       >
+        <Button onClick={() => refresh()}>Refresh Test</Button>
         <Button
           onClick={() =>
             setModal({

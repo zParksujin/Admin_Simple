@@ -1,20 +1,39 @@
 import React from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import TableToolbar from '@/components/type/toolbar';
-import { typeKeyArray } from '@/sections/statistics/statistics-buy/type';
-import statisticsBuyParamAtom, { statisticsBuyParam } from '@/recoil/statistics/statistics-buy/parmas';
+import Toolbar from '@/components/type/toolbar';
+import { chartTypeKey, typeKeyArray } from '@/sections/statistics/statistics-buy/type';
+import statisticsBuyParamAtom, {
+  statisticsBuyParam,
+} from '@/recoil/statistics/statistics-buy/parmas';
+import {
+  statisticsBuyToggleAtom,
+  statisticsBuyToggleSelector,
+} from '@/recoil/statistics/statistics-buy/chart/datasets/selector';
 
 function ToolbarRender({ tab }) {
   const param = useRecoilValue(statisticsBuyParamAtom);
   const setType = useSetRecoilState(statisticsBuyParam);
-  const reset = useResetRecoilState(statisticsBuyParamAtom)
+  const resetParam = useResetRecoilState(statisticsBuyParamAtom);
+  const resetToggle = useResetRecoilState(statisticsBuyToggleAtom);
+  const toggle = useRecoilValue(statisticsBuyToggleAtom);
+  const setToggle = useSetRecoilState(statisticsBuyToggleSelector);
+  const toggleTypeList = chartTypeKey;
+
+  const reset = () => {
+    resetParam();
+    resetToggle();
+  };
 
   return (
-    <TableToolbar
+    <Toolbar
       setType={setType}
+      setToggle={setToggle}
       param={param}
       typeKey={typeKeyArray}
       onResetType={reset}
+      toggleTypeList={toggleTypeList}
+      toggle={toggle}
+      tab={tab}
     />
   );
 }

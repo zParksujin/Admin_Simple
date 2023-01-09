@@ -10,7 +10,7 @@ export const searchType = [
 ];
 const dateType = ['register', 'leave', 'cert'];
 const adultType = ['', 'Y', 'N'];
-const statusType = ['', 'cert', 'no-cert', 'leave', 'block'];
+const statusType = ['', 'cert', 'not-cert', 'leave', 'block'];
 const sortType = ['register', 'buy', 'buy-count', 'refund'];
 
 export const typeKeyArray = ['search_type', 'date_type', 'adult_yn', 'status', 'sort'];

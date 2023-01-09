@@ -7,7 +7,7 @@ export const statisticsBuyContentSelector = selector({
     const buyList = get(statisticsBuySelector);
     const contentPrice = buyList.map((v) => v.content_price);
     const contentCount = buyList.map((v) => v.content_count);
-    const contentCancelPrice = buyList.map((v) => v.content_cancelPrice);
+    const contentCancelPrice = buyList.map((v) => v.content_cancel_price);
     const contentCancelCount = buyList.map((v) => v.content_cancel_count);
 
     return { contentPrice, contentCount, contentCancelPrice, contentCancelCount };
