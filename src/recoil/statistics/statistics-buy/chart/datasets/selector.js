@@ -12,14 +12,6 @@ export const statisticsBuyToggleAtom = atom({
   default: 'total',
 });
 
-export const statisticsBuyToggleSelector = selector({
-  key: 'statisticsBuyToggleSelector',
-  get: ({ get }) => get(statisticsBuyToggleAtom),
-  set: ({ get, set }, value) => {
-    set(statisticsBuyToggleAtom, value);
-  },
-});
-
 export const statisticsBuyDatasetsSelector = selector({
   key: 'statisticsBuyDatasetsSelector',
   get: ({ get }) => {
@@ -50,27 +42,6 @@ export const statisticsBuyDatasetsSelector = selector({
       });
     }
 
-    // const toggleList = get(statisticsBuyToggleAtom);
-    // console.log(toggleList, compareObj);
-
-    // // eslint-disable-next-line no-restricted-syntax
-    // for (const item of toggleList) {
-    //   // eslint-disable-next-line no-restricted-syntax, guard-for-in
-    //   for (const key in compareObj[item]) {
-    //     datasets.push({
-    //       type: 'bar',
-    //       label: key,
-    //       data: compareObj[item][key],
-    //       backgroundColor: getRandomRGB(),
-    //       borderWidth: 2,
-    //     });
-    //   }
-    // }
-    // const resultObj = {
-    //   labels,
-    //   datasets,
-    // };
-    // console.log(resultObj);
     return {
       labels,
       datasets,

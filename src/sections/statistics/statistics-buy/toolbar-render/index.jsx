@@ -7,7 +7,6 @@ import statisticsBuyParamAtom, {
 } from '@/recoil/statistics/statistics-buy/parmas';
 import {
   statisticsBuyToggleAtom,
-  statisticsBuyToggleSelector,
 } from '@/recoil/statistics/statistics-buy/chart/datasets/selector';
 
 function ToolbarRender({ tab }) {
@@ -16,7 +15,7 @@ function ToolbarRender({ tab }) {
   const resetParam = useResetRecoilState(statisticsBuyParamAtom);
   const resetToggle = useResetRecoilState(statisticsBuyToggleAtom);
   const toggle = useRecoilValue(statisticsBuyToggleAtom);
-  const setToggle = useSetRecoilState(statisticsBuyToggleSelector);
+  const setToggle = useSetRecoilState(statisticsBuyToggleAtom);
   const toggleTypeList = chartTypeKey;
 
   const reset = () => {
