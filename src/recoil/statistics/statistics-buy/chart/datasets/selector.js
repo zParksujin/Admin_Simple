@@ -12,9 +12,12 @@ export const statisticsBuyToggleAtom = atom({
   default: 'total',
 });
 
+// 컴포넌트에 작성 될 비즈니스 로직들을 selector로 분리하여
+// 컴포넌트에서는 getter만을 사용하여 필요한 값을 가져오게 된다.
 export const statisticsBuyDatasetsSelector = selector({
   key: 'statisticsBuyDatasetsSelector',
   get: ({ get }) => {
+    const datasets = [];
     const labels = get(statisticsBuyLabelSelector);
     const content = get(statisticsBuyContentSelector);
     const payPost = get(statisticsBuyPayPostSelector);
@@ -28,8 +31,6 @@ export const statisticsBuyDatasetsSelector = selector({
       spon,
       total,
     };
-
-    const datasets = [];
     const toggle = get(statisticsBuyToggleAtom);
 
     // eslint-disable-next-line no-restricted-syntax, guard-for-in

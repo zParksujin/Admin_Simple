@@ -9,6 +9,7 @@ const ContentListImage = () => {
   const contentList = useRecoilValue(contentListSelector('content'));
   const { data, page } = contentList;
   
+
   const { fetchBlockContentInfo } = useContentListImage();
   const setType = useSetRecoilState(contentListParam);
 

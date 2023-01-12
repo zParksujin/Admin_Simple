@@ -8,8 +8,7 @@ import BanLayerModal from './custom/BanLayerModal';
 
 const Loadable = (Component) => (props) =>
   (
-    <Suspense
-    >
+    <Suspense>
       <Component {...props} />
     </Suspense>
   );

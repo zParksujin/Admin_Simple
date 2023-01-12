@@ -14,6 +14,7 @@ import {
   Colors,
 } from 'chart.js';
 import { Card, CardHeader } from '@mui/material';
+import { useLocales } from '@/locales';
 
 ChartJS.register(
   LinearScale,
@@ -29,11 +30,12 @@ ChartJS.register(
 );
 
 function ChartComponent({ data, title, subTitle }) {
+  const { t } = useLocales()
   return (
     <Card sx={{ padding: '5px 15px'}}>
       <CardHeader
-      title={title}
-      subheader={subTitle}
+      title={t(title)}
+      subheader={t(subTitle)}
        />
       <Chart type="bar" data={data} />
     </Card>

@@ -7,7 +7,6 @@ export const globalModalCreator = selector({
   set: ({ get, set }, value) => {
     const atom = [...get(globalModalAtom)];
     atom.push(value);
-    console.log(globalModalAtom, atom, value);
     set(globalModalAtom, [...atom]);
   },
 });

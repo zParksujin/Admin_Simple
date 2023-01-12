@@ -28,7 +28,11 @@ export default function Router() {
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         {
           path: 'login',
-          element: <LoginPage />,
+          element: (
+            <AuthGuard>
+              <LoginPage />
+            </AuthGuard>
+          ),
         },
       ],
     },

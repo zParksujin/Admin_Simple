@@ -7,7 +7,8 @@ import { PageNotFoundIllustration } from '@/assets/illustrations';
 // assets
 
 // ----------------------------------------------------------------------
-function ErrorSection({ error }) {
+function ErrorSection({error}, info) {
+                console.log(error, info);
   return (
     <>
       <Helmet>
@@ -26,7 +27,7 @@ function ErrorSection({ error }) {
         >
           <Container>
               <Typography variant="h3" paragraph>
-                {error.message}
+                {error?.message}
               </Typography>
 
               <Typography sx={{ color: 'text.secondary' }}>
