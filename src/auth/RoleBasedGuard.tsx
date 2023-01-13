@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 // @mui
 import { Container, Typography } from '@mui/material';
 // components
@@ -8,14 +8,17 @@ import { ForbiddenIllustration } from '../assets/illustrations';
 // import { useAuthContext } from './useAuthContext';
 
 // ----------------------------------------------------------------------
+interface IRoleBasedGuard {
+  children?: ReactNode;
+  hasContent?: boolean;
+  roles?: string[];
+}
 
-RoleBasedGuard.propTypes = {
-  children: PropTypes.node,
-  hasContent: PropTypes.bool,
-  roles: PropTypes.arrayOf(PropTypes.string),
-};
-
-export default function RoleBasedGuard({ hasContent, roles, children }) {
+function RoleBasedGuard({
+  hasContent,
+  roles,
+  children,
+}: IRoleBasedGuard): JSX.Element | boolean | null {
   // Logic here to get current user role
   // const { user } = useAuthContext();
 
@@ -41,3 +44,5 @@ export default function RoleBasedGuard({ hasContent, roles, children }) {
 
   return <> {children} </>;
 }
+
+export default RoleBasedGuard;

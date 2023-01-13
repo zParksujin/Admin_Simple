@@ -8,7 +8,7 @@ const userListSelector = selector({
   get: async ({ get }) => {
     const param = get(userListParamAtom);
     const res = await getUserList(param);
-    if (res.error) {
+    if (res?.error) {
       throw res.error;
     }
     return res.data;

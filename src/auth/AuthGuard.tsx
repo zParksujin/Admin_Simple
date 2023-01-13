@@ -1,10 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { clearSession } from '@/api';
 import useMe from '@/recoil/me/hook/useMe';
 
-function AuthGuard({ children }) {
+interface IAuthGuard {
+  children?: ReactNode;
+  // any props that come into the component
+}
+
+function AuthGuard({ children }: IAuthGuard): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
   const { setMe } = useMe(location.pathname, navigate);
@@ -37,9 +41,5 @@ function AuthGuard({ children }) {
 
   return <> {children} </>;
 }
-
-AuthGuard.propTypes = {
-  children: PropTypes.node,
-};
 
 export default AuthGuard;

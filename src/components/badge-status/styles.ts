@@ -2,8 +2,12 @@
 import { styled } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
+interface IStyledBadgeStatus {
+  theme: any;
+  ownerState: any;
+}
 
-export const StyledBadgeStatus = styled('span')(({ theme, ownerState }) => {
+export const StyledBadgeStatus = styled('span')(({ theme, ownerState }: IStyledBadgeStatus) => {
   const { status, size } = ownerState;
 
   return {
