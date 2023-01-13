@@ -25,11 +25,12 @@ const TestProgress = () => {
       component="div"
     >
       <CircularProgress />
-      <Button 
-      sx={{ zIndex: 1200,}}
-      onClick={() => {
-        closeLoading()
-      }}>
+      <Button
+        sx={{ zIndex: 1200 }}
+        onClick={() => {
+          closeLoading();
+        }}
+      >
         Close Button
       </Button>
       <Box
@@ -43,7 +44,7 @@ const TestProgress = () => {
         }}
       />
     </Box>
-  )
+  );
 };
 
 export default TestProgress;

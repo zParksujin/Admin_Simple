@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import ToolbarRender from './toolbar-render';
 import ContentsRender from './contents-render';
 
-function UserListSection(params) {
-  const [tab, 
+function UserListSection() {
+  const [
+    tab,
     // setTab
   ] = useState(0);
   return (

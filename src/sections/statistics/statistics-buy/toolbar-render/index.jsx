@@ -5,9 +5,7 @@ import { chartTypeKey, typeKeyArray } from '@/sections/statistics/statistics-buy
 import statisticsBuyParamAtom, {
   statisticsBuyParam,
 } from '@/recoil/statistics/statistics-buy/parmas';
-import {
-  statisticsBuyToggleAtom,
-} from '@/recoil/statistics/statistics-buy/chart/datasets/selector';
+import { statisticsBuyToggleAtom } from '@/recoil/statistics/statistics-buy/chart/datasets/selector';
 
 function ToolbarRender({ tab }) {
   const param = useRecoilValue(statisticsBuyParamAtom);

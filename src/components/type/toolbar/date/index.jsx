@@ -96,7 +96,7 @@ const DateType = ({
             const startDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
             setStartDate(startDay.format('YYYY-MM-DD'));
             if (param?.end_date) {
-              setEndDate(param?.end_date)
+              setEndDate(param?.end_date);
             }
           }}
           // inputFormat="YYYY-MM-DD"
@@ -116,7 +116,7 @@ const DateType = ({
             const endDay = dayjs(e.currentTarget.value, 'YYYY-MM-DD');
             setEndDate(endDay.format('YYYY-MM-DD'));
             if (param?.start_date) {
-              setStartDate(param?.start_date)
+              setStartDate(param?.start_date);
             }
           }}
           // inputFormat="YYYY-MM-DD"

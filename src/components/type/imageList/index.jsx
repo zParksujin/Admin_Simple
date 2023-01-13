@@ -4,7 +4,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import { TablePaginationCustom } from '@/components/table';
 
 const ImageListComponent = ({ setType, data, page, total, limit, getInfoData }) => {
-
   const onChangeOffset = useCallback(
     (e, newPage) => {
       console.log(newPage, limit);

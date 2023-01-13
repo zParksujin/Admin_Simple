@@ -15,9 +15,9 @@ import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 
 const BanLayerModal = ({ cbFunc }) => {
   const { setCloseModal } = useGlobalModal();
-  const blindList = useMemo(() => ['선택', '블라인드', '블라인드 해제'], [])
+  const blindList = useMemo(() => ['선택', '블라인드', '블라인드 해제'], []);
 
-  const onCloseModal = (e) => {
+  const onCloseModal = () => {
     if (cbFunc) {
       cbFunc();
     }
@@ -63,18 +63,23 @@ const BanLayerModal = ({ cbFunc }) => {
             <TextField disabled name="대상자" label="대상자" />
             <TextField disabled name="종류" label="종류" />
             <TextField disabled name="내용" label="내용" />
-            <TextField sx={{ gridColumn: '1/3' }} disabled name="메시지(회원알림) - 자동 발송" label="메시지(회원알림) - 자동 발송" />
+            <TextField
+              sx={{ gridColumn: '1/3' }}
+              disabled
+              name="메시지(회원알림) - 자동 발송"
+              label="메시지(회원알림) - 자동 발송"
+            />
             <FormControl sx={{ gridColumn: '1/3' }} fullWidth>
               <InputLabel variant="standard" htmlFor="block-code">
-              블라인드 여부
+                블라인드 여부
               </InputLabel>
               <NativeSelect id="blind" defaultValue="선택">
                 <option value="선택">선택</option>
                 {blindList.map((v) => (
-                    <option key={v} value={v}>
-                      {v}
-                    </option>
-                  ))}
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
               </NativeSelect>
             </FormControl>
             <TextField

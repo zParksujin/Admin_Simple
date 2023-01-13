@@ -4,7 +4,7 @@ import { getMyMenu } from '@/api/menu';
 
 const menuSelector = selector({
   key: 'menuSelector',
-  get: async ({ get }) => {
+  get: async () => {
     const res = await getMyMenu();
     if (res.status === 200) {
       return res.data;

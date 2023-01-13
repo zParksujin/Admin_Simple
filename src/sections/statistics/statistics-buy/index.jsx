@@ -3,7 +3,7 @@ import TabSection from './tab';
 import ToolbarRender from './toolbar-render';
 import ContentsRender from './contents-render';
 
-function StatisticsBuySection(params) {
+function StatisticsBuySection() {
   const [tab, setTab] = useState(0);
 
   return (

@@ -8,7 +8,6 @@ import useContentListImage from '@/recoil/global/modal/block/hook/useContentList
 const ContentListImage = () => {
   const contentList = useRecoilValue(contentListSelector('content'));
   const { data, page } = contentList;
-  
 
   const { fetchBlockContentInfo } = useContentListImage();
   const setType = useSetRecoilState(contentListParam);

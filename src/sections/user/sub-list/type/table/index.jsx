@@ -1,12 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function TableComponent() {
-    
-    return (
-        <>
-           table 
-        </>
-    );
+  return <>table</>;
 }
 
 export default TableComponent;

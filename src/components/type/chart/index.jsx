@@ -30,13 +30,10 @@ ChartJS.register(
 );
 
 function ChartComponent({ data, title, subTitle }) {
-  const { t } = useLocales()
+  const { t } = useLocales();
   return (
-    <Card sx={{ padding: '5px 15px'}}>
-      <CardHeader
-      title={t(title)}
-      subheader={t(subTitle)}
-       />
+    <Card sx={{ padding: '5px 15px' }}>
+      <CardHeader title={t(title)} subheader={t(subTitle)} />
       <Chart type="bar" data={data} />
     </Card>
   );

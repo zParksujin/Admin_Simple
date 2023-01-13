@@ -4,7 +4,7 @@ import { myIpCheck } from '@/api/auth';
 
 const checkMyIp = selector({
   key: 'checkMyIp',
-  get: async ({ get }) => {
+  get: async () => {
     const res = await myIpCheck();
     if (res?.status === 200) {
       return res.data;

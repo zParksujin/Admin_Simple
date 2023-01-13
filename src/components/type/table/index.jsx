@@ -7,7 +7,7 @@ import CustomBodyRows from './customBody';
 import CustomBodyHeaders from './customHeader';
 import CustomPopover from './popover';
 
-function TableComponent({ page, setType, offset, total, limit, subColumns = [], mainColumns, data }) {
+function TableComponent({ page, setType, total, limit, subColumns = [], mainColumns, data }) {
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const [openPopover, setOpenPopover] = useState(null);
@@ -75,13 +75,15 @@ function TableComponent({ page, setType, offset, total, limit, subColumns = [], 
         </Scrollbar>
       </TableContainer>
 
-      {page !== undefined && <TablePaginationCustom
-        count={total}
-        page={page}
-        rowsPerPage={limit}
-        onPageChange={onChangeOffset}
-        onRowsPerPageChange={onChangeLimit}
-      />}
+      {page !== undefined && (
+        <TablePaginationCustom
+          count={total}
+          page={page}
+          rowsPerPage={limit}
+          onPageChange={onChangeOffset}
+          onRowsPerPageChange={onChangeLimit}
+        />
+      )}
     </Paper>
   );
 }

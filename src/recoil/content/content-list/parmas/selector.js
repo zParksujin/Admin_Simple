@@ -13,7 +13,7 @@ export const contentListParam = selector({
 export const contentListSearch = selector({
   key: 'contentListSearch',
   get: ({ get }) => get(contentListParamAtom),
-  set: ({ get, set }, param) => {
+  set: ({ set }, param) => {
     set(contentListParamAtom, param);
   },
 });

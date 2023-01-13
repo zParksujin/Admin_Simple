@@ -5,12 +5,12 @@ import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 const OneButtonModal = ({ cbFunc, des, clear = false }) => {
   const { setCloseModal, setClearModal } = useGlobalModal();
 
-  const onCloseModal = (e) => {
+  const onCloseModal = () => {
     if (cbFunc) {
       cbFunc();
     }
     if (clear) {
-      setClearModal ();
+      setClearModal();
     }
     setCloseModal();
   };
@@ -71,9 +71,8 @@ const OneButtonModal = ({ cbFunc, des, clear = false }) => {
           width: '100%',
           background: 'rgba(0,0,0,.451)',
         }}
-
         onClick={() => onCloseModal()}
-        />
+      />
     </Box>
   );
 };

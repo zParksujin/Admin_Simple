@@ -18,6 +18,7 @@
     "airbnb",
     "airbnb/hooks",
     "prettier",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
@@ -50,7 +51,9 @@
       }
     }
   },
-  "rules": {
+  "ignorePatterns": ["build/**/*.js", ".vscode"],
+
+   "rules": {
     "camelcase": 0,
     "no-console": 0,
     "no-param-reassign": 0,
@@ -72,7 +75,9 @@
     "react/function-component-definition": 0,
     "jsx-a11y/control-has-associated-label": 0,
     "react/prop-types": 0,
-    
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "no-empty-function": 0,
     "import/no-cycle" : 0,
     // 확장자 명시
     "import/extensions": 0,

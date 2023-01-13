@@ -45,10 +45,9 @@ export default memo(NavSectionMini);
 
 Items.propTypes = {
   items: PropTypes.array,
-  isLastGroup: PropTypes.bool,
 };
 
-function Items({ items, isLastGroup }) {
+function Items({ items }) {
   return (
     <>
       {Object.keys(items).map((item) => {

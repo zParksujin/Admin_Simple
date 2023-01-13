@@ -14,7 +14,7 @@ const en = {
     findPw: 'Find Password',
     connectIp: 'connect IP',
     login: 'Login',
-    workplaceLogin: 'WORKPLACE Login'
+    workplaceLogin: 'WORKPLACE Login',
   },
   demo: {
     title: `English`,

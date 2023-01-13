@@ -8,7 +8,7 @@ import { pkg_type_name } from '@/components/modal/custom/type';
 // import BlockProcessSelect from './Select';
 import BlockProcessSelectSK from './SelectSk';
 
-const BlockProcessSelect = lazy(() => import('./Select'))
+const BlockProcessSelect = lazy(() => import('./Select'));
 
 const BlockProcessContents = ({
   data,
@@ -93,7 +93,7 @@ const BlockProcessContents = ({
       )}
       <Box sx={{ display: data?.contents?.length > 0 ? 'block' : 'none', gridColumn: '1/3' }}>
         {data?.contents?.length > 0 &&
-          data?.contents.map((v) => (
+          data?.contents.map(() => (
             <CardMedia
               sx={{ width: 151 }}
               component="img"

@@ -1,11 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function ChartComponent() {
-    return (
-        <>
-            chart
-        </>
-    );
+  return <>chart</>;
 }
 
 export default ChartComponent;

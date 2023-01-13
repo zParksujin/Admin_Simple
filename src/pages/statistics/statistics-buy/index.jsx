@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet-async';
 import { useSettingsContext } from '@/components/settings';
 import StatisticsBuySection from '@/sections/statistics/statistics-buy';
 
-
 function UserList() {
   const { themeStretch } = useSettingsContext();
 

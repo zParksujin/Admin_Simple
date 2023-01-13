@@ -1,12 +1,7 @@
-import React from "react";
+import React from 'react';
 
-function TopSection(params) {
-    
-    return (
-        <>
-            
-        </>
-    );
+function TopSection() {
+  return <>TopSection</>;
 }
 
-export default TopSection
+export default TopSection;

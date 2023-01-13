@@ -74,18 +74,18 @@ const BanProccessLayerModal = ({ cbFunc, data }) => {
       >
         <Typography>제재관리</Typography>
         <Divider sx={{ margin: '20px 0' }} />
-          <Suspense>
-            <BlockProcessContents
-              data={data}
-              setCategoryIdx={setCategoryIdx}
-              setBlockType={setBlockType}
-              setExpireDay={setExpireDay}
-              setBlockDate={setBlockDate}
-              setMemo={setMemo}
-              blockDate={blockDate}
-              memo={memo}
-            />
-          </Suspense>
+        <Suspense>
+          <BlockProcessContents
+            data={data}
+            setCategoryIdx={setCategoryIdx}
+            setBlockType={setBlockType}
+            setExpireDay={setExpireDay}
+            setBlockDate={setBlockDate}
+            setMemo={setMemo}
+            blockDate={blockDate}
+            memo={memo}
+          />
+        </Suspense>
         <Divider sx={{ margin: '20px 0' }} />
         <Box component="div" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
           <Button

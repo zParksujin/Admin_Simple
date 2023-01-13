@@ -120,7 +120,6 @@ const CustomTablePagination = styled(TablePaginationUnstyled)(
 
 export default function TablePaginationCustom({
   rowsPerPageOptions = [10, 20, 30, 50, 100],
-  sx,
   ...other
 }) {
   return (

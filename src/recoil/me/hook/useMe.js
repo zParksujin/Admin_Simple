@@ -12,7 +12,7 @@ const useMe = (redirect = '', navigate) => {
           navigate('/dashboard/main');
         }
       })
-      .catch((e) => {
+      .catch(() => {
         clearSession();
       });
   });

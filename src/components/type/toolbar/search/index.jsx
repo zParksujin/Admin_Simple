@@ -19,36 +19,42 @@ const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
 
   const returnValue = () => {
     let result = '';
-    typeOptions[typeKey].forEach(v => {
+    typeOptions[typeKey].forEach((v) => {
       // eslint-disable-next-line consistent-return
       Object.keys(param).forEach((item) => {
-        if (v === item){
+        if (v === item) {
           result = v;
-      }
-      })
-    })
+        }
+      });
+    });
     return result;
-}
+  };
 
   const onChangeFilter = (e) => {
     e.preventDefault();
-    const copy = {...param, [e.target.value || 'profile_id']: searchText};
+    const copy = { ...param, [e.target.value || 'profile_id']: searchText };
     console.log(copy, e.target.value);
-    delete copy[returnValue()]
+    delete copy[returnValue()];
     setSearchType({ ...copy });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const copy = {...param, [returnValue() || 'profile_id']: searchText};
+    const copy = { ...param, [returnValue() || 'profile_id']: searchText };
     setSearchType({ ...copy });
-  }
+  };
 
   return (
     <>
       <Box sx={{ minWidth: SELECT_WIDTH }}>
         <FormControl fullWidth>
-          <InputLabel variant="standard" id="demo-simple-select-label" htmlFor="uncontrolled-native">{t(`common.${typeKey}.tag`)}</InputLabel>
+          <InputLabel
+            variant="standard"
+            id="demo-simple-select-label"
+            htmlFor="uncontrolled-native"
+          >
+            {t(`common.${typeKey}.tag`)}
+          </InputLabel>
           <NativeSelect
             id="uncontrolled-native"
             onChange={onChangeFilter}
@@ -56,10 +62,7 @@ const SearchType = ({ typeOptions, typeKey, setSearchType, param }) => {
             value={returnValue()}
           >
             {typeOptions[typeKey].map((option) => (
-              <option
-                key={option}
-                value={option}
-              >
+              <option key={option} value={option}>
                 {t(`common.search_type.${option}`)}
               </option>
             ))}

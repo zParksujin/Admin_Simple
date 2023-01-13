@@ -7,8 +7,8 @@ import { PageNotFoundIllustration } from '@/assets/illustrations';
 // assets
 
 // ----------------------------------------------------------------------
-function ErrorSection({error}, info) {
-                console.log(error, info);
+function ErrorSection({ error }, info) {
+  console.log(error, info);
   return (
     <>
       <Helmet>
@@ -26,21 +26,21 @@ function ErrorSection({error}, info) {
           }}
         >
           <Container>
-              <Typography variant="h3" paragraph>
-                {error?.message}
-              </Typography>
+            <Typography variant="h3" paragraph>
+              {error?.message}
+            </Typography>
 
-              <Typography sx={{ color: 'text.secondary' }}>
-                Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the
-                URL? Be sure to check your spelling.
-              </Typography>
+            <Typography sx={{ color: 'text.secondary' }}>
+              Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL?
+              Be sure to check your spelling.
+            </Typography>
 
-              <PageNotFoundIllustration
-                sx={{
-                  height: 260,
-                  my: { xs: 5, sm: 10 },
-                }}
-              />
+            <PageNotFoundIllustration
+              sx={{
+                height: 260,
+                my: { xs: 5, sm: 10 },
+              }}
+            />
 
             <Button component={RouterLink} to="/" size="large" variant="contained">
               Go to Home
