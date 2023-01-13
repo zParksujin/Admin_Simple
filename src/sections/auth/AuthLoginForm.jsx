@@ -38,11 +38,13 @@ function AuthLoginForm() {
     async (e) => {
       e.preventDefault();
       if (email.length === 0) {
+        // eslint-disable-next-line no-alert
         alert('아이디를 입력해 주세요.'); // TODO 모달로 변경
         return;
       }
 
       if (pw.length === 0) {
+        // eslint-disable-next-line no-alert
         alert('비밀번호를 입력해 주세요.');
         return;
       }
@@ -53,6 +55,7 @@ function AuthLoginForm() {
       });
 
       if (!result?.status) {
+        // eslint-disable-next-line no-alert
         alert(result.message);
         return;
       }

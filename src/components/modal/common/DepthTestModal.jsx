@@ -5,7 +5,7 @@ import { MODAL_TYPE } from '..';
 
 const DepthTestModal = ({ cb, count = 0 }) => {
   const { setCloseModal, setModal, setClearModal } = useGlobalModal();
-  const onCloseModal = (e) => {
+  const onCloseModal = () => {
     if (cb) {
       cb();
     }
@@ -57,24 +57,18 @@ const DepthTestModal = ({ cb, count = 0 }) => {
               OK
             </Button>
             <Button
-             onClick={() =>
+              onClick={() =>
                 setModal({
                   type: MODAL_TYPE.DEPTH_TEST,
                   props: {
-                    count: count + 1
+                    count: count + 1,
                   },
                 })
               }
             >
-               MORE DEPTH {count}
+              MORE DEPTH {count}
             </Button>
-            <Button
-             onClick={() =>
-              setClearModal()
-              }
-            >
-               CLEAR MODAL
-            </Button>
+            <Button onClick={() => setClearModal()}>CLEAR MODAL</Button>
           </Box>
         </Box>
       </Card>
@@ -85,10 +79,10 @@ const DepthTestModal = ({ cb, count = 0 }) => {
           left: 0,
           height: '100%',
           width: '100%',
-          background: 'rgba(0,0,0,.451)'
+          background: 'rgba(0,0,0,.451)',
         }}
         onClick={() => onCloseModal()}
-        />
+      />
     </Box>
   );
 };

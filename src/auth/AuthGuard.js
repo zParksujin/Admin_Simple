@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { clearSession } from '@/api';
 import useMe from '@/recoil/me/hook/useMe';
 
-function AuthGuard({ children, history }) {
+function AuthGuard({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { setMe } = useMe(location.pathname, navigate);

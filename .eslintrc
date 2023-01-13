@@ -2,28 +2,46 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2021": true,
+    "es6": true,
     "node": true
    },
-  "plugins": [
-    "prettier"
-  ],
+  // "plugins": [
+  //   "prettier"
+  // ],
+  // "extends": [
+  //   "airbnb",
+  //   "airbnb/hooks",
+  //   "prettier"
+  // ],
+  "globals": {}, // 선언되지 않은 전역변수 추가 ex) Kakao
   "extends": [
     "airbnb",
     "airbnb/hooks",
-    "prettier"
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
-  "parser": "@babel/eslint-parser",
+  // "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint","import"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
     "requireConfigFile": false,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "impliedStrict": true
-    },
-    "babelOptions": { "presets": [ ["@babel/preset-react"], ["babel-preset-react-app", false] ]}
+  "ecmaFeatures": {
+      "jsx": true
+    }
   },
+  // "parserOptions": {
+  //   "ecmaVersion": "latest",
+  //   "sourceType": "module",
+  //   "requireConfigFile": false,
+  //   "ecmaFeatures": {
+  //     "experimentalObjectRestSpread": true,
+  //     "impliedStrict": true
+  //   },
+  //   "babelOptions": { "presets": [ ["@babel/preset-react"], ["babel-preset-react-app", false] ]}
+  // },
   "settings": {
     "import/resolver": {
       "node": {

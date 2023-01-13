@@ -13,7 +13,9 @@ const Loadable = (Component) => (props) =>
     </Suspense>
   );
 
-const BanProccessLayerModal = Loadable(lazy(() => import('@/components/modal/custom/block-process-layer')));
+const BanProccessLayerModal = Loadable(
+  lazy(() => import('@/components/modal/custom/block-process-layer'))
+);
 
 export const MODAL_TYPE = {
   ONE_BUTTON: 'ONE_BUTTON',
