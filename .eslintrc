@@ -13,7 +13,9 @@
   //   "airbnb/hooks",
   //   "prettier"
   // ],
-  "globals": {}, // 선언되지 않은 전역변수 추가 ex) Kakao
+  "globals": {
+    // "JSX": true
+  }, // 선언되지 않은 전역변수 추가 ex) Kakao
   "extends": [
     "airbnb",
     "airbnb/hooks",
@@ -79,6 +81,7 @@
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-empty-function": 0,
     "no-empty-function": 0,
+    "@typescript-eslint/ban-ts-comment": 0, // ts-ignore comfiler에 대해 무시하는 문법을 막는 lint mui custom type 해결 후 삭제 예정
     "import/no-cycle" : 0,
     // 확장자 명시
     "import/extensions": 0,

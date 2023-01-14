@@ -18,7 +18,6 @@ import ThemeProvider from '@/theme';
 // locales
 import ThemeLocalization from '@/locales';
 // components
-import SnackbarProvider from '@/components/snackbar';
 import { ThemeSettings, SettingsProvider } from '@/components/settings';
 import ScrollToTop from '@/components/scroll-to-top';
 
@@ -46,10 +45,8 @@ function App() {
         <ThemeProvider>
           <ThemeSettings>
             <ThemeLocalization>
-              <SnackbarProvider>
-                <Router />
-                <DebugObserver />
-              </SnackbarProvider>
+              <Router />
+              <DebugObserver />
             </ThemeLocalization>
           </ThemeSettings>
         </ThemeProvider>

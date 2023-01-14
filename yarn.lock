@@ -2406,6 +2406,14 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-lazy-load-image-component@^1.5.2":
+  "integrity" "sha512-4NLJsMJVrMv18FuMIkUUBVj/PH9A+BvLKrZC75EWiEFn1IsMrZHgL1tVKw5QBfoa0Qjz6SkWIzEvwcyZ8PgnIg=="
+  "resolved" "https://registry.npmjs.org/@types/react-lazy-load-image-component/-/react-lazy-load-image-component-1.5.2.tgz"
+  "version" "1.5.2"
+  dependencies:
+    "@types/react" "*"
+    "csstype" "^3.0.2"
+
 "@types/react-transition-group@^4.4.5":
   "integrity" "sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA=="
   "resolved" "https://registry.npmjs.org/@types/react-transition-group/-/react-transition-group-4.4.5.tgz"
@@ -2470,6 +2478,11 @@
   "integrity" "sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw=="
   "resolved" "https://registry.npmjs.org/@types/stack-utils/-/stack-utils-2.0.1.tgz"
   "version" "2.0.1"
+
+"@types/stylis@^4.0.2":
+  "integrity" "sha512-wtckGuk1eXUlUz0Qb1eXHG37Z7HWT2GfMdqRf8F/ifddTwadSS9Jwsqi4qtXk7cP7MtoyGVIHPElFCLc6HItbg=="
+  "resolved" "https://registry.npmjs.org/@types/stylis/-/stylis-4.0.2.tgz"
+  "version" "4.0.2"
 
 "@types/trusted-types@^2.0.2":
   "integrity" "sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg=="
@@ -8129,7 +8142,7 @@
     "react-fast-compare" "^3.2.0"
     "shallowequal" "^1.1.0"
 
-"react-hook-form@^7.0.0", "react-hook-form@^7.39.5":
+"react-hook-form@^7.0.0":
   "integrity" "sha512-OE0HKyz5IPc6svN2wd+e+evidZrw4O4WZWAWYzQVZuHi+hYnHFSLnxOq0ddjbdmaLIsLHut/ab7j72y2QT3+KA=="
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.39.5.tgz"
   "version" "7.39.5"
@@ -9039,10 +9052,10 @@
     "browserslist" "^4.21.4"
     "postcss-selector-parser" "^6.0.4"
 
-"stylis-plugin-rtl@^2.1.1":
-  "integrity" "sha512-q6xIkri6fBufIO/sV55md2CbgS5c6gg9EhSVATtHHCdOnbN/jcI0u3lYhNVeuI65c4lQPo67g8xmq5jrREvzlg=="
-  "resolved" "https://registry.npmjs.org/stylis-plugin-rtl/-/stylis-plugin-rtl-2.1.1.tgz"
-  "version" "2.1.1"
+"stylis-plugin-rtl@^2.0.2":
+  "integrity" "sha512-3xKsCTUs/Ab6Kp/NjwTEvcS6eI2ZbIORJssvw2S+H20DlUIp8ZC3drQ/0V3G5P559A4xGwA+XV6ZSJHhEoRvhw=="
+  "resolved" "https://registry.npmjs.org/stylis-plugin-rtl/-/stylis-plugin-rtl-2.0.2.tgz"
+  "version" "2.0.2"
   dependencies:
     "cssjanus" "^2.0.1"
 

@@ -6,7 +6,6 @@ import { Box, Divider, Typography, Stack, MenuItem, IconButton } from '@mui/mate
 // routes
 // components
 import { useRecoilValue } from 'recoil';
-import { useSnackbar } from '@/components/snackbar';
 import MenuPopover from '@/components/menu-popover';
 import { CustomAvatar } from '@/components/custom-avatar';
 import adminMeAtom from '@/recoil/me/atom';
@@ -36,8 +35,6 @@ export default function AccountPopover() {
   const navigate = useNavigate();
   const me = useRecoilValue(adminMeAtom);
 
-  const { enqueueSnackbar } = useSnackbar();
-
   const [openPopover, setOpenPopover] = useState(null);
 
   const handleOpenPopover = (event) => {
@@ -56,7 +53,6 @@ export default function AccountPopover() {
       handleClosePopover();
     } catch (error) {
       console.error(error);
-      enqueueSnackbar('Unable to logout!', { variant: 'error' });
     }
   };
 

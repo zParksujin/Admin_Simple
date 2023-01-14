@@ -8,11 +8,3 @@ export const globalLoadingCreator = selector({
     set(globalLoadingAtom, obj);
   },
 });
-
-export const globalLoadingClose = selector({
-  key: 'globalLoadingClose',
-  get: ({ get }) => get(globalLoadingAtom),
-  set: ({ set }) => {
-    set(globalLoadingAtom, {});
-  },
-});

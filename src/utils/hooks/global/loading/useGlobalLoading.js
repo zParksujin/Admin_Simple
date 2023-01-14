@@ -1,9 +1,10 @@
-import { useSetRecoilState } from 'recoil';
-import { globalLoadingClose, globalLoadingCreator } from '@/recoil/global/loading';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { globalLoadingCreator } from '@/recoil/global/loading';
+import globalLoading from '@/recoil/global/loading/atom';
 
 const useGlobalLoading = () => {
   const setLoading = useSetRecoilState(globalLoadingCreator);
-  const closeLoading = useSetRecoilState(globalLoadingClose);
+  const closeLoading = useResetRecoilState(globalLoading);
 
   return { setLoading, closeLoading };
 };
