@@ -1,21 +1,19 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect, useRef, memo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef, memo } from 'react';
 // hooks
 import useActiveLink from '../../../hooks/useActiveLink';
 //
 import { StyledPopover } from './styles';
 import NavItem from './NavItem';
+import { IAdminMenuItem } from '@/api/menu/type';
 
-// ----------------------------------------------------------------------
+interface INavList {
+  data: IAdminMenuItem;
+  depth: number;
+  hasChild: boolean;
+}
 
-NavList.propTypes = {
-  data: PropTypes.object,
-  depth: PropTypes.number,
-  hasChild: PropTypes.bool,
-};
-
-function NavList({ data, depth, hasChild }) {
+function NavList({ data, depth, hasChild }: INavList): JSX.Element | null {
   const navRef = useRef(null);
 
   const { pathname } = useLocation();
@@ -32,7 +30,9 @@ function NavList({ data, depth, hasChild }) {
   }, [pathname]);
 
   useEffect(() => {
-    const appBarEl = Array.from(document.querySelectorAll('.MuiAppBar-root'));
+    const appBarEl = Array.from(
+      document.querySelectorAll('.MuiAppBar-root') as NodeListOf<HTMLElement>
+    );
 
     // Reset styles when hover
     const styles = () => {
@@ -80,14 +80,22 @@ function NavList({ data, depth, hasChild }) {
         <StyledPopover
           open={open}
           anchorEl={navRef.current}
-          anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-          transformOrigin={{ vertical: 'center', horizontal: 'left' }}
+          anchorOrigin={
+            depth === 1
+              ? { vertical: 'bottom', horizontal: 'left' }
+              : { vertical: 'center', horizontal: 'right' }
+          }
+          transformOrigin={
+            depth === 1
+              ? { vertical: 'top', horizontal: 'left' }
+              : { vertical: 'center', horizontal: 'left' }
+          }
           PaperProps={{
             onMouseEnter: handleOpen,
             onMouseLeave: handleClose,
           }}
         >
-          <NavSubList data={data.menus} depth={depth} />
+          <NavSubList data={data?.menus} depth={depth} />
         </StyledPopover>
       )}
     </>
@@ -95,24 +103,24 @@ function NavList({ data, depth, hasChild }) {
 }
 
 export default memo(NavList);
-// ----------------------------------------------------------------------
 
-NavSubList.propTypes = {
-  data: PropTypes.array,
-  depth: PropTypes.number,
-};
+interface INavSubList {
+  data: IAdminMenuItem[] | undefined;
+  depth: number;
+}
 
-function NavSubList({ data, depth }) {
+function NavSubList({ data, depth }: INavSubList) {
   return (
     <>
-      {data.map((list) => (
-        <NavList
-          key={list.title + list.path}
-          data={list}
-          depth={depth + 1}
-          hasChild={!!list.menus}
-        />
-      ))}
+      {data &&
+        data.map((list) => (
+          <NavList
+            key={list.title + list.path}
+            data={list}
+            depth={depth + 1}
+            hasChild={!!list.menus}
+          />
+        ))}
     </>
   );
 }

@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
+// @ts-nocheck
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
-import { Box, Tooltip, Link, ListItemText } from '@mui/material';
+import { Tooltip, Link, ListItemText } from '@mui/material';
 // locales
 import { memo, useMemo } from 'react';
 import { useLocales } from '@/locales';
@@ -14,17 +14,26 @@ import { StyledItem, StyledIcon, StyledDotIcon } from './styles';
 import { ICONS } from '@/layouts/dashboard/nav/config-navigation';
 import { ROOTS_DASHBOARD } from '@/routes/paths';
 
-// ----------------------------------------------------------------------
+interface INavItem {
+  open: boolean;
+  active: boolean;
+  item: IItem;
+  depth: number;
+  isExternalLink?: boolean;
+  onClick?: () => void;
+}
 
-NavItem.propTypes = {
-  open: PropTypes.bool,
-  active: PropTypes.bool,
-  item: PropTypes.object,
-  depth: PropTypes.number,
-  isExternalLink: PropTypes.bool,
-};
+interface IItem {
+  title: string;
+  sub_title?: string;
+  path?: string;
+  menus?: Record<string, any>;
+  disabled?: boolean;
+  caption?: string;
+  roles?: string[];
+}
 
-function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
+function NavItem({ item, depth, open, active, isExternalLink, onClick }: INavItem): JSX.Element {
   const { t } = useLocales();
 
   const {
@@ -32,7 +41,6 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
     sub_title,
     path,
     // icon,
-    info,
     menus,
     disabled,
     caption,
@@ -43,7 +51,13 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
 
   const renderContent = useMemo(
     () => (
-      <StyledItem depth={depth} active={active} disabled={disabled} caption={!!caption} {...other}>
+      <StyledItem
+        depth={depth}
+        active={active}
+        disabled={disabled}
+        caption={!!caption}
+        onClick={onClick}
+      >
         {!path && <StyledIcon>{ICONS.user}</StyledIcon>}
 
         {subItem && (
@@ -72,12 +86,6 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
           }}
         />
 
-        {info && (
-          <Box component="span" sx={{ lineHeight: 0 }}>
-            {info}
-          </Box>
-        )}
-
         {!!menus && (
           <Iconify
             width={16}
@@ -87,7 +95,7 @@ function NavItem({ item, depth, open, active, isExternalLink, ...other }) {
         )}
       </StyledItem>
     ),
-    [active, caption, depth, disabled, info, menus, open, other, path, subItem, sub_title, t, title]
+    [active, caption, depth, disabled, menus, open, onClick, path, subItem, sub_title, t, title]
   );
 
   const renderItem = () => {

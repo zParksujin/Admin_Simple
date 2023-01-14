@@ -14,11 +14,7 @@ interface IRoleBasedGuard {
   roles?: string[];
 }
 
-function RoleBasedGuard({
-  hasContent,
-  roles,
-  children,
-}: IRoleBasedGuard): JSX.Element | boolean | null {
+function RoleBasedGuard({ hasContent, roles, children }: IRoleBasedGuard): JSX.Element | null {
   // Logic here to get current user role
   // const { user } = useAuthContext();
 

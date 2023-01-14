@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { lazy, Suspense, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createPortal } from 'react-dom';
@@ -6,7 +7,7 @@ import OneButtonModal from './common/OneButtonModal';
 import DepthTestModal from './common/DepthTestModal';
 import BanLayerModal from './custom/BanLayerModal';
 
-const Loadable = (Component) => (props) =>
+const Loadable = (Component: typeof React.Component) => (props: any) =>
   (
     <Suspense>
       <Component {...props} />
@@ -26,29 +27,32 @@ export const MODAL_TYPE = {
   DEPTH_TEST: 'DEPTH_TEST',
 };
 
-const MODAL_COMPONENTS = {
+interface IModalComponent {
+  [key: string]: (props: any) => JSX.Element | null;
+}
+
+const MODAL_COMPONENTS: IModalComponent = {
   ONE_BUTTON: OneButtonModal,
   DEPTH_TEST: DepthTestModal,
   BAN_LAYER: BanLayerModal,
   BAN_PROCCESS_LAYER: BanProccessLayerModal,
 };
 
-const GlobalModal = () => {
+const GlobalModal = (): JSX.Element | null => {
   const modalList = useRecoilValue(globalModalAtom);
 
   const render = useMemo(
     () =>
       modalList.map(({ type, props }, index) => {
-        const ModalComponent = MODAL_COMPONENTS[type];
-        return <ModalComponent key={index} {...props} />;
+        const ModalComponent = MODAL_COMPONENTS[type] as typeof MODAL_COMPONENTS[typeof type];
+        return <ModalComponent key={index} {...(props as object)} />;
       }),
     [modalList]
   );
 
-  if (modalList.length === 0) {
-    return null;
-  }
-  return createPortal(<>{render}</>, document.getElementById('modal-root'));
+  return modalList.length === 0
+    ? null
+    : createPortal(<>{render}</>, document.getElementById('modal-root') as HTMLDivElement);
 };
 
 export default GlobalModal;

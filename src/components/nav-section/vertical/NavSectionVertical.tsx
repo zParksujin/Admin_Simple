@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
-// @mui
 import { List, Stack } from '@mui/material';
+import { SxProps } from '@mui/system';
 // locales
 import { useRecoilValueLoadable } from 'recoil';
 import NavList from './NavList';
@@ -8,12 +7,14 @@ import { menuSelector } from '@/recoil/menu';
 
 // ----------------------------------------------------------------------
 
-NavSectionVertical.propTypes = {
-  sx: PropTypes.object,
-  data: PropTypes.array,
-};
+interface INavSectionVertical {
+  sx: SxProps;
+}
 
-export default function NavSectionVertical({ sx, ...other }) {
+export default function NavSectionVertical({
+  sx,
+  ...other
+}: INavSectionVertical): JSX.Element | null {
   const {
     state,
     contents: { data },

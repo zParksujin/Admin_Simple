@@ -1,20 +1,16 @@
-import PropTypes from 'prop-types';
+// @ts-nocheck
 import { memo } from 'react';
-// @mui
-import { Box, Stack } from '@mui/material';
-//
+import { Box, Stack, SxProps } from '@mui/material';
 import { useRecoilValueLoadable } from 'recoil';
-import NavList from './NavList';
 import { menuSelector } from '@/recoil/menu';
+import NavList from './NavList';
+import { IMyMenuItem } from '@/api/menu/type';
 
-// ----------------------------------------------------------------------
+interface INavSectionMini {
+  sx: SxProps;
+}
 
-NavSectionMini.propTypes = {
-  sx: PropTypes.object,
-  data: PropTypes.array,
-};
-
-function NavSectionMini({ sx, ...other }) {
+function NavSectionMini({ sx, ...other }: INavSectionMini): JSX.Element | null {
   const {
     state,
     contents: { data },
@@ -34,23 +30,21 @@ function NavSectionMini({ sx, ...other }) {
       }}
       {...other}
     >
-      <Items items={data} isLastGroup />
+      <Items items={data} />
     </Stack>
   );
 }
 
 export default memo(NavSectionMini);
 
-// ----------------------------------------------------------------------
+interface IItems {
+  items: IMyMenuItem[];
+}
 
-Items.propTypes = {
-  items: PropTypes.array,
-};
-
-function Items({ items }) {
+function Items({ items }: IItems) {
   return (
     <>
-      {Object.keys(items).map((item) => {
+      {Object.keys(items).map((item: string) => {
         const menu = items[item];
         return (
           <NavList key={menu.title + menu.path} data={menu} depth={1} hasChild={!!menu.menus} />

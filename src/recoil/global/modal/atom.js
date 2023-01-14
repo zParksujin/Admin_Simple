@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 
-const globalModalAtom = atom({
-  key: 'globalModalAtom',
+const globalModal = atom({
+  key: 'globalModal',
   default: [],
 });
 
-export default globalModalAtom;
+export default globalModal;

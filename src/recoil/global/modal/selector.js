@@ -11,7 +11,6 @@ export const globalModalCreator = selector({
   },
 });
 
-// 데이터 초기화 신경쓰며 Close, Clear 해주세요
 export const globalModalClose = selector({
   key: 'globalModalClose',
   get: ({ get }) => get(globalModalAtom),
@@ -21,13 +20,5 @@ export const globalModalClose = selector({
       atom.pop();
       set(globalModalAtom, atom);
     }
-  },
-});
-
-export const globalModalClear = selector({
-  key: 'globalModalClear',
-  get: ({ get }) => get(globalModalAtom),
-  set: ({ set }) => {
-    set(globalModalAtom, []);
   },
 });

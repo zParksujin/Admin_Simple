@@ -1,16 +1,23 @@
-// @mui
-import { alpha, styled } from '@mui/material/styles';
+// @ts-nocheck
+import { styled, alpha } from '@mui/material/styles';
 import { Popover, ListItemButton, ListItemIcon } from '@mui/material';
+import { Theme } from '@mui/system';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // config
-import { ICON } from '../../../config-global';
+import { NAV, ICON } from '../../../config-global';
 
 // ----------------------------------------------------------------------
-
+interface IStyledItem {
+  active?: boolean;
+  disabled?: boolean;
+  open?: boolean;
+  depth?: number;
+  theme: Theme;
+}
 export const StyledItem = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'active' && prop !== 'open',
-})(({ active, disabled, open, depth, theme }) => {
+})(({ active, disabled, open, depth, theme }: IStyledItem) => {
   const isLight = theme.palette.mode === 'light';
 
   const subItem = depth !== 1;
@@ -34,16 +41,20 @@ export const StyledItem = styled(ListItemButton, {
   };
 
   return {
-    flexDirection: 'column',
+    flexShrink: 0,
+    display: 'inline-flex',
     textTransform: 'capitalize',
-    padding: theme.spacing(1, 0, 0.5, 0),
+    padding: theme.spacing(0, 0.75),
     color: theme.palette.text.secondary,
     borderRadius: theme.shape.borderRadius,
+    height: NAV.H_DASHBOARD_ITEM_HORIZONTAL,
     '&:hover': hoverStyle,
     // Sub item
     ...(subItem && {
-      flexDirection: 'row',
-      padding: theme.spacing(1),
+      width: '100%',
+      margin: 0,
+      paddingRight: 0,
+      paddingLeft: theme.spacing(1),
     }),
     // Active item
     ...(active && {
@@ -74,10 +85,10 @@ export const StyledItem = styled(ListItemButton, {
 // ----------------------------------------------------------------------
 
 export const StyledIcon = styled(ListItemIcon)({
-  marginRight: 0,
-  marginBottom: 4,
-  width: ICON.NAV_ITEM_MINI,
-  height: ICON.NAV_ITEM_MINI,
+  marginRight: 8,
+  flexShrink: 0,
+  width: ICON.NAV_ITEM_HORIZONTAL,
+  height: ICON.NAV_ITEM_HORIZONTAL,
 });
 
 // ----------------------------------------------------------------------

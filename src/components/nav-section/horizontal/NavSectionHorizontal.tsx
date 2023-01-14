@@ -1,22 +1,18 @@
-import PropTypes from 'prop-types';
+// @ts-nocheck
 import { memo } from 'react';
-// @mui
 import { Stack } from '@mui/material';
-// utils
+import { SxProps } from '@mui/system';
 import { useRecoilValueLoadable } from 'recoil';
 import { hideScrollbarY } from '../../../utils/cssStyles';
-//
 import NavList from './NavList';
 import { menuSelector } from '@/recoil/menu';
+import { IMyMenuItem } from '@/api/menu/type';
 
-// ----------------------------------------------------------------------
+interface INavSectionHorizontal {
+  sx: SxProps;
+}
 
-NavSectionHorizontal.propTypes = {
-  sx: PropTypes.object,
-  data: PropTypes.array,
-};
-
-function NavSectionHorizontal({ sx, ...other }) {
+function NavSectionHorizontal({ sx, ...other }: INavSectionHorizontal): JSX.Element | null {
   const {
     state,
     contents: { data },
@@ -46,11 +42,11 @@ export default memo(NavSectionHorizontal);
 
 // ----------------------------------------------------------------------
 
-Items.propTypes = {
-  items: PropTypes.array,
-};
+interface IItems {
+  items: IMyMenuItem[];
+}
 
-function Items({ items }) {
+function Items({ items }: IItems) {
   return (
     <>
       {items.map((menu) => (

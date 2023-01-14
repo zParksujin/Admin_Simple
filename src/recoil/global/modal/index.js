@@ -1,6 +1,6 @@
-import globalModalAtom from './atom';
-import { globalModalCreator, globalModalClose, globalModalClear } from './selector';
+import globalModal from './atom';
+import { globalModalCreator, globalModalClose } from './selector';
 
-export { globalModalCreator, globalModalClose, globalModalClear };
+export { globalModalCreator, globalModalClose };
 
-export default globalModalAtom;
+export default globalModal;

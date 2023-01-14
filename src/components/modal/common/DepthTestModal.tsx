@@ -1,9 +1,16 @@
+// @ts-nocheck
 import { Box, Button, Card, Typography } from '@mui/material';
 import React from 'react';
 import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 import { MODAL_TYPE } from '..';
 
-const DepthTestModal = ({ cb, count = 0 }) => {
+interface IDepthTestModal {
+  cb: () => void;
+  count: number;
+}
+
+const DepthTestModal = (props: IDepthTestModal): JSX.Element | null => {
+  const { cb, count = 0 } = props;
   const { setCloseModal, setModal, setClearModal } = useGlobalModal();
   const onCloseModal = () => {
     if (cb) {
@@ -43,7 +50,6 @@ const DepthTestModal = ({ cb, count = 0 }) => {
             flexDirection: 'column',
             padding: '10px',
           }}
-          elevation={4}
         >
           {/* TODO add T */}
           <Box component="div" sx={{ height: '100%', padding: '70px 100px' }}>

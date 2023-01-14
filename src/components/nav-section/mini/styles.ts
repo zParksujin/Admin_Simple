@@ -1,16 +1,23 @@
-// @mui
-import { styled, alpha } from '@mui/material/styles';
+// @ts-nocheck
+import { alpha, styled } from '@mui/material/styles';
 import { Popover, ListItemButton, ListItemIcon } from '@mui/material';
+import { Theme } from '@mui/system';
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // config
-import { NAV, ICON } from '../../../config-global';
+import { ICON } from '../../../config-global';
 
-// ----------------------------------------------------------------------
+interface IStyledItem {
+  active?: boolean;
+  disabled?: boolean;
+  open?: boolean;
+  depth?: number;
+  theme?: Theme;
+}
 
 export const StyledItem = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'active' && prop !== 'open',
-})(({ active, disabled, open, depth, theme }) => {
+})(({ active, disabled, open, depth, theme }: IStyledItem) => {
   const isLight = theme.palette.mode === 'light';
 
   const subItem = depth !== 1;
@@ -34,20 +41,16 @@ export const StyledItem = styled(ListItemButton, {
   };
 
   return {
-    flexShrink: 0,
-    display: 'inline-flex',
+    flexDirection: 'column',
     textTransform: 'capitalize',
-    padding: theme.spacing(0, 0.75),
+    padding: theme.spacing(1, 0, 0.5, 0),
     color: theme.palette.text.secondary,
     borderRadius: theme.shape.borderRadius,
-    height: NAV.H_DASHBOARD_ITEM_HORIZONTAL,
     '&:hover': hoverStyle,
     // Sub item
     ...(subItem && {
-      width: '100%',
-      margin: 0,
-      paddingRight: 0,
-      paddingLeft: theme.spacing(1),
+      flexDirection: 'row',
+      padding: theme.spacing(1),
     }),
     // Active item
     ...(active && {
@@ -78,10 +81,10 @@ export const StyledItem = styled(ListItemButton, {
 // ----------------------------------------------------------------------
 
 export const StyledIcon = styled(ListItemIcon)({
-  marginRight: 8,
-  flexShrink: 0,
-  width: ICON.NAV_ITEM_HORIZONTAL,
-  height: ICON.NAV_ITEM_HORIZONTAL,
+  marginRight: 0,
+  marginBottom: 4,
+  width: ICON.NAV_ITEM_MINI,
+  height: ICON.NAV_ITEM_MINI,
 });
 
 // ----------------------------------------------------------------------

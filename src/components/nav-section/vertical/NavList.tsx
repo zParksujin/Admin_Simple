@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState, useEffect, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
@@ -7,16 +6,17 @@ import { Collapse } from '@mui/material';
 import useActiveLink from '../../../hooks/useActiveLink';
 //
 import NavItem from './NavItem';
+import { IAdminMenuItem } from '@/api/menu/type';
 
 // ----------------------------------------------------------------------
 
-NavList.propTypes = {
-  data: PropTypes.object,
-  depth: PropTypes.number,
-  hasChild: PropTypes.bool,
-};
+interface INavList {
+  data: IAdminMenuItem;
+  depth: number;
+  hasChild: boolean;
+}
 
-function NavList({ data, depth, hasChild }) {
+function NavList({ data, depth, hasChild }: INavList): JSX.Element | null {
   const { pathname } = useLocation();
 
   const { active, isExternalLink } = useActiveLink(data.path);
@@ -66,12 +66,12 @@ export default memo(NavList);
 
 // ----------------------------------------------------------------------
 
-NavSubList.propTypes = {
-  data: PropTypes.array,
-  depth: PropTypes.number,
-};
+interface INavSubList {
+  data: IAdminMenuItem[] | undefined;
+  depth: number;
+}
 
-function NavSubList({ data, depth }) {
+function NavSubList({ data, depth }: INavSubList) {
   return (
     <>
       {data &&

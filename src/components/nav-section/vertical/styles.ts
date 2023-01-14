@@ -1,14 +1,23 @@
-// @mui
+// @ts-nocheck
+
 import { alpha, styled } from '@mui/material/styles';
+import { Theme } from '@mui/system';
 import { ListItemIcon, ListSubheader, ListItemButton } from '@mui/material';
 // config
 import { ICON, NAV } from '../../../config-global';
 
 // ----------------------------------------------------------------------
 
+interface IStyledItem {
+  active?: boolean;
+  disabled?: boolean;
+  depth: number;
+  theme?: Theme;
+  caption: boolean;
+}
 export const StyledItem = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'active' && prop !== 'caption',
-})(({ active, disabled, depth, caption, theme }) => {
+})(({ active, disabled, depth, caption, theme }: IStyledItem) => {
   const isLight = theme.palette.mode === 'light';
 
   const subItem = depth !== 1;

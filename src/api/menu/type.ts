@@ -6,6 +6,7 @@ export interface IAdminMenuItem {
   sub_path: string;
   type: string;
   path: string;
+  menus?: IAdminMenuItem[];
 }
 
 export interface IMyMenuItem {
