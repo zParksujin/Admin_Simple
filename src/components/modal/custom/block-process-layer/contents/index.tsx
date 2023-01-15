@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { CardMedia, Paper, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';

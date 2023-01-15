@@ -103,7 +103,7 @@ function Searchbar() {
 
   const allItems = useMemo(
     () =>
-      flattenArray(reduceItems).map((option) => {
+      flattenArray({ list: reduceItems }).map((option) => {
         const group = splitPath(reduceItems, option.path);
 
         if (option.path?.includes('[0-9]+')) {

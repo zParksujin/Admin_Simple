@@ -95,7 +95,6 @@ function NavList({ data, depth, hasChild }: INavList): JSX.Element | null {
 }
 
 export default memo(NavList);
-// ----------------------------------------------------------------------
 
 interface INavSubList {
   data: IAdminMenuItem[] | undefined;

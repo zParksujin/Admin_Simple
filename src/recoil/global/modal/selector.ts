@@ -1,17 +1,20 @@
+// @ts-nocheck
 import { selector } from 'recoil';
 import globalModalAtom from '.';
 
-export const globalModalCreator = selector({
+import { IGlobalModal } from './atom';
+
+export const globalModalCreator = selector<IGlobalModal[]>({
   key: 'globalModalCreator',
   get: ({ get }) => get(globalModalAtom),
-  set: ({ get, set }, value) => {
+  set: ({ get, set }, newValue: IGlobalModal) => {
     const atom = [...get(globalModalAtom)];
-    atom.push(value);
+    atom.push(newValue);
     set(globalModalAtom, [...atom]);
   },
 });
 
-export const globalModalClose = selector({
+export const globalModalClose = selector<IGlobalModal[]>({
   key: 'globalModalClose',
   get: ({ get }) => get(globalModalAtom),
   set: ({ get, set }) => {

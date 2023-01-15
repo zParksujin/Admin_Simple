@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 
-const BlockProcessSelectSK = () => (
+const BlockProcessSelectSK = (): JSX.Element => (
   <>
     <FormControl fullWidth>
       <InputLabel variant="standard" htmlFor="block-code">

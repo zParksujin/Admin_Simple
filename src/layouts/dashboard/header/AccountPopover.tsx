@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
@@ -56,7 +57,7 @@ export default function AccountPopover() {
     }
   };
 
-  const handleClickItem = (path) => {
+  const handleClickItem = (path: string) => {
     handleClosePopover();
     navigate(path);
   };

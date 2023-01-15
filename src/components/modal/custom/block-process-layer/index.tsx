@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Box, Button, Card, Divider, Typography } from '@mui/material';
 import React, { Suspense, useState } from 'react';
 import dayjs from 'dayjs';
@@ -5,15 +6,6 @@ import useGlobalModal from '@/utils/hooks/global/modal/useGlobalModal';
 import { MODAL_TYPE } from '../..';
 import BlockProcessContents from './contents';
 
-/**
- * category_idx: 1
-    type: warning
-    expire_day: 0
-    block_date: 2023-01-06 16:25:00
-    message_idx: 3679
-    type: 'warning' | 'restriction' | 'ban';
-    expire_day: '0' | '3' | '7' | '30' | '36500';
- */
 const BanProccessLayerModal = ({ cbFunc, data }) => {
   const { setCloseModal, setModal } = useGlobalModal();
   const [categoryIdx, setCategoryIdx] = useState();

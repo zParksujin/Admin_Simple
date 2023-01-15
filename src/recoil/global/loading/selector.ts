@@ -1,7 +1,9 @@
 import { selector } from 'recoil';
 import globalLoadingAtom from '.';
 
-export const globalLoadingCreator = selector({
+import { IGlobalLoading } from './atom';
+
+export const globalLoadingCreator = selector<IGlobalLoading>({
   key: 'globalLoadingCreator',
   get: ({ get }) => get(globalLoadingAtom),
   set: ({ set }, obj) => {
