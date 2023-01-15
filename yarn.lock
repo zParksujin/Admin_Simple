@@ -4726,10 +4726,10 @@
     "normalize-path" "^3.0.0"
     "schema-utils" "^4.0.0"
 
-"eslint@*", "eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8", "eslint@^3 || ^4 || ^5 || ^6 || ^7 || ^8", "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0", "eslint@^6.0.0 || ^7.0.0 || ^8.0.0", "eslint@^7.0.0 || ^8.0.0", "eslint@^7.32.0 || ^8.2.0", "eslint@^7.5.0 || ^8.0.0", "eslint@^8.0.0", "eslint@^8.1.0", "eslint@^8.31.0", "eslint@>= 6", "eslint@>=5", "eslint@>=7.0.0", "eslint@>=7.28.0":
-  "integrity" "sha512-0tQQEVdmPZ1UtUKXjX7EMm9BlgJ08G90IhWh0PKDCb3ZLsgAOHI8fYSIzYVZej92zsgq+ft0FGsxhJ3xo2tbuA=="
-  "resolved" "https://registry.npmjs.org/eslint/-/eslint-8.31.0.tgz"
-  "version" "8.31.0"
+"eslint@*", "eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8", "eslint@^3 || ^4 || ^5 || ^6 || ^7 || ^8", "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0", "eslint@^6.0.0 || ^7.0.0 || ^8.0.0", "eslint@^7.0.0 || ^8.0.0", "eslint@^7.32.0 || ^8.2.0", "eslint@^7.5.0 || ^8.0.0", "eslint@^8.0.0", "eslint@^8.1.0", "eslint@^8.32.0", "eslint@>= 6", "eslint@>=5", "eslint@>=7.0.0", "eslint@>=7.28.0":
+  "integrity" "sha512-nETVXpnthqKPFyuY2FNjz/bEd6nbosRgKbkgS/y1C7LJop96gYHWpiguLecMHQ2XCPxn77DS0P+68WzG6vkZSQ=="
+  "resolved" "https://registry.npmjs.org/eslint/-/eslint-8.32.0.tgz"
+  "version" "8.32.0"
   dependencies:
     "@eslint/eslintrc" "^1.4.1"
     "@humanwhocodes/config-array" "^0.11.8"

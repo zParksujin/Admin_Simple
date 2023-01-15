@@ -1,10 +1,6 @@
 import React from 'react';
-// @mui
 import { Typography, Stack, SxProps } from '@mui/material';
-//
 import Image from '../image';
-
-// ----------------------------------------------------------------------
 
 interface IEmptyContent {
   sx?: SxProps;
