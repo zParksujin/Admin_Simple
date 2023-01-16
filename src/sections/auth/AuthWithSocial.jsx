@@ -1,9 +1,9 @@
 import { memo, useCallback, useEffect } from 'react';
 import { Divider, IconButton, Stack } from '@mui/material';
 import { useSetRecoilState } from 'recoil';
-import { customWindowOpener } from 'src/utils/auth/customWindowOpener';
 import adminMeAtom from 'src/recoil/me';
 import { useNavigate } from 'react-router';
+import { customWindowOpener } from '@/utils/auth/customWindowOpener';
 import { baseURL } from '@/api';
 import setToken from '@/utils/auth/setToken';
 

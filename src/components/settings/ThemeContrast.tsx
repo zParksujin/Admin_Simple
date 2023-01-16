@@ -34,7 +34,7 @@ export default function ThemeContrast({ children }: IThemeContrast) {
           styleOverrides: {
             ...(isContrastBold && {
               root: {
-                boxShadow: outerTheme.customShadows.z4,
+                boxShadow: (outerTheme as any).customShadows.z4,
               },
             }),
           },

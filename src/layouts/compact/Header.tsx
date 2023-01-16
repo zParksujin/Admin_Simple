@@ -1,7 +1,5 @@
-// @ts-nocheck
-import PropTypes from 'prop-types';
 // @mui
-import { useTheme } from '@mui/material/styles';
+import { SxProps, useTheme } from '@mui/material/styles';
 import { AppBar, Toolbar, Box, Link } from '@mui/material';
 // config
 import { HEADER } from '../../config-global';
@@ -10,35 +8,35 @@ import { bgBlur } from '../../utils/cssStyles';
 // components
 import Logo from '../../components/logo';
 
-// ----------------------------------------------------------------------
+interface IHeader {
+  isOffset: boolean;
+}
 
-Header.propTypes = {
-  isOffset: PropTypes.bool,
-};
-
-export default function Header({ isOffset }) {
+export default function Header({ isOffset }: IHeader): JSX.Element {
   const theme = useTheme();
 
   return (
     <AppBar color="transparent" sx={{ boxShadow: 0 }}>
       <Toolbar
-        sx={{
-          justifyContent: 'space-between',
-          height: {
-            xs: HEADER.H_MOBILE,
-            md: HEADER.H_MAIN_DESKTOP,
-          },
-          transition: theme.transitions.create(['height', 'background-color'], {
-            easing: theme.transitions.easing.easeInOut,
-            duration: theme.transitions.duration.shorter,
-          }),
-          ...(isOffset && {
-            ...bgBlur({ color: theme.palette.background.default }),
+        sx={
+          {
+            justifyContent: 'space-between',
             height: {
-              md: HEADER.H_MAIN_DESKTOP - 16,
+              xs: HEADER.H_MOBILE,
+              md: HEADER.H_MAIN_DESKTOP,
             },
-          }),
-        }}
+            transition: theme.transitions.create(['height', 'background-color'], {
+              easing: theme.transitions.easing.easeInOut,
+              duration: theme.transitions.duration.shorter,
+            }),
+            ...(isOffset && {
+              ...bgBlur({ color: theme.palette.background.default }),
+              height: {
+                md: HEADER.H_MAIN_DESKTOP - 16,
+              },
+            }),
+          } as any
+        }
       >
         <Logo />
 
@@ -52,13 +50,11 @@ export default function Header({ isOffset }) {
   );
 }
 
-// ----------------------------------------------------------------------
+interface IShadow {
+  sx?: SxProps;
+}
 
-Shadow.propTypes = {
-  sx: PropTypes.object,
-};
-
-function Shadow({ sx, ...other }) {
+function Shadow({ sx, ...other }: IShadow): JSX.Element {
   return (
     <Box
       sx={{
@@ -71,7 +67,7 @@ function Shadow({ sx, ...other }) {
         borderRadius: '50%',
         position: 'absolute',
         width: `calc(100% - 48px)`,
-        boxShadow: (theme) => theme.customShadows.z8,
+        boxShadow: (theme) => (theme as any).customShadows.z8,
         ...sx,
       }}
       {...other}

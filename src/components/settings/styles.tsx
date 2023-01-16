@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { alpha, styled, Theme } from '@mui/material/styles';
 import { CardActionArea, Radio, FormControlLabel, Stack, Box } from '@mui/material';
 
@@ -8,9 +7,14 @@ export const StyledWrap = styled(Box)(() => ({
   gridTemplateColumns: 'repeat(2, 1fr)',
 }));
 
+interface IStyledCard {
+  selected: boolean;
+  theme: Theme;
+}
+
 export const StyledCard = styled(CardActionArea, {
   shouldForwardProp: (prop) => prop !== 'selected',
-})(({ selected, theme }) => ({
+})(({ selected, theme }: IStyledCard) => ({
   height: 72,
   display: 'flex',
   alignItems: 'center',
@@ -25,8 +29,7 @@ export const StyledCard = styled(CardActionArea, {
   ...(selected && {
     color: theme.palette.primary.main,
 
-    /* tslint:disable */
-    boxShadow: theme.customShadows.z12,
+    boxShadow: (theme as any).customShadows.z12,
     borderColor: alpha(theme.palette.grey[500], 0.24),
   }),
 }));

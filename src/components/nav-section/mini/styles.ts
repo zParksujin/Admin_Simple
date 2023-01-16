@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { alpha, styled } from '@mui/material/styles';
 import { Popover, ListItemButton, ListItemIcon } from '@mui/material';
 import { Theme } from '@mui/system';
@@ -12,7 +11,7 @@ interface IStyledItem {
   disabled?: boolean;
   open?: boolean;
   depth?: number;
-  theme?: Theme;
+  theme: Theme;
 }
 
 export const StyledItem = styled(ListItemButton, {
@@ -96,7 +95,7 @@ export const StyledPopover = styled(Popover)(({ theme }) => ({
     pointerEvents: 'auto',
     padding: theme.spacing(1),
     marginTop: theme.spacing(0.5),
-    boxShadow: theme.customShadows.dropdown,
+    boxShadow: (theme as any).customShadows.dropdown,
     borderRadius: Number(theme.shape.borderRadius) * 1.5,
     ...bgBlur({ color: theme.palette.background.default }),
   },

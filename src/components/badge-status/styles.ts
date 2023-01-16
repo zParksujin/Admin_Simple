@@ -1,7 +1,5 @@
-// @mui
 import { styled } from '@mui/material/styles';
 
-// ----------------------------------------------------------------------
 interface IStyledBadgeStatus {
   theme: any;
   ownerState: any;
