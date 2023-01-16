@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect } from 'react';
 import { Divider, IconButton, Stack } from '@mui/material';
 import { useSetRecoilState } from 'recoil';
-import adminMeAtom from 'src/recoil/me';
+import adminMeAtom from '@/recoil/me';
 import { useNavigate } from 'react-router';
 import { customWindowOpener } from '@/utils/auth/customWindowOpener';
 import { baseURL } from '@/api';

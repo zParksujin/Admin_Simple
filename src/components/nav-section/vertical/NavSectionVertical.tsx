@@ -8,7 +8,7 @@ import { menuSelector } from '@/recoil/menu';
 // ----------------------------------------------------------------------
 
 interface INavSectionVertical {
-  sx: SxProps;
+  sx?: SxProps;
 }
 
 export default function NavSectionVertical({

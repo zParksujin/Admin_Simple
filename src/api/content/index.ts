@@ -21,7 +21,7 @@ export const getBlockCategoryCode = async () => {
   return res;
 };
 
-export const getBlockCategoryDetailCode = async (code: number) => {
+export const getBlockCategoryDetailCode = async (code: string) => {
   const res = <IApiDataResult<IBlockCategoryCodeItem[]>>(
     await instance.get(`/v1/admins/block_category/code/${code}`)
   );

@@ -4,7 +4,7 @@ import globalModalAtom from '.';
 
 import { IGlobalModal } from './atom';
 
-export const globalModalCreator = selector<IGlobalModal[]>({
+export const globalModalCreator = selector<IGlobalModal>({
   key: 'globalModalCreator',
   get: ({ get }) => get(globalModalAtom),
   set: ({ get, set }, newValue: IGlobalModal) => {
@@ -14,7 +14,7 @@ export const globalModalCreator = selector<IGlobalModal[]>({
   },
 });
 
-export const globalModalClose = selector<IGlobalModal[]>({
+export const globalModalClose = selector({
   key: 'globalModalClose',
   get: ({ get }) => get(globalModalAtom),
   set: ({ get, set }) => {

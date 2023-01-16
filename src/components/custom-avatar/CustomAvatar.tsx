@@ -25,10 +25,12 @@ interface ICustomAvatar {
   BadgeProps?: Record<string, string>;
   children?: ReactNode;
   sx?: SxProps;
+  src?: string;
+  alt?: string;
 }
 
 const CustomAvatar = forwardRef(
-  ({ color, name = '', BadgeProps, children, sx, ...other }: ICustomAvatar, ref): JSX.Element => {
+  ({ color, name = '', BadgeProps, children, sx, src, alt }: ICustomAvatar, ref): JSX.Element => {
     const theme = useTheme();
 
     const charAtName = getCharAtName(name);
@@ -39,7 +41,7 @@ const CustomAvatar = forwardRef(
 
     const renderContent =
       colr === 'default' ? (
-        <Avatar ref={ref} sx={sx} {...other}>
+        <Avatar ref={ref} sx={sx} src={src} alt={alt}>
           {name && charAtName}
           {children}
         </Avatar>
@@ -52,7 +54,8 @@ const CustomAvatar = forwardRef(
             fontWeight: theme.typography.fontWeightMedium,
             ...sx,
           }}
-          {...other}
+          src={src}
+          alt={alt}
         >
           {name && charAtName}
           {children}

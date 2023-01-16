@@ -31,9 +31,8 @@ export const getAdminMe = async () => {
 
 export const myIpCheck = async () => {
   const res = <IApiDataResult<IMyIpInfo>>await instance.get('/v1/admins/my-ip');
-  console.log(res);
 
-  return res.data;
+  return res;
 };
 
 export const adminLogout = async () => {

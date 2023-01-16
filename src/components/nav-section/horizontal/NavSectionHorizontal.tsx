@@ -9,7 +9,7 @@ import { menuSelector } from '@/recoil/menu';
 import { IMyMenuItem } from '@/api/menu/type';
 
 interface INavSectionHorizontal {
-  sx: SxProps;
+  sx?: SxProps;
 }
 
 function NavSectionHorizontal({ sx, ...other }: INavSectionHorizontal): JSX.Element | null {

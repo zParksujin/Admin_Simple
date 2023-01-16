@@ -11,7 +11,7 @@ export default function Login() {
   const { t } = useLocales();
 
   return (
-    <LoginLayout title={t('login.main')}>
+    <LoginLayout title={t('login.main')} illustration="">
       <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
         <Typography variant="h4">{t('login.signIn')}</Typography>
       </Stack>

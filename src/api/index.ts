@@ -90,9 +90,11 @@ export interface IApiResult {
 }
 
 export interface IApiDataResult<T> extends IApiResult {
+  error?: any;
   data: T;
 }
 export interface IApiListResult<T> extends IApiResult {
+  error?: any;
   data: T[];
   total_count: number;
   page: IListPage;

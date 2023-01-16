@@ -1,41 +1,35 @@
-// @ts-nocheck
-import PropTypes from 'prop-types';
-// @mui
 import { alpha, useTheme } from '@mui/material/styles';
 import { Tooltip, Box, IconButton } from '@mui/material';
-// utils
 import { bgBlur } from '../../../utils/cssStyles';
-//
 import SvgColor from '../../svg-color';
-//
 import BadgeDot from './BadgeDot';
 
-// ----------------------------------------------------------------------
+interface IToggleButton {
+  notDefault: boolean;
+  open: boolean;
+  onToggle: () => void;
+}
 
-ToggleButton.propTypes = {
-  open: PropTypes.bool,
-  onToggle: PropTypes.func,
-  notDefault: PropTypes.bool,
-};
-
-export default function ToggleButton({ notDefault, open, onToggle }) {
+export default function ToggleButton({ notDefault, open, onToggle }: IToggleButton) {
   const theme = useTheme();
 
   return (
     <Box
-      sx={{
-        p: 0.5,
-        right: 24,
-        bottom: 24,
-        zIndex: 999,
-        position: 'fixed',
-        borderRadius: '50%',
-        boxShadow: `-12px 12px 32px -4px ${alpha(
-          theme.palette.mode === 'light' ? theme.palette.grey[600] : theme.palette.common.black,
-          0.36
-        )}`,
-        ...bgBlur({ color: theme.palette.background.default }),
-      }}
+      sx={
+        {
+          p: 0.5,
+          right: 24,
+          bottom: 24,
+          zIndex: 999,
+          position: 'fixed',
+          borderRadius: '50%',
+          boxShadow: `-12px 12px 32px -4px ${alpha(
+            theme.palette.mode === 'light' ? theme.palette.grey[600] : theme.palette.common.black,
+            0.36
+          )}`,
+          ...bgBlur({ color: theme.palette.background.default }),
+        } as any
+      }
     >
       {notDefault && !open && (
         <BadgeDot

@@ -9,6 +9,8 @@ function StatisticsBuyTable() {
   const statisticsBuyList = useRecoilValue(statisticsBuySelector);
   const setType = useSetRecoilState(statisticsBuyParam);
 
+  console.log(statisticsBuyList);
+
   const SUB_HEAD = useMemo<ISubHeader[]>(
     () => [
       { id: '', label: '구분', colSpan: 1 },
@@ -64,7 +66,7 @@ function StatisticsBuyTable() {
       subColumns={SUB_HEAD}
       mainColumns={MAIN_HEAD}
       setType={setType}
-      data={statisticsBuyList}
+      data={statisticsBuyList?.data}
     />
   );
 }

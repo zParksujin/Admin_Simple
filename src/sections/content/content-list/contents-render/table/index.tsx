@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+// @ts-nocheck
 import TableComponent from '@/components/type/table';
 import { contentListSelector } from '@/recoil/content/content-list';
 import { contentListParam } from '@/recoil/content/content-list/parmas';

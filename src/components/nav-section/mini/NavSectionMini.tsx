@@ -7,7 +7,7 @@ import NavList from './NavList';
 import { IMyMenuItem } from '@/api/menu/type';
 
 interface INavSectionMini {
-  sx: SxProps;
+  sx?: SxProps;
 }
 
 function NavSectionMini({ sx, ...other }: INavSectionMini): JSX.Element | null {
