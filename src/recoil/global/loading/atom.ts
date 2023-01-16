@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 export interface IGlobalLoading {
-  type: string;
+  type: string | '';
 }
 
 const globalLoading = atom<IGlobalLoading>({

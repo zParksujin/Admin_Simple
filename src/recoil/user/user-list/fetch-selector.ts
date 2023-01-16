@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { selector } from 'recoil';
 import { getUserList } from '@/api/user';
 
@@ -8,10 +9,10 @@ const userListSelector = selector({
   get: async ({ get }) => {
     const param = get(userListParamAtom);
     const res = await getUserList(param);
-    if (res?.error) {
+    if (res?.error || res.status !== 200) {
       throw res.error;
     }
-    return res.data;
+    return res;
   },
 });
 

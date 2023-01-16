@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, SetStateAction, useCallback, useState } from 'react';
 // @mui
 import { Link, Stack, TextField, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -21,21 +21,21 @@ function AuthLoginForm() {
   const userIP = useRecoilValue(checkMyIpSelector);
 
   const onChangeEmail = useCallback(
-    (e) => {
+    (e: { currentTarget: { value: SetStateAction<string> } }) => {
       setEmail(e.currentTarget.value);
     },
     [setEmail]
   );
 
   const onChangePW = useCallback(
-    (e) => {
+    (e: { currentTarget: { value: SetStateAction<string> } }) => {
       setPw(e.currentTarget.value);
     },
     [setPw]
   );
 
   const login = useCallback(
-    async (e) => {
+    async (e: { preventDefault: () => void }) => {
       e.preventDefault();
       if (email.length === 0) {
         // eslint-disable-next-line no-alert
@@ -60,7 +60,7 @@ function AuthLoginForm() {
         return;
       }
 
-      setToken(result.data);
+      setToken(result.data.token);
       setAuth(result.data.userInfo);
 
       navigate('/dashboard/main');
@@ -94,7 +94,7 @@ function AuthLoginForm() {
 
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ my: 2 }}>
           <Box>
-            {t('login.connectIp')} : {userIP?.data?.ip || ''}
+            {t('login.connectIp')} : {userIP.ip || ''}
           </Box>
           <Link variant="body2" color="inherit" underline="always">
             {t('login.findPw')}

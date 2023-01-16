@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import StatisticsBuyTable from './table';
 import StatisticsBuyChart from './chart';
 
-function ContentsRender({ tab }) {
+function ContentsRender({ tab }: { tab: number }) {
   const render = useMemo(
     () => (
       <>

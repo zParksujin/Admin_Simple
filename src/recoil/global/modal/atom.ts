@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
 export interface IGlobalModal {
-  type?: string;
+  type: string;
   props?: any;
 }
 

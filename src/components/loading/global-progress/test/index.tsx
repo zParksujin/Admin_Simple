@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import useGlobalLoading from '@/utils/hooks/global/loading/useGlobalLoading';
 
-const TestProgress = (): JSX.Element => {
+const TestProgress = (): JSX.Element | null => {
   const { closeLoading } = useGlobalLoading();
   return (
     <Box

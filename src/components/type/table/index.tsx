@@ -9,12 +9,12 @@ import CustomBodyHeaders from './customHeader';
 import CustomPopover from './popover';
 
 interface ITableComponent {
-  page: number;
+  page?: number;
   setType: SetterOrUpdater<any>;
-  total: number;
-  limit: number;
-  subColumns?: Record<string, string>[];
-  mainColumns: Record<string, string>[];
+  total?: number;
+  limit?: number;
+  subColumns?: any[];
+  mainColumns: any[];
   data: any;
 }
 
@@ -37,15 +37,15 @@ function TableComponent({
 
   const onChangeOffset = useCallback(
     (_e: any, newPage: number) => {
-      console.log(newPage, limit);
-      setType({ offset: newPage * limit });
+      if (limit) {
+        setType({ offset: newPage * limit });
+      }
     },
     [limit, setType]
   );
 
   const onChangeLimit = useCallback(
     (e: { target: { value: string } }) => {
-      console.log(e.target.value);
       setType({ limit: parseInt(e.target.value, 10) });
     },
     [setType]

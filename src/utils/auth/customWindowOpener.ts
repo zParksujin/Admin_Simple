@@ -1,7 +1,11 @@
 interface IPopup {
   [key: string]: string | number;
 }
-export const customWindowOpener = (url: string, name: string, options: Record<string, string>) => {
+export const customWindowOpener = (
+  url: string,
+  name: string,
+  options: { [key: string]: string | number }
+) => {
   const popup: IPopup | undefined = {
     width: '400',
     height: '700',

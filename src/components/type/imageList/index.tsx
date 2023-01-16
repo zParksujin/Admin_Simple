@@ -7,7 +7,7 @@ import { TablePaginationCustom } from '@/components/table';
 interface IImageListComponent {
   setType: SetterOrUpdater<any>;
   data: any;
-  page: number;
+  page?: number;
   total: number;
   limit: number;
   getInfoData: (contentData?: unknown) => Promise<void>;

@@ -42,11 +42,12 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 
 instance.interceptors.response.use(
   (res: AxiosResponse) => {
-    // const duration = +new Date() - +(res?.config?.metadata?.startTime || 0);
+    const duration = +new Date() - +((res?.config as any)?.metadata?.startTime || 0);
 
     return {
-      ...res,
-      // duration,
+      // ...res,
+      ...res.data,
+      duration,
     };
   },
   async (err: AxiosError) => {

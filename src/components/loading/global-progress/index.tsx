@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { createPortal } from 'react-dom';
-import globalLoadingAtom from '@/recoil/global/loading/atom';
+import globalLoading from '@/recoil/global/loading';
 
 import BasicProgress from '@/components/loading/global-progress/basic';
 import TestProgress from '@/components/loading/global-progress/test';
@@ -21,16 +21,14 @@ const LOADING_COMPONENTS: ILoadingComponent = {
 };
 
 const GlobalProgress = (): JSX.Element | null => {
-  const loading = useRecoilValue(globalLoadingAtom);
+  const { type } = useRecoilValue(globalLoading);
 
   const render = useMemo(() => {
-    const LoadingComponent = LOADING_COMPONENTS[
-      loading.type
-    ] as typeof LOADING_COMPONENTS[typeof loading.type];
+    const LoadingComponent = LOADING_COMPONENTS[type] as typeof LOADING_COMPONENTS[typeof type];
     return <LoadingComponent />;
-  }, [loading]);
+  }, [type]);
 
-  return loading.type === ''
+  return type === ''
     ? null
     : createPortal(<>{render}</>, document.getElementById('loading-root') as HTMLDivElement);
 };

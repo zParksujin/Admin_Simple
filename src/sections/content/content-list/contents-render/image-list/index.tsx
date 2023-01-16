@@ -14,11 +14,11 @@ const ContentListImage = () => {
 
   return (
     <ImageListComponent
+      page={page?.page && +page.page - 1}
       setType={setType}
       total={page.total}
       limit={page.limit}
       data={data}
-      page={page.page - 1}
       getInfoData={fetchBlockContentInfo}
     />
   );

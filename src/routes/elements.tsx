@@ -1,15 +1,16 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, LazyExoticComponent } from 'react';
 // components
 import LoadingScreen from '../components/loading/loading-screen';
 
 // ----------------------------------------------------------------------
 
-const Loadable = (Component) => (props) =>
-  (
-    <Suspense fallback={<LoadingScreen />}>
-      <Component {...props} />
-    </Suspense>
-  );
+const Loadable =
+  (Component: LazyExoticComponent<() => JSX.Element>) => (props: JSX.IntrinsicAttributes) =>
+    (
+      <Suspense fallback={<LoadingScreen />}>
+        <Component {...props} />
+      </Suspense>
+    );
 
 // ----------------------------------------------------------------------
 

@@ -14,7 +14,7 @@ const contentListSelector = selectorFamily({
         if (res.error) {
           throw res.error;
         }
-        return res.data;
+        return res;
       }
       const param = get(contentListParamAtom);
 
@@ -22,7 +22,7 @@ const contentListSelector = selectorFamily({
       if (res.error) {
         throw res.error;
       }
-      return res.data;
+      return res;
     },
 });
 

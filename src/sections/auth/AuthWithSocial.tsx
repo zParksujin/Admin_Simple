@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { customWindowOpener } from '@/utils/auth/customWindowOpener';
 import { baseURL } from '@/api';
 import setToken from '@/utils/auth/setToken';
+import { IAdminLoginToken } from '@/api/auth/type';
 
 function AuthWithSocial() {
   const setMe = useSetRecoilState(adminMeAtom);
@@ -27,7 +28,7 @@ function AuthWithSocial() {
   }, []);
 
   const workplaceCallback = useCallback(
-    async (e) => {
+    async (e: { data: string | IAdminLoginToken | string[] }) => {
       if (e?.data && typeof e?.data === 'string' && e?.data?.includes('workplace-login:')) {
         const data = setToken(e.data);
         setMe(data.userInfo);

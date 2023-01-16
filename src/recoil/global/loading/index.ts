@@ -1,6 +1,6 @@
-import globalModalAtom from './atom';
+import globalLoading from './atom';
 import { globalLoadingCreator } from './selector';
 
 export { globalLoadingCreator };
 
-export default globalModalAtom;
+export default globalLoading;

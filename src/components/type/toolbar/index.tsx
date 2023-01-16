@@ -13,7 +13,7 @@ interface IToolbar {
   setSearchType?: SetterOrUpdater<any>;
   typeKey: string[];
   param?: any;
-  typeOptions: Record<string, any>;
+  typeOptions?: Record<string, any>;
   onResetType?: Resetter;
   toggleTypeList?: string[];
   setToggle?: SetterOrUpdater<string>;
