@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import ContentsRender from './contents-render';
 import TabSection from './tab';
-import ToolbarRender from './toolbar-render';
+import TopSection from './top';
+import ContentsRender from './type';
 
-function ContentListSection() {
+function SubListSection(): JSX.Element {
   const [tab, setTab] = useState(0);
+
   return (
     <>
+      <TopSection />
       <TabSection tab={tab} setTab={setTab} />
-      <ToolbarRender tab={tab} />
       <ContentsRender tab={tab} />
     </>
   );
 }
 
-export default ContentListSection;
+export default SubListSection;

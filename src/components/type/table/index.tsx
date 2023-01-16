@@ -1,23 +1,42 @@
 import React, { useCallback, useState } from 'react';
 import { Table, TableBody, TableContainer, Paper } from '@mui/material';
 
+import { SetterOrUpdater } from 'recoil';
 import Scrollbar from '@/components/scrollbar';
 import { TableNoData, TablePaginationCustom } from '@/components/table';
 import CustomBodyRows from './customBody';
 import CustomBodyHeaders from './customHeader';
 import CustomPopover from './popover';
 
-function TableComponent({ page, setType, total, limit, subColumns = [], mainColumns, data }) {
+interface ITableComponent {
+  page: number;
+  setType: SetterOrUpdater<any>;
+  total: number;
+  limit: number;
+  subColumns?: Record<string, string>[];
+  mainColumns: Record<string, string>[];
+  data: any;
+}
+
+function TableComponent({
+  page,
+  setType,
+  total,
+  limit,
+  subColumns = [],
+  mainColumns,
+  data,
+}: ITableComponent) {
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const [openPopover, setOpenPopover] = useState(null);
 
-  const handleOpenPopover = (event) => {
+  const handleOpenPopover = (event: { currentTarget: React.SetStateAction<null> }) => {
     setOpenPopover(event.currentTarget);
   };
 
   const onChangeOffset = useCallback(
-    (e, newPage) => {
+    (_e: any, newPage: number) => {
       console.log(newPage, limit);
       setType({ offset: newPage * limit });
     },
@@ -25,7 +44,7 @@ function TableComponent({ page, setType, total, limit, subColumns = [], mainColu
   );
 
   const onChangeLimit = useCallback(
-    (e) => {
+    (e: { target: { value: string } }) => {
       console.log(e.target.value);
       setType({ limit: parseInt(e.target.value, 10) });
     },
@@ -62,10 +81,10 @@ function TableComponent({ page, setType, total, limit, subColumns = [], mainColu
                     handleOpenPopover={handleOpenPopover}
                   />
                   <CustomPopover
+                    openConfirm={openConfirm}
                     openPopover={openPopover}
                     handleClosePopover={handleClosePopover}
                     handleOpenConfirm={handleOpenConfirm}
-                    openConfirm={openConfirm}
                     handleCloseConfirm={handleCloseConfirm}
                   />
                 </>

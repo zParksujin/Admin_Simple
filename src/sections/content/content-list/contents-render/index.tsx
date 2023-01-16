@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import ContentListImage from './image-list';
 import ContentListTable from './table';
 
-function ContentsRender({ tab }) {
+function ContentsRender({ tab }: { tab: number }) {
   const render = useMemo(
     () => (
       <>

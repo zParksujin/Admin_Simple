@@ -1,14 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
-// @mui
 import { Button, Container, Stack, Typography } from '@mui/material';
-// components
+import { FallbackProps } from 'react-error-boundary';
 import { PageNotFoundIllustration } from '@/assets/illustrations';
-// assets
 
-// ----------------------------------------------------------------------
-function ErrorSection({ error }, info) {
-  console.log(error, info);
+function ErrorSection({ error }: FallbackProps) {
+  console.log(error);
   return (
     <>
       <Helmet>

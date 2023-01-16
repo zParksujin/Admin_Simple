@@ -1,10 +1,24 @@
 import React, { useEffect, useCallback } from 'react';
 import { Box, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
 import dayjs from 'dayjs';
+import { SetterOrUpdater } from 'recoil';
 import { useLocales } from '@/locales';
 
 const INPUT_WIDTH = 160;
 const SELECT_WIDTH = 100;
+
+interface IDateType {
+  setType: SetterOrUpdater<any>;
+  typeKey: string;
+  param?: any;
+  typeOptions: Record<string, any>;
+  startDate: string | '';
+  setStartDate: React.Dispatch<string>;
+  endDate: string | '';
+  setEndDate: React.Dispatch<string>;
+  dateType: string | null;
+  setDateType: React.Dispatch<string>;
+}
 
 const DateType = ({
   typeOptions,
@@ -17,13 +31,13 @@ const DateType = ({
   setEndDate,
   dateType,
   setDateType,
-}) => {
+}: IDateType) => {
   const { t } = useLocales();
   const onSearchDate = useCallback(() => {
     setType({ start_date: startDate, end_date: endDate });
   }, [endDate, setType, startDate]);
 
-  const onChangeFilter = (e) => {
+  const onChangeFilter = (e: { target: { value: string } }) => {
     setDateType(e.target.value);
   };
 
@@ -50,9 +64,8 @@ const DateType = ({
               onChange={onChangeFilter}
               value={dateType}
               name={typeKey}
-              label={t(`common.${typeKey}.tag`)}
             >
-              {typeOptions[typeKey].map((option) => (
+              {typeOptions[typeKey].map((option: string) => (
                 <option key={option} value={option}>
                   {t(`common.${typeKey}.${option}`)}
                 </option>

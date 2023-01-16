@@ -9,6 +9,7 @@ interface IMenuPopover {
   open?: any;
   children?: ReactNode;
   disabledArrow?: boolean;
+  onClose?: () => void;
   arrow?:
     | 'top-left'
     | 'top-center'

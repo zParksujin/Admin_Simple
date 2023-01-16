@@ -1,11 +1,28 @@
 import { Divider, IconButton, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
 import React, { useCallback } from 'react';
 import InfoIcon from '@mui/icons-material/Info';
+import { SetterOrUpdater } from 'recoil';
 import { TablePaginationCustom } from '@/components/table';
 
-const ImageListComponent = ({ setType, data, page, total, limit, getInfoData }) => {
+interface IImageListComponent {
+  setType: SetterOrUpdater<any>;
+  data: any;
+  page: number;
+  total: number;
+  limit: number;
+  getInfoData: (contentData?: unknown) => Promise<void>;
+}
+
+const ImageListComponent = ({
+  setType,
+  data,
+  page,
+  total,
+  limit,
+  getInfoData,
+}: IImageListComponent) => {
   const onChangeOffset = useCallback(
-    (e, newPage) => {
+    (_e: any, newPage: number) => {
       console.log(newPage, limit);
       setType({ offset: newPage * limit });
     },
@@ -13,7 +30,7 @@ const ImageListComponent = ({ setType, data, page, total, limit, getInfoData }) 
   );
 
   const onChangeLimit = useCallback(
-    (e) => {
+    (e: { target: { value: string } }) => {
       console.log(e.target.value);
       setType({ limit: parseInt(e.target.value, 10) });
     },
@@ -32,7 +49,7 @@ const ImageListComponent = ({ setType, data, page, total, limit, getInfoData }) 
       <Divider variant="middle" sx={{ margin: '15px 0' }} />
       <ImageList sx={{ width: '100%' }} cols={6}>
         {data &&
-          data.map((item) => (
+          data.map((item: any) => (
             <ImageListItem key={item.content.content_idx} sx={{ alignItems: 'center' }}>
               <img
                 src={item.content.poster_url || item.content.content_url}

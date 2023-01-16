@@ -1,14 +1,22 @@
 import { Box, FormControl, InputLabel, NativeSelect } from '@mui/material';
 import React, { useCallback } from 'react';
+import { SetterOrUpdater } from 'recoil';
 import { useLocales } from '@/locales';
 
 const SELECT_WIDTH = 100;
 
-const OtherType = ({ typeOptions, typeKey, setType, param }) => {
+interface ISearchType {
+  typeOptions: Record<string, any>;
+  typeKey: string;
+  setType: SetterOrUpdater<any>;
+  param: any;
+}
+
+const OtherType = ({ typeOptions, typeKey, setType, param }: ISearchType) => {
   const { t } = useLocales();
 
   const onChangeFilter = useCallback(
-    (e) => {
+    (e: { target: { value: any } }) => {
       setType({ [typeKey]: e.target.value });
     },
     [setType, typeKey]
@@ -24,10 +32,9 @@ const OtherType = ({ typeOptions, typeKey, setType, param }) => {
           id="demo-simple-select-label"
           onChange={onChangeFilter}
           value={param[typeKey]}
-          label={t(`common.${typeKey}.tag`)}
           name={typeKey}
         >
-          {typeOptions[typeKey].map((option) => (
+          {typeOptions[typeKey].map((option: string) => (
             <option key={option} value={option}>
               {option === '' ? '' : t(`common.${typeKey}.${option}`)}
             </option>

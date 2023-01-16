@@ -1,5 +1,14 @@
 // @mui
-import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
+import {
+  Box,
+  Checkbox,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableSortLabel,
+  SxProps,
+  SortDirection,
+} from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -15,8 +24,17 @@ const visuallyHidden = {
   clip: 'rect(0 0 0 0)',
 };
 
-// ----------------------------------------------------------------------
-
+interface ICustomBodyHeaders {
+  order?: SortDirection;
+  orderBy?: string;
+  rowCount?: number;
+  subColumns?: Record<string, any>[];
+  mainColumns: Record<string, any>[];
+  numSelected?: number;
+  onSort?: (a: number | string) => void;
+  onSelectAllRows?: (a: boolean) => void;
+  sx?: SxProps;
+}
 export default function CustomBodyHeaders({
   order,
   orderBy,
@@ -27,7 +45,7 @@ export default function CustomBodyHeaders({
   onSort,
   onSelectAllRows,
   sx,
-}) {
+}: ICustomBodyHeaders) {
   return (
     <TableHead sx={sx}>
       <TableRow>
@@ -67,7 +85,7 @@ export default function CustomBodyHeaders({
               <TableSortLabel
                 hideSortIcon
                 active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : 'asc'}
+                direction={orderBy === headCell.id ? (order as 'asc' | 'desc' | undefined) : 'asc'}
                 onClick={() => onSort(headCell.id)}
                 sx={{ textTransform: 'capitalize' }}
               >

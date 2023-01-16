@@ -1,11 +1,18 @@
+// @ts-nocheck
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import React from 'react';
 import Iconify from '@/components/iconify';
 import { Comma } from '@/utils/Comma';
 
-const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }) => (
+interface ICustomBodyRows {
+  data: any;
+  mainColumns: Record<string, any>[];
+  openPopover: any | null;
+  handleOpenPopover: (event: { currentTarget: React.SetStateAction<null> }) => void;
+}
+const CustomBodyRows = ({ data, mainColumns, openPopover, handleOpenPopover }: ICustomBodyRows) => (
   <>
-    {data.map((row, index) => (
+    {data.map((row: { [x: string]: any }, index: React.Key | null | undefined) => (
       <TableRow hover role="checkbox" tabIndex={-1} key={index}>
         {mainColumns.map((column) => {
           const value = row[column.id];
